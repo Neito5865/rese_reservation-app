@@ -8,9 +8,9 @@
 
         <ul class="header-nav">
             <div class="header-nav__items">
-                <li class="header-nav__item"><a class="header-nav__link" href="">Home</a></li>
-                <li class="header-nav__item"><a class="header-nav__link" href="">Registration</a></li>
-                <li class="header-nav__item"><a class="header-nav__link" href="">Login</a></li>
+                <li class="header-nav__item"><a class="header-nav__link" href="/">Home</a></li>
+                <li class="header-nav__item"><a class="header-nav__link" href="/register">Registration</a></li>
+                <li class="header-nav__item"><a class="header-nav__link" href="/login">Login</a></li>
             </div>
         </ul>
 

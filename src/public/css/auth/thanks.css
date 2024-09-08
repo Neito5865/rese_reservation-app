@@ -1,0 +1,35 @@
+.thanks__content {
+    max-width: 1280px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.thanks__inner {
+    width: 400px;
+    background-color: #fff;
+    border-radius: 4px;
+    margin: 40px auto 0 auto;
+    text-align: center;
+    padding: 100px 0;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
+}
+
+
+.thanks__heading h2 {
+    font-size: 24px;
+    font-weight: normal;
+    margin: 0;
+}
+.thanks__button{
+    margin-top: 50px;
+}
+.thanks__button--link {
+    text-decoration: none;
+    font-size: 13px;
+    color: #fff;
+    background-color: #3560F6;
+    border: none;
+    padding: 8px 17px;
+    border-radius: 4px;
+    cursor: pointer;
+}

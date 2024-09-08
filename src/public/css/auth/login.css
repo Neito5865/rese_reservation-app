@@ -9,6 +9,7 @@
     background-color: #fff;
     border-radius: 4px;
     margin: 140px auto 0 auto;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
 }
 
 .login__heading{
@@ -23,4 +24,37 @@
     font-size: 18px;
     font-weight: bold;
     margin: 0;
+}
+
+.login-form{
+    width: 85%;
+    margin: 0 auto;
+}
+.login-form__item{
+    width: 100%;
+    text-align: right;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+.login-form__item-input--email, .login-form__item-input--pass{
+    border: none;
+    border-bottom: solid 1px #000;
+    font-size: 16px;
+    display: inline-block;
+    width: 90%;
+}
+.login-form__button{
+    margin-top: 30px;
+    padding-bottom: 20px;
+    text-align: right;
+}
+.login-form__button-submit{
+    font-size: 13px;
+    color: #fff;
+    background-color: #3560F6;
+    border: none;
+    padding: 8px 17px;
+    border-radius: 4px;
+    cursor: pointer;
 }
