@@ -1,7 +1,9 @@
 body{
     background-color: #EEE;
 }
-
+.container{
+    position: relative;
+}
 .header__inner{
     max-width: 1280px;
     padding: 0 20px;

@@ -10,10 +10,10 @@
     @yield('css')
 </head>
 <body>
-    @include('commons.header')
-    <main>
+    <div class="container">
+        @include('commons.header')
         @yield('content')
-    </main>
+    </div>
     <script src="https://kit.fontawesome.com/bbc02bbca9.js" crossorigin="anonymous"></script>
 </body>
 </html>

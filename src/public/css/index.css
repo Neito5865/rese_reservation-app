@@ -1,0 +1,105 @@
+.shopALL__content {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.search{
+    text-align: right;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 1280px;
+    padding: 0 20px;
+}
+.search-form{
+    display: inline-block;
+    background-color: #fff;
+    width: 610px;
+    height: 50px;
+    border-radius: 4px;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
+}
+.search-form__inner {
+    display: flex;
+    align-items: center;
+}
+.search-form__item-select{
+    width: 90px;
+    height: 30px;
+    border-right: 1px solid #EEE;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+.search-form__item-select:nth-of-type(2){
+    margin-left: 8px;
+}
+.search-form__item-input{
+    width: 340px;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 8px;
+}
+.search-form__item-select-area, .search-form__item-select-genre, .search-form__item-input-keyword{
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size: 13px;
+}
+
+
+.shop-card__flex{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.shop-card{
+    flex-basis: calc(25% - 13px);
+    width: 300px;
+    height: 280px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
+    margin-bottom: 25px;
+}
+.shop-card__img{
+    width: 100%;
+    height: 150px;
+}
+.shop-card__img img{
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px 4px 0 0;
+}
+.shop-card__content{
+    padding: 20px;
+}
+.shop-card__heading{
+    font-size: 18px;
+    margin: 0;
+}
+.shop-card__tag{
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.shop-card__content--flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.shop-card__link-detail{
+    display: inline-block;
+    background-color: #3560F6;
+    font-size: 13px;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+.favorite-btn i{
+    font-size: 32px;
+    color: #EEE;
+}
