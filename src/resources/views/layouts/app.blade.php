@@ -11,7 +11,6 @@
 </head>
 <body>
     <div class="container">
-        @include('commons.header')
         @yield('content')
     </div>
     <script src="https://kit.fontawesome.com/bbc02bbca9.js" crossorigin="anonymous"></script>

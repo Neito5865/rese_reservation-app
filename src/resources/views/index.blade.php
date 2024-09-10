@@ -5,31 +5,34 @@
 @endsection
 
 @section('content')
-    <div class="search">
-        <form method="GET" action="" class="search-form">
-            @csrf
-            <div class="search-form__inner">
-                <div class="search-form__item-select">
-                    <select name="area" id="" class="search-form__item-select-area">
-                        <option value="">All area</option>
-                        <option value="">サンプル</option>
-                        <option value="">サンプル</option>
-                    </select>
+    <div class="header-search__flex">
+        @include('commons.header')
+        <div class="search">
+            <form method="GET" action="" class="search-form">
+                @csrf
+                <div class="search-form__inner">
+                    <div class="search-form__item-select">
+                        <select name="area" id="" class="search-form__item-select-area">
+                            <option value="">All area</option>
+                            <option value="">サンプル</option>
+                            <option value="">サンプル</option>
+                        </select>
+                    </div>
+                    <div class="search-form__item-select">
+                        <select name="genre" id="" class="search-form__item-select-genre">
+                            <option value="">All genre</option>
+                            <option value="">サンプル</option>
+                            <option value="">サンプル</option>
+                        </select>
+                    </div>
+                    <div class="search-form__item-input">
+                        <input class="search-form__item-input-keyword" type="text" name="keyword" value="{{ old('keyword') }}" placeholder="Search ...">
+                    </div>
                 </div>
-                <div class="search-form__item-select">
-                    <select name="genre" id="" class="search-form__item-select-genre">
-                        <option value="">All genre</option>
-                        <option value="">サンプル</option>
-                        <option value="">サンプル</option>
-                    </select>
-                </div>
-                <div class="search-form__item-input">
-                    <input class="search-form__item-input-keyword" type="text" name="keyword" value="{{ old('keyword') }}" placeholder="Search ...">
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-    <div class="shopALL__content">
+    <div class="shopAll__content">
         <div class="shop-card__flex">
             <div class="shop-card">
                 <div class="shop-card__img">
