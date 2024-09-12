@@ -48,9 +48,10 @@
                         <div class="shop-card__link">
                             <a href="" class="shop-card__link-detail">詳しくみる</a>
                         </div>
-                        <div class="favorite-btn">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
+                        <form class="shop-card__form">
+                            @csrf
+                            <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -68,9 +69,10 @@
                         <div class="shop-card__link">
                             <a href="" class="shop-card__link-detail">詳しくみる</a>
                         </div>
-                        <div class="favorite-btn">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
+                        <form class="shop-card__form">
+                            @csrf
+                            <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -88,9 +90,10 @@
                         <div class="shop-card__link">
                             <a href="" class="shop-card__link-detail">詳しくみる</a>
                         </div>
-                        <div class="favorite-btn">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
+                        <form class="shop-card__form">
+                            @csrf
+                            <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -108,9 +111,10 @@
                         <div class="shop-card__link">
                             <a href="" class="shop-card__link-detail">詳しくみる</a>
                         </div>
-                        <div class="favorite-btn">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
+                        <form class="shop-card__form">
+                            @csrf
+                            <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -128,9 +132,10 @@
                         <div class="shop-card__link">
                             <a href="" class="shop-card__link-detail">詳しくみる</a>
                         </div>
-                        <div class="favorite-btn">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
+                        <form class="shop-card__form">
+                            @csrf
+                            <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
+                        </form>
                     </div>
                 </div>
             </div>
