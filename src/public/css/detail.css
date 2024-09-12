@@ -85,6 +85,10 @@
     padding: 0 10px;
 }
 .reservation-form__select{
+    position: relative;
+    /* display: inline-block; */
+}
+.reservation-form__select--time, .reservation-form__select--number{
     border: none;
     border-radius: 5px;
     margin-left: 28px;
@@ -93,8 +97,19 @@
     height: 30px;
     margin-top: 14px;
     padding: 0 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
-
+.custom-arrow {
+    position: absolute;
+    top: 50%;
+    right: 12%;
+    transform: translateY(-70%);
+    pointer-events: none;
+    font-size: 20px;
+    color: #E2E2E2;
+}
 .reservation-summary{
     width: 83%;
     background-color: #5580F7;

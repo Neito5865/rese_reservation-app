@@ -17,6 +17,7 @@
                             <option value="">サンプル</option>
                             <option value="">サンプル</option>
                         </select>
+                        <i class="fa-solid fa-sort-down custom-arrow"></i>
                     </div>
                     <div class="search-form__item-select">
                         <select name="genre" id="" class="search-form__item-select-genre">
@@ -24,8 +25,10 @@
                             <option value="">サンプル</option>
                             <option value="">サンプル</option>
                         </select>
+                        <i class="fa-solid fa-sort-down custom-arrow"></i>
                     </div>
                     <div class="search-form__item-input">
+                        <i class="fa-solid fa-magnifying-glass"></i>
                         <input class="search-form__item-input-keyword" type="text" name="keyword" value="{{ old('keyword') }}" placeholder="Search ...">
                     </div>
                 </div>

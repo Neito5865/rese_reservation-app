@@ -35,19 +35,25 @@
                     <form method="" action="" class="reservation-form">
                     @csrf
                         <input class="reservation-form__input" type="date" name="date" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
-                        <select class="reservation-form__select" name="number">
-                            @for ($i = 0; $i < 24 * 4; $i++ )
-                                @php
-                                    $time = sprintf('%02d:%02d', intdiv($i, 4), ($i % 4) * 15);
-                                @endphp
-                                <option value="{{ $time }}" {{ $time == '12:00' ? 'selected' : '' }}>{{ $time }}</optioin>
-                            @endfor
-                        </select>
-                        <select class="reservation-form__select" name="number">
-                            @for ($i = 1; $i <= 100; $i++ )
-                                <option value="{{ $i }}" {{ $i == '1' ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</optioin>
-                            @endfor
-                        </select>
+                        <div class="reservation-form__select">
+                            <select class="reservation-form__select--time" name="time">
+                                @for ($i = 0; $i < 24 * 4; $i++ )
+                                    @php
+                                        $time = sprintf('%02d:%02d', intdiv($i, 4), ($i % 4) * 15);
+                                    @endphp
+                                    <option value="{{ $time }}" {{ $time == '12:00' ? 'selected' : '' }}>{{ $time }}</optioin>
+                                @endfor
+                            </select>
+                            <i class="fa-solid fa-sort-down custom-arrow"></i>
+                        </div>
+                        <div class="reservation-form__select">
+                            <select class="reservation-form__select--number" name="number">
+                                @for ($i = 1; $i <= 100; $i++ )
+                                    <option value="{{ $i }}" {{ $i == '1' ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</optioin>
+                                @endfor
+                            </select>
+                            <i class="fa-solid fa-sort-down custom-arrow"></i>
+                        </div>
                         <div class="reservation-summary">
                             <table class="reservation-summary-table">
                                 <tr class="reservation-summary-table__row">
