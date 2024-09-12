@@ -11,7 +11,7 @@
             <h2>Login</h2>
         </div>
         <div class="form">
-            <form method="" action="" class="login-form">
+            <form method="POST" action="/login" class="login-form">
                 @csrf
                     <div class="login-form__item">
                         <div class="icon">
@@ -23,7 +23,7 @@
                         <div class="icon">
                             <i class="fa-solid fa-lock" style="color: #4b4b4b;font-size: 25px;vertical-align: top;"></i>
                         </div>
-                        <input type="password" class="login-form__item-input--pass" name="email" placeholder="Password">
+                        <input type="password" class="login-form__item-input--pass" name="password" placeholder="Password">
                     </div>
                     <div class="login-form__button">
                         <input type="submit" class="login-form__button-submit" value="ログイン">

@@ -33,6 +33,10 @@
     display: flex;
     justify-content: space-between;
 }
+.register-form__error{
+    font-size: 14px;
+    color: #ff0000;
+}
 
 .register-form__item-input--email,
 .register-form__item-input--pass, .register-form__item-input--name {

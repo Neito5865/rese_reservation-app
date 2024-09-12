@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ShopsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,7 @@ Route::get('/thanks', function () {
 });
 
 // トップページ（店舗一覧）
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [ShopsController::class, 'index']);
 
 // 店舗詳細ページ
 Route::get('/detail', function () {
