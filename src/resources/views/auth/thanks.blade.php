@@ -11,7 +11,7 @@
             <h2>会員登録ありがとうございます</h2>
         </div>
         <div class="thanks__button">
-            <a href="/login" class="thanks__button--link">ログインする</a>
+            <a href="{{ route('login') }}" class="thanks__button--link">ログインする</a>
         </div>
     </div>
 @endsection

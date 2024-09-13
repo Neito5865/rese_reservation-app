@@ -38,6 +38,10 @@
     display: inline-block;
     width: 90%;
 }
+.login-form__error{
+    font-size: 14px;
+    color: #ff0000;
+}
 .login-form__button{
     margin-top: 30px;
     padding-bottom: 20px;

@@ -11,7 +11,7 @@
             <h2>Register</h2>
         </div>
         <div class="form">
-            <form method="POST" action="/register" class="register-form">
+            <form method="POST" action="{{ route('create.register') }}" class="register-form">
                 @csrf
                 <div class="register-form__group">
                     <div class="register-form__item">

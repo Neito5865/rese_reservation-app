@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopsController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,18 +16,19 @@ use App\Http\Controllers\ShopsController;
 */
 
 // ログイン関係
-Route::get('/login', function () {
-    return view('auth.login');
-});
 Route::get('/register', function () {
     return view('auth.register');
-});
-Route::get('/thanks', function () {
+})->name('register');
+Route::post('/register', [RegisterController::class, 'create'])->name('create.register');
+Route::get('thanks', function(){
     return view('auth.thanks');
-});
+})->name('thanks');
 
 // トップページ（店舗一覧）
-Route::get('/', [ShopsController::class, 'index']);
+Route::get('/', [ShopsController::class, 'index'])->name('shops');
+
+
+
 
 // 店舗詳細ページ
 Route::get('/detail', function () {

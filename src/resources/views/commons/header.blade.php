@@ -9,18 +9,18 @@
         <ul class="header-nav">
             <div class="header-nav__items">
                 @if(Auth::check())
-                    <li class="header-nav__item"><a class="header-nav__link" href="/">Home</a></li>
+                    <li class="header-nav__item"><a class="header-nav__link" href="{{ route('shops') }}">Home</a></li>
                     <li class="header-nav__item">
-                        <form method="POST" action="/logout">
+                        <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <input class="header-nav__item--logout-btn" type="submit" value="Logout">
                         </form>
                     </li>
                     <li class="header-nav__item"><a class="header-nav__link" href="/mypage">Mypage</a></li>
                 @else
-                    <li class="header-nav__item"><a class="header-nav__link" href="/">Home</a></li>
-                    <li class="header-nav__item"><a class="header-nav__link" href="/register">Registration</a></li>
-                    <li class="header-nav__item"><a class="header-nav__link" href="/login">Login</a></li>
+                    <li class="header-nav__item"><a class="header-nav__link" href="{{ route('shops') }}">Home</a></li>
+                    <li class="header-nav__item"><a class="header-nav__link" href="{{ route('register') }}">Registration</a></li>
+                    <li class="header-nav__item"><a class="header-nav__link" href="{{ route('login') }}">Login</a></li>
                 @endif
             </div>
         </ul>
