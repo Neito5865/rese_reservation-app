@@ -39,7 +39,7 @@
         <div class="shop-card__flex">
             <div class="shop-card">
                 <div class="shop-card__img">
-                    <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="仙人">
+                    <img src="{{ asset('storage/' . '/shops/sushi.jpg') }}" alt="仙人">
                 </div>
                 <div class="shop-card__content">
                     <h3 class="shop-card__heading">仙人</h3>
