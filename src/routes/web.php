@@ -26,6 +26,8 @@ Route::get('thanks', function(){
 
 // トップページ（店舗一覧）
 Route::get('/', [ShopsController::class, 'index'])->name('shops');
+// 店舗検索機能
+Route::get('/search', [ShopsController::class, 'search'])->name('shops.search');
 
 
 

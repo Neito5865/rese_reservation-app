@@ -8,22 +8,24 @@
     <div class="header-search__flex">
         @include('commons.header')
         <div class="search">
-            <form method="GET" action="" class="search-form">
+            <form method="GET" action="{{ route('shops.search') }}" class="search-form">
                 @csrf
                 <div class="search-form__inner">
                     <div class="search-form__item-select">
-                        <select name="area" id="" class="search-form__item-select-area">
+                        <select name="area_id" id="" class="search-form__item-select-area">
                             <option value="">All area</option>
-                            <option value="">サンプル</option>
-                            <option value="">サンプル</option>
+                            @foreach($areas as $area)
+                                <option value="{{ $area['id'] }}">{{ $area['area'] }}</option>
+                            @endforeach
                         </select>
                         <i class="fa-solid fa-sort-down custom-arrow"></i>
                     </div>
                     <div class="search-form__item-select">
-                        <select name="genre" id="" class="search-form__item-select-genre">
+                        <select name="genre_id" id="" class="search-form__item-select-genre">
                             <option value="">All genre</option>
-                            <option value="">サンプル</option>
-                            <option value="">サンプル</option>
+                            @foreach($genres as $genre)
+                                <option value="{{ $genre['id'] }}">{{ $genre['genre'] }}</option>
+                            @endforeach
                         </select>
                         <i class="fa-solid fa-sort-down custom-arrow"></i>
                     </div>
@@ -37,111 +39,29 @@
     </div>
     <div class="shopAll__content">
         <div class="shop-card__flex">
-            <div class="shop-card">
-                <div class="shop-card__img">
-                    <img src="{{ asset('storage/' . '/shops/sushi.jpg') }}" alt="仙人">
-                </div>
-                <div class="shop-card__content">
-                    <h3 class="shop-card__heading">仙人</h3>
-                    <div class="shop-card__tag">
-                        <span class="shop-card__tag--area">#東京都</span>
-                        <span class="shop-card__tag--genre">#寿司</span>
+            @foreach($shops as $shop)
+                <div class="shop-card">
+                    <div class="shop-card__img">
+                        <img src="{{ asset('storage/' . $shop['shopImg']) }}" alt="{{ $shop['shopName'] }}">
                     </div>
-                    <div class="shop-card__content--flex">
-                        <div class="shop-card__link">
-                            <a href="" class="shop-card__link-detail">詳しくみる</a>
+                    <div class="shop-card__content">
+                        <h3 class="shop-card__heading">{{ $shop['shopName'] }}</h3>
+                        <div class="shop-card__tag">
+                            <span class="shop-card__tag--area">#{{ $shop['area']['area'] }}</span>
+                            <span class="shop-card__tag--genre">#{{ $shop['genre']['genre'] }}</span>
                         </div>
-                        <form class="shop-card__form">
-                            @csrf
-                            <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="shop-card">
-                <div class="shop-card__img">
-                    <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="仙人">
-                </div>
-                <div class="shop-card__content">
-                    <h3 class="shop-card__heading">仙人</h3>
-                    <div class="shop-card__tag">
-                        <span class="shop-card__tag--area">#東京都</span>
-                        <span class="shop-card__tag--genre">#寿司</span>
-                    </div>
-                    <div class="shop-card__content--flex">
-                        <div class="shop-card__link">
-                            <a href="" class="shop-card__link-detail">詳しくみる</a>
+                        <div class="shop-card__content--flex">
+                            <div class="shop-card__link">
+                                <a href="" class="shop-card__link-detail">詳しくみる</a>
+                            </div>
+                            <form class="shop-card__form">
+                                @csrf
+                                <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
+                            </form>
                         </div>
-                        <form class="shop-card__form">
-                            @csrf
-                            <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
-                        </form>
                     </div>
                 </div>
-            </div>
-            <div class="shop-card">
-                <div class="shop-card__img">
-                    <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="仙人">
-                </div>
-                <div class="shop-card__content">
-                    <h3 class="shop-card__heading">仙人</h3>
-                    <div class="shop-card__tag">
-                        <span class="shop-card__tag--area">#東京都</span>
-                        <span class="shop-card__tag--genre">#寿司</span>
-                    </div>
-                    <div class="shop-card__content--flex">
-                        <div class="shop-card__link">
-                            <a href="" class="shop-card__link-detail">詳しくみる</a>
-                        </div>
-                        <form class="shop-card__form">
-                            @csrf
-                            <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="shop-card">
-                <div class="shop-card__img">
-                    <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="仙人">
-                </div>
-                <div class="shop-card__content">
-                    <h3 class="shop-card__heading">仙人</h3>
-                    <div class="shop-card__tag">
-                        <span class="shop-card__tag--area">#東京都</span>
-                        <span class="shop-card__tag--genre">#寿司</span>
-                    </div>
-                    <div class="shop-card__content--flex">
-                        <div class="shop-card__link">
-                            <a href="" class="shop-card__link-detail">詳しくみる</a>
-                        </div>
-                        <form class="shop-card__form">
-                            @csrf
-                            <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="shop-card">
-                <div class="shop-card__img">
-                    <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="仙人">
-                </div>
-                <div class="shop-card__content">
-                    <h3 class="shop-card__heading">仙人</h3>
-                    <div class="shop-card__tag">
-                        <span class="shop-card__tag--area">#東京都</span>
-                        <span class="shop-card__tag--genre">#寿司</span>
-                    </div>
-                    <div class="shop-card__content--flex">
-                        <div class="shop-card__link">
-                            <a href="" class="shop-card__link-detail">詳しくみる</a>
-                        </div>
-                        <form class="shop-card__form">
-                            @csrf
-                            <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection
