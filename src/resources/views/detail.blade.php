@@ -10,18 +10,18 @@
             @include('commons.header')
             <div class="detail-container">
                 <div class="detail__heading">
-                    <button class="back-button"><a href="/">&lt;</a></button>
-                    <h2 class="detail__shop-name">仙人</h2>
+                    <button class="back-button"><a href="{{ route('shops') }}">&lt;</a></button>
+                    <h2 class="detail__shop-name">{{ $shop['shopName'] }}</h2>
                 </div>
                 <div class="detail__img">
-                    <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="仙人">
+                    <img src="{{ asset('storage/' . $shop['shopImg']) }}" alt="{{ $shop['shopName'] }}">
                 </div>
                 <div class="detail__tag">
-                    <span class="detail__tag--area">#東京都</span>
-                    <span class="detail__tag--genre">#寿司</span>
+                    <span class="detail__tag--area">#{{ $shop['area']['area'] }}</span>
+                    <span class="detail__tag--genre">#{{ $shop['genre']['genre'] }}</span>
                 </div>
                 <div class="detail__description">
-                    <p>料理長厳選の食材から作る寿司を用いたコースをぜひお楽しみください。食材・味・価格、お客様の満足度を徹底的に追及したお店です。特別な日のお食事、ビジネス接待まで気軽に使用することができます。</p>
+                    <p>{{ $shop['detail'] }}</p>
                 </div>
             </div>
         </div>

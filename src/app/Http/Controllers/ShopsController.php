@@ -16,4 +16,15 @@ class ShopsController extends Controller
         $genres = Genre::all();
         return view('index', compact('shops', 'areas', 'genres'));
     }
+
+    public function search(Request $request){
+        $shops = Shop::with('area', 'genre')->AreaSearch($request->area_id)->GenreSearch($request->genre_id)->KeywordSearch($request->keyword)->get();
+
+        return response()->json(['shops' => $shops]);
+    }
+
+    public function show($id){
+        $shop = Shop::findOrFail($id);
+        return view('detail', ['shop' => $shop]);
+    }
 }
