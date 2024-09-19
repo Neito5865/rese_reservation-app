@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopsController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ReservationsController;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,10 @@ Route::get('/search', [ShopsController::class, 'search'])->name('shops.search');
 Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.detail');
 
 
-// 新規予約登録
+// ログイン後
 Route::group(['middleware' => 'auth'], function(){
+    // 新規予約登録
     Route::post('/reservations/{shop_id}', [ReservationsController::class, 'store'])->name('reservation.store');
+    // マイページの表示
+    Route::get('/mypage', [UsersController::class, 'show'])->name('mypage.show');
 });

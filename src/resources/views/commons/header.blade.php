@@ -16,7 +16,7 @@
                             <input class="header-nav__item--logout-btn" type="submit" value="Logout">
                         </form>
                     </li>
-                    <li class="header-nav__item"><a class="header-nav__link" href="/mypage">Mypage</a></li>
+                    <li class="header-nav__item"><a class="header-nav__link" href="{{ route('mypage.show') }}">Mypage</a></li>
                 @else
                     <li class="header-nav__item"><a class="header-nav__link" href="{{ route('shops') }}">Home</a></li>
                     <li class="header-nav__item"><a class="header-nav__link" href="{{ route('register') }}">Registration</a></li>

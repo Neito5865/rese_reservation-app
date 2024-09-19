@@ -8,7 +8,7 @@
     @include('commons.header')
     <div class="mypage-content">
         <div class="mypage__user-name">
-            <p>testさん</p>
+            <p>{{ Auth::user()->name }}さん</p>
         </div>
         <div class="mypage__flex">
             <div class="mypage-left">
@@ -16,62 +16,36 @@
                     <h2>予約状況</h2>
                 </div>
                 <div class="reservation-status__container">
-                    <div class="status-card">
-                        <div class="status-card__heading-btn--flex">
-                            <div class="status-card__heading">
-                                <i class="fa-regular fa-clock"></i><h3>予約1</h3>
+                    @foreach($reservations as $reservation)
+                        <div class="status-card">
+                            <div class="status-card__heading-btn--flex">
+                                <div class="status-card__heading">
+                                    <i class="fa-regular fa-clock"></i><h3>予約{{ $loop->iteration }}</h3>
+                                </div>
+                                <div class="status-card__btn--modal">
+                                    <button class="status-card__btn--delete open-modal-btn" id="open-modal" type="submit">&times;</button>
+                                </div>
                             </div>
-                            <form method="" action="" class="status-card-form">
-                                <button class="status-card__btn--delete" type="submit">×</button>
-                            </form>
+                            <table class="status-card-table">
+                                <tr class="status-card-table__row">
+                                    <th class="status-card-table__heading">Shop</th>
+                                    <td class="status-card-table__item">{{ $reservation->shop->shopName }}</td>
+                                </tr>
+                                <tr class="status-card-table__row">
+                                    <th class="status-card-table__heading">Date</th>
+                                    <td class="status-card-table__item">{{ $reservation->date }}</td>
+                                </tr>
+                                <tr class="status-card-table__row">
+                                    <th class="status-card-table__heading">Time</th>
+                                    <td class="status-card-table__item">{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}</td>
+                                </tr>
+                                <tr class="status-card-table__row">
+                                    <th class="status-card-table__heading">Number</th>
+                                    <td class="status-card-table__item">{{ $reservation->numberPeople }}人</td>
+                                </tr>
+                            </table>
                         </div>
-                        <table class="status-card-table">
-                            <tr class="status-card-table__row">
-                                <th class="status-card-table__heading">Shop</th>
-                                <td class="status-card-table__item">仙人</td>
-                            </tr>
-                            <tr class="status-card-table__row">
-                                <th class="status-card-table__heading">Date</th>
-                                <td class="status-card-table__item">2024-09-11</td>
-                            </tr>
-                            <tr class="status-card-table__row">
-                                <th class="status-card-table__heading">Time</th>
-                                <td class="status-card-table__item">17:00</td>
-                            </tr>
-                            <tr class="status-card-table__row">
-                                <th class="status-card-table__heading">Number</th>
-                                <td class="status-card-table__item">1人</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="status-card">
-                        <div class="status-card__heading-btn--flex">
-                            <div class="status-card__heading">
-                                <i class="fa-regular fa-clock"></i><h3>予約2</h3>
-                            </div>
-                            <form method="" action="" class="status-card-form">
-                                <button class="status-card__btn--delete" type="submit">×</button>
-                            </form>
-                        </div>
-                        <table class="status-card-table">
-                            <tr class="status-card-table__row">
-                                <th class="status-card-table__heading">Shop</th>
-                                <td class="status-card-table__item">仙人</td>
-                            </tr>
-                            <tr class="status-card-table__row">
-                                <th class="status-card-table__heading">Date</th>
-                                <td class="status-card-table__item">2024-09-11</td>
-                            </tr>
-                            <tr class="status-card-table__row">
-                                <th class="status-card-table__heading">Time</th>
-                                <td class="status-card-table__item">17:00</td>
-                            </tr>
-                            <tr class="status-card-table__row">
-                                <th class="status-card-table__heading">Number</th>
-                                <td class="status-card-table__item">1人</td>
-                            </tr>
-                        </table>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <div class="mypage-right">
@@ -146,4 +120,49 @@
             </div>
         </div>
     </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close-btn">&times;</span>
+            <h2>こちらの予約を削除してもよろしいですか？</h2>
+            <table class="modal-table">
+                <tr class="modal__row">
+                    <th class="modal-table__heading">Shop</th>
+                    <td class="modal-table__item">{{ $reservation->shop->shopName }}</td>
+                </tr>
+                <tr class="modal-table__row">
+                    <th class="modal-table__heading">Date</th>
+                    <td class="modal-table__item">{{ $reservation->date }}</td>
+                </tr>
+                <tr class="modal-table__row">
+                    <th class="modal-table__heading">Time</th>
+                    <td class="modal-table__item">{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}</td>
+                </tr>
+                <tr class="modal-table__row">
+                    <th class="smodal-table__heading">Number</th>
+                    <td class="modal-table__item">{{ $reservation->numberPeople }}人</td>
+                </tr>
+            </table>
+            <form class="delete-form" action="" method="">
+                @csrf
+                <div class="delete-form__button">
+                    <input type="hidden" name="id" id="modal-id">
+                    <input class="delete-form__button-submit" type="submit" value="削除">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('open-modal').onclick = function(){
+            document.getElementById('modal').style.display = 'block';
+        }
+        document.getElementById('close-modal').onclick = function(){
+            document.getElementById('modal').style.display = 'none';
+        }
+        window.onclick = function(event){
+            if(event.target == document.getElementById('modal')){
+                document.getElementById('modal').style.display = 'none';
+            }
+        }
+    </script>
 @endsection

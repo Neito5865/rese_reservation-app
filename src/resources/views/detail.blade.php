@@ -74,8 +74,8 @@
                                 @if ($userReservations->isEmpty())
                                 <p>現在、この店舗での予約はありません。</p>
                                 @else
-                                    <table class="reservation-summary-table">
-                                        @foreach($userReservations as $reservation)
+                                    @foreach($userReservations as $reservation)
+                                        <table class="reservation-summary-table">
                                             <tr class="reservation-summary-table__row">
                                                 <th class="reservation-summary-table__heading">Shop</th>
                                                 <td class="reservation-summary-table__item">{{ $reservation->shop->shopName }}</td>
@@ -86,14 +86,14 @@
                                             </tr>
                                             <tr class="reservation-summary-table__row">
                                                 <th class="reservation-summary-table__heading">Time</th>
-                                                <td class="reservation-summary-table__item">{{ $reservation->time }}</td>
+                                                <td class="reservation-summary-table__item">{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}</td>
                                             </tr>
                                             <tr class="reservation-summary-table__row">
                                                 <th class="reservation-summary-table__heading">Number</th>
-                                                <td class="reservation-summary-table__item">{{ $reservation->snumberPeople }}人</td>
+                                                <td class="reservation-summary-table__item">{{ $reservation->numberPeople }}人</td>
                                             </tr>
-                                        @endforeach
-                                    </table>
+                                        </table>
+                                    @endforeach
                                 @endif
                             @else
                                 <p>この店舗での予約状況を確認するには<br>ログインしてください。</p>
