@@ -32,7 +32,7 @@
                     <h2>予約</h2>
                 </div>
                 <div class="form">
-                    <form method="" action="" class="reservation-form">
+                    <form method="POST" action="{{ route('reservation.store', ['shop_id' => $shop['id']]) }}" class="reservation-form">
                     @csrf
                         <input class="reservation-form__input" type="date" name="date" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                         <div class="reservation-form__select">
@@ -47,7 +47,7 @@
                             <i class="fa-solid fa-sort-down custom-arrow"></i>
                         </div>
                         <div class="reservation-form__select">
-                            <select class="reservation-form__select--number" name="number">
+                            <select class="reservation-form__select--number" name="numberPeople">
                                 @for ($i = 1; $i <= 100; $i++ )
                                     <option value="{{ $i }}" {{ $i == '1' ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</optioin>
                                 @endfor
@@ -55,24 +55,34 @@
                             <i class="fa-solid fa-sort-down custom-arrow"></i>
                         </div>
                         <div class="reservation-summary">
-                            <table class="reservation-summary-table">
-                                <tr class="reservation-summary-table__row">
-                                    <th class="reservation-summary-table__heading">Shop</th>
-                                    <td class="reservation-summary-table__item">仙人</td>
-                                </tr>
-                                <tr class="reservation-summary-table__row">
-                                    <th class="reservation-summary-table__heading">Date</th>
-                                    <td class="reservation-summary-table__item">2024-09-11</td>
-                                </tr>
-                                <tr class="reservation-summary-table__row">
-                                    <th class="reservation-summary-table__heading">Time</th>
-                                    <td class="reservation-summary-table__item">17:00</td>
-                                </tr>
-                                <tr class="reservation-summary-table__row">
-                                    <th class="reservation-summary-table__heading">Number</th>
-                                    <td class="reservation-summary-table__item">1人</td>
-                                </tr>
-                            </table>
+                            @if(Auth::check())
+                                @if ($userReservations->isEmpty())
+                                <p>現在、この店舗での予約はありません。</p>
+                                @else
+                                    <table class="reservation-summary-table">
+                                        @foreach($userReservations as $reservation)
+                                            <tr class="reservation-summary-table__row">
+                                                <th class="reservation-summary-table__heading">Shop</th>
+                                                <td class="reservation-summary-table__item">{{ $reservation->shop->shopName }}</td>
+                                            </tr>
+                                            <tr class="reservation-summary-table__row">
+                                                <th class="reservation-summary-table__heading">Date</th>
+                                                <td class="reservation-summary-table__item">{{ $reservation->date }}</td>
+                                            </tr>
+                                            <tr class="reservation-summary-table__row">
+                                                <th class="reservation-summary-table__heading">Time</th>
+                                                <td class="reservation-summary-table__item">{{ $reservation->time }}</td>
+                                            </tr>
+                                            <tr class="reservation-summary-table__row">
+                                                <th class="reservation-summary-table__heading">Number</th>
+                                                <td class="reservation-summary-table__item">{{ $reservation->snumberPeople }}人</td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+                                @endif
+                            @else
+                                <p>この店舗での予約状況を確認するには<br>ログインしてください。</p>
+                            @endif
                         </div>
                         <div class="reservation-form__button">
                             <input class="reservation-form__button--submit" type="submit" value="予約する">

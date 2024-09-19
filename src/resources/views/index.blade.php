@@ -52,7 +52,7 @@
                         </div>
                         <div class="shop-card__content--flex">
                             <div class="shop-card__link">
-                                <a href="{{ route('shop.show', ['id' => $shop['id']]) }}" class="shop-card__link-detail">詳しくみる</a>
+                                <a href="{{ route('shop.detail', ['shop_id' => $shop['id']]) }}" class="shop-card__link-detail">詳しくみる</a>
                             </div>
                             <form class="shop-card__form">
                                 @csrf
@@ -108,7 +108,7 @@
                                     </div>
                                     <div class="shop-card__content--flex">
                                         <div class="shop-card__link">
-                                            <a href="{{ route('shop.show', ['id' => $shop['id']]) }}" class="shop-card__link-detail">詳しくみる</a>
+                                            <a href="{{ route('shop.detail', ['shop_id' => $shop['id']]) }}" class="shop-card__link-detail">詳しくみる</a>
                                         </div>
                                         <form class="shop-card__form">
                                             @csrf

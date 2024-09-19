@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopsController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ReservationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,23 +30,10 @@ Route::get('/', [ShopsController::class, 'index'])->name('shops');
 // 店舗検索機能
 Route::get('/search', [ShopsController::class, 'search'])->name('shops.search');
 // 店舗詳細ページ
-Route::get('/detail/{id}', [ShopsController::class, 'show'])->name('shop.show');
+Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.detail');
 
 
-
-
-
-// 店舗詳細ページ
-Route::get('/detail', function () {
-    return view('detail');
-});
-
-// マイページ
-Route::get('/mypage', function () {
-    return view('mypage');
-});
-
-// 予約完了
-Route::get('/done', function () {
-    return view('done');
+// 新規予約登録
+Route::group(['middleware' => 'auth'], function(){
+    Route::post('/reservations/{shop_id}', [ReservationsController::class, 'store'])->name('reservation.store');
 });

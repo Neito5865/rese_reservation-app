@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Shop;
+use App\Models\Reservation;
 
 
 class ShopsController extends Controller
@@ -23,8 +25,14 @@ class ShopsController extends Controller
         return response()->json(['shops' => $shops]);
     }
 
-    public function show($id){
-        $shop = Shop::findOrFail($id);
-        return view('detail', ['shop' => $shop]);
+    public function show($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+
+        $userReservations = collect();
+        if(Auth::check()){
+            $userReservations = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->with('shop')->get();
+        }
+
+        return view('detail', compact('shop', 'userReservations'));
     }
 }
