@@ -35,6 +35,11 @@
                     <form method="POST" action="{{ route('reservation.store', ['shop_id' => $shop['id']]) }}" class="reservation-form">
                     @csrf
                         <input class="reservation-form__input" type="date" name="date" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                        <div class="reservation-form__error">
+                            @error('date')
+                            {{ $message }}
+                            @enderror
+                        </div>
                         <div class="reservation-form__select">
                             <select class="reservation-form__select--time" name="time">
                                 @for ($i = 0; $i < 24 * 4; $i++ )
@@ -46,6 +51,11 @@
                             </select>
                             <i class="fa-solid fa-sort-down custom-arrow"></i>
                         </div>
+                        <div class="reservation-form__error">
+                            @error('time')
+                            {{ $message }}
+                            @enderror
+                        </div>
                         <div class="reservation-form__select">
                             <select class="reservation-form__select--number" name="numberPeople">
                                 @for ($i = 1; $i <= 100; $i++ )
@@ -53,6 +63,11 @@
                                 @endfor
                             </select>
                             <i class="fa-solid fa-sort-down custom-arrow"></i>
+                        </div>
+                        <div class="reservation-form__error">
+                            @error('numberPeople')
+                            {{ $message }}
+                            @enderror
                         </div>
                         <div class="reservation-summary">
                             @if(Auth::check())

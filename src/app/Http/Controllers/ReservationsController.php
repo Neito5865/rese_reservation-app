@@ -9,11 +9,12 @@ use App\Models\Genre;
 use App\Models\Shop;
 use App\Models\User;
 use App\Models\Reservation;
+use App\Http\Requests\ReservationRequest;
 
 class ReservationsController extends Controller
 {
     // 新規予約登録
-    public function store(Request $request, $shop_id){
+    public function store(ReservationRequest $request, $shop_id){
         $user_id = Auth::id();
         $reservation = $request->only([
             'date',

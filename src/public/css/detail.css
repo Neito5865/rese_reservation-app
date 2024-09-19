@@ -86,7 +86,6 @@
 }
 .reservation-form__select{
     position: relative;
-    /* display: inline-block; */
 }
 .reservation-form__select--time, .reservation-form__select--number{
     border: none;
@@ -109,6 +108,11 @@
     pointer-events: none;
     font-size: 20px;
     color: #E2E2E2;
+}
+.reservation-form__error{
+    margin-left: 28px;
+    font-size: 14px;
+    color: #ef9a54;
 }
 .reservation-summary{
     width: 83%;
