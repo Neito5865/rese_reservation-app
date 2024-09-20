@@ -10,7 +10,7 @@ class UsersController extends Controller
 {
     public function show(){
         $user = Auth::user();
-        $reservations = $user->reservations;
+        $reservations = $user->reservations()->orderBy('date', 'asc')->get();
 
         return view('mypage', ['reservations' => $reservations]);
     }
