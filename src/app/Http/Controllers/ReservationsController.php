@@ -27,4 +27,13 @@ class ReservationsController extends Controller
 
         return view('done');
     }
+
+    // 予約削除
+    public function destroy(Request $request){
+        $reservation = Reservation::findOrFail($request->id);
+        if(\Auth::id() === $reservation->user_id){
+            $reservation->delete();
+        }
+        return redirect()->route('mypage.show');
+    }
 }

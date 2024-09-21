@@ -161,11 +161,11 @@
                     <div class="modal-close__back">
                         <a class="modal-close__back--link" href="/mypage">&lt; 戻る</a>
                     </div>
-                    <form class="delete-form" action="/mypage/delete" method="POST">
+                    <form class="delete-form" action="{{ route('reservation.destroy', $reservation->id) }}" method="POST">
                         @method('DELETE')
                         @csrf
                         <div class="delete-form__button">
-                            <input type="hidden" name="id" id="modal-id">
+                            <input type="hidden" name="id" id="modal-id" value="{{ $reservation['id'] }}">
                             <input class="delete-form__button-submit" type="submit" value="キャンセル">
                         </div>
                     </form>
@@ -189,7 +189,7 @@
                     document.getElementById('modal-id').value = this.getAttribute('data-id');
 
                     // フォームのactionを動的に設定
-                    document.querySelector('.delete-form').setAttribute('action', `/mypage/delete/${this.getAttribute('data-id')}`);
+                    document.querySelector('.delete-form').setAttribute('action', `/reservations/${this.getAttribute('data-id')}/delete`);
 
                     // モーダルを表示
                     modal.style.display = 'block';
