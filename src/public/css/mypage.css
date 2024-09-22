@@ -144,10 +144,14 @@
 .favorite-card__btn--favorite {
     border: none;
     background-color: #fff;
+    color: #EEE;
+    cursor: pointer;
+}
+.favorite-card__btn--favorite.favorited {
+    color: #ff0000;
 }
 .favorite-card__btn--favorite i {
     font-size: 32px;
-    color: #EEE;
 }
 
 .modal{

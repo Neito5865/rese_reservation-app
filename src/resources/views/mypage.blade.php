@@ -60,69 +60,39 @@
                     <h2>お気に入り店舗</h2>
                 </div>
                 <div class="favorite-card__flex">
-                    <div class="favorite-card">
-                        <div class="favorite-card__img">
-                            <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="仙人">
-                        </div>
-                        <div class="favorite-card__content">
-                            <h3 class="favorite-card__shop-name">仙人</h3>
-                            <div class="favorite-card__tag">
-                                <span class="favorite-card__tag--area">#東京都</span>
-                                <span class="favorite-card__tag--genre">#寿司</span>
+                    @foreach($favoriteShops as $shop)
+                        <div class="favorite-card">
+                            <div class="favorite-card__img">
+                                <img src="{{ asset('storage/' . $shop['shopImg']) }}" alt="{{ $shop['shopName'] }}">
                             </div>
-                            <div class="favorite-card__content--flex">
-                                <div class="favorite-card__link">
-                                    <a href="" class="favorite-card__link-detail">詳しくみる</a>
+                            <div class="favorite-card__content">
+                                <h3 class="favorite-card__shop-name">{{ $shop['shopName'] }}</h3>
+                                <div class="favorite-card__tag">
+                                    <span class="favorite-card__tag--area">#{{ $shop['area']['area'] }}</span>
+                                    <span class="favorite-card__tag--genre">#{{ $shop['genre']['genre'] }}</span>
                                 </div>
-                                <form class="favorite-card__form">
-                                    @csrf
-                                    <button class="favorite-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="favorite-card">
-                        <div class="favorite-card__img">
-                            <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="仙人">
-                        </div>
-                        <div class="favorite-card__content">
-                            <h3 class="favorite-card__shop-name">仙人</h3>
-                            <div class="favorite-card__tag">
-                                <span class="favorite-card__tag--area">#東京都</span>
-                                <span class="favorite-card__tag--genre">#寿司</span>
-                            </div>
-                            <div class="favorite-card__content--flex">
-                                <div class="favorite-card__link">
-                                    <a href="" class="favorite-card__link-detail">詳しくみる</a>
+                                <div class="favorite-card__content--flex">
+                                    <div class="favorite-card__link">
+                                        <a href="" class="favorite-card__link-detail">詳しくみる</a>
+                                    </div>
+                                    @if(Auth::check())
+                                        @if(Auth::user()->isFavorite($shop->id))
+                                            <form class="favorite-card__form" method="POST" action="{{ route('unfavorite', $shop->id) }}">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="favorite-card__btn--favorite favorited" type="submit"><i class="fa-solid fa-heart"></i></button>
+                                            </form>
+                                        @else
+                                            <form class="favorite-card__form" method="POST" action="{{ route('favorite', $shop->id) }}">
+                                                @csrf
+                                                <button class="favorite-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
+                                            </form>
+                                        @endif
+                                    @endif
                                 </div>
-                                <form class="favorite-card__form">
-                                    @csrf
-                                    <button class="favorite-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
-                                </form>
                             </div>
                         </div>
-                    </div>
-                    <div class="favorite-card">
-                        <div class="favorite-card__img">
-                            <img src="https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg" alt="仙人">
-                        </div>
-                        <div class="favorite-card__content">
-                            <h3 class="favorite-card__shop-name">仙人</h3>
-                            <div class="favorite-card__tag">
-                                <span class="favorite-card__tag--area">#東京都</span>
-                                <span class="favorite-card__tag--genre">#寿司</span>
-                            </div>
-                            <div class="favorite-card__content--flex">
-                                <div class="favorite-card__link">
-                                    <a href="" class="favorite-card__link-detail">詳しくみる</a>
-                                </div>
-                                <form class="favorite-card__form">
-                                    @csrf
-                                    <button class="favorite-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>

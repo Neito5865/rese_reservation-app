@@ -11,7 +11,8 @@ class UsersController extends Controller
     public function show(){
         $user = Auth::user();
         $reservations = $user->reservations()->orderBy('date', 'asc')->get();
+        $favoriteShops = $user->favorites()->get();
 
-        return view('mypage', ['reservations' => $reservations]);
+        return view('mypage', compact('reservations', 'favoriteShops'));
     }
 }

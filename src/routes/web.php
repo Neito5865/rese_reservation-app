@@ -5,6 +5,7 @@ use App\Http\Controllers\ShopsController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 Route::post('/register', [RegisterController::class, 'create'])->name('create.register');
-Route::get('thanks', function(){
+Route::get('/thanks', function(){
     return view('auth.thanks');
 })->name('thanks');
 
@@ -42,4 +43,12 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/reservations/{id}/delete', [ReservationsController::class, 'destroy'])->name('reservation.destroy');
     // マイページの表示
     Route::get('/mypage', [UsersController::class, 'show'])->name('mypage.show');
+
+    // お気に入り登録
+    Route::group(['prefix' => 'shops/{id}'], function(){
+        // お気に入り登録
+        Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite');
+        // お気に入り解除
+        Route::delete('unfavorite', [FavoriteController::class, 'destroy'])->name('unfavorite');
+    });
 });

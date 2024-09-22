@@ -122,9 +122,13 @@
 .shop-card__btn--favorite{
     border: none;
     background-color: #fff;
+    color: #EEE;
+    cursor: pointer;
+}
+.shop-card__btn--favorite.favorited{
+    color: #ff0000;
 }
 .shop-card__btn--favorite i{
     font-size: 32px;
-    color: #EEE;
 }
 

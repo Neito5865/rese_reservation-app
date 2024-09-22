@@ -54,10 +54,20 @@
                             <div class="shop-card__link">
                                 <a href="{{ route('shop.detail', ['shop_id' => $shop['id']]) }}" class="shop-card__link-detail">詳しくみる</a>
                             </div>
-                            <form class="shop-card__form">
-                                @csrf
-                                <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
-                            </form>
+                            @if(Auth::check())
+                                @if(Auth::user()->isFavorite($shop->id))
+                                    <form class="shop-card__form" method="POST" action="{{ route('unfavorite', $shop->id) }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="shop-card__btn--favorite favorited" type="submit"><i class="fa-solid fa-heart"></i></button>
+                                    </form>
+                                @else
+                                    <form class="shop-card__form" method="POST" action="{{ route('favorite', $shop->id) }}">
+                                        @csrf
+                                        <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
+                                    </form>
+                                @endif
+                            @endif
                         </div>
                     </div>
                 </div>
