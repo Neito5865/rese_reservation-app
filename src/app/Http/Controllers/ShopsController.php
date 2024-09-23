@@ -8,6 +8,7 @@ use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Shop;
 use App\Models\Reservation;
+use Carbon\Carbon;
 
 
 class ShopsController extends Controller
@@ -30,7 +31,12 @@ class ShopsController extends Controller
 
         $userReservations = collect();
         if(Auth::check()){
-            $userReservations = Reservation::where('user_id', Auth::id())->where('shop_id', $shop_id)->with('shop')->get();
+            $today = Carbon::today();
+            $userReservations = Reservation::where('user_id', Auth::id())
+                                            ->where('shop_id', $shop_id)
+                                            ->where('date', '>=', $today)
+                                            ->with('shop')
+                                            ->get();
         }
 
         return view('detail', compact('shop', 'userReservations'));
