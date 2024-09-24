@@ -62,3 +62,9 @@
     border-radius: 4px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .register__inner {
+        width: 100%;
+    }
+}

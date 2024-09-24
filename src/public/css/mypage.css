@@ -235,3 +235,27 @@
     padding: 8px 16px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px){
+    .mypage__flex {
+        flex-direction: column;
+    }
+    .mypage-left {
+        width: 100%;
+        padding: 0 15px;
+    }
+    .status-card-table__heading {
+        width: 35%;
+    }
+    .status-card-table__item {
+        width: 65%;
+    }
+
+    .mypage-right {
+        width: 100%;
+        padding: 0 15px;
+    }
+    .favorite-card__flex {
+        flex-direction: column;
+    }
+}

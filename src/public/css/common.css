@@ -115,3 +115,11 @@ body{
 .active + .header-nav{
     display: block;
 }
+
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding: 0 15px;
+        margin: 0 auto;
+    }
+}
