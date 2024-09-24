@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ShopsController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ReservationsController;
@@ -17,6 +19,22 @@ use App\Http\Controllers\FavoriteController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// メール認証通知を表示するルート
+Route::get('/email/verify', function(){
+    return view('auth.verify-email');
+})->name('verification.notice');
+// メール認証リンクを検証するルート
+Route::get('/email/verify/{id}/{hash}', function(EmailVerificationRequest $request){
+    $request->fulfill();
+    return redirect()->route('thanks');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+// メール認証リンクを再送信するルート
+Route::post('/email/verification-notification', function(Request $request){
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('massage', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 
 // ログイン関係
 Route::get('/register', function () {
@@ -36,7 +54,7 @@ Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.de
 
 
 // ログイン後
-Route::group(['middleware' => 'auth'], function(){
+Route::middleware(['auth', 'verified'])->group(function(){
     // 新規予約登録
     Route::post('/reservations/{shop_id}', [ReservationsController::class, 'store'])->name('reservation.store');
     // 予約削除
@@ -44,7 +62,7 @@ Route::group(['middleware' => 'auth'], function(){
     // マイページの表示
     Route::get('/mypage', [UsersController::class, 'show'])->name('mypage.show');
 
-    // お気に入り登録
+    // お気に入り関連
     Route::group(['prefix' => 'shops/{id}'], function(){
         // お気に入り登録
         Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite');

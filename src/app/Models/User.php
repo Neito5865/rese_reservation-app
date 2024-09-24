@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\softDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use softDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -74,6 +74,6 @@ class User extends Authenticatable
     }
 
     public function isFavorite($shopId){
-        return $this->Favorites()->where('shop_id', $shopId)->exists();
+        return $this->favorites()->where('shop_id', $shopId)->exists();
     }
 }

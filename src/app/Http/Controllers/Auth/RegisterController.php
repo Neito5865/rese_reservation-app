@@ -26,7 +26,7 @@ class RegisterController extends Controller
         auth()->login($user);
 
         // thanksページにリダイレクト
-        return redirect()->route('thanks');
+        return redirect()->route('verification.notice');
     }
 
     // バリデーションルール
