@@ -22,8 +22,10 @@ class ShopsController extends Controller
 
     public function search(Request $request){
         $shops = Shop::with('area', 'genre')->AreaSearch($request->area_id)->GenreSearch($request->genre_id)->KeywordSearch($request->keyword)->get();
+        $areas = Area::all();
+        $genres = Genre::all();
 
-        return response()->json(['shops' => $shops]);
+        return view('index', compact('shops', 'areas', 'genres'));
     }
 
     public function show($shop_id){
