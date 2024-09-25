@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="favorite-card__content--flex">
                                     <div class="favorite-card__link">
-                                        <a href="" class="favorite-card__link-detail">詳しくみる</a>
+                                        <a href="{{ route('shop.detail', ['shop_id' => $shop['id']]) }}" class="favorite-card__link-detail">詳しくみる</a>
                                     </div>
                                     @if(Auth::check())
                                         @if(Auth::user()->isFavorite($shop->id))
