@@ -6,13 +6,19 @@ use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
-    public function store($id){
-        \Auth::user()->favorite($id);
-        return back();
-    }
+    public function store($id, Request $request){
+    \Auth::user()->favorite($id);
 
-    public function destroy($id){
+    // 検索条件を含んだリダイレクト先を生成
+    $queryParams = $request->only(['area_id', 'genre_id', 'keyword']); // 検索条件を取得
+    return redirect()->route('shops.search', $queryParams); // 検索条件を保持してリダイレクト
+}
+
+    public function destroy($id, Request $request){
         \Auth::user()->unfavorite($id);
-        return back();
+
+        // 検索条件を含んだリダイレクト先を生成
+        $queryParams = $request->only(['area_id', 'genre_id', 'keyword']); // 検索条件を取得
+        return redirect()->route('shops.search', $queryParams); // 検索条件を保持してリダイレクト
     }
 }

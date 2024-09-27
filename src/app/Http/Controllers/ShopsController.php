@@ -22,9 +22,14 @@ class ShopsController extends Controller
 
     public function search(Request $request){
         $shops = Shop::with('area', 'genre')->AreaSearch($request->area_id)->GenreSearch($request->genre_id)->KeywordSearch($request->keyword)->get();
+
+        // Ajaxリクエストであれば部分ビューを返す
+        if ($request->ajax()) {
+            return view('partials.shop-list', compact('shops'))->render();
+        }
+
         $areas = Area::all();
         $genres = Genre::all();
-
         return view('index', compact('shops', 'areas', 'genres'));
     }
 
