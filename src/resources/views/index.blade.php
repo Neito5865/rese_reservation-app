@@ -80,6 +80,8 @@
         </div>
     </div>
 @endsection
+
+@section('script')
     <script>
         document.addEventListener('DOMContentLoaded', function(){
             const form = document.getElementById('search-form');
@@ -103,5 +105,4 @@
             });
         });
     </script>
-@section('script')
 @endsection
