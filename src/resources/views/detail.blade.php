@@ -32,7 +32,7 @@
                     <h2>予約</h2>
                 </div>
                 <div class="form">
-                    <form method="POST" action="{{ route('reservation.store', ['shop_id' => $shop['id']]) }}" class="reservation-form">
+                    <form method="POST" action="{{ route('reservation.store', ['id' => $shop['id']]) }}" class="reservation-form">
                     @csrf
                         <input class="reservation-form__input" type="date" name="date" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                         <div class="reservation-form__error">
