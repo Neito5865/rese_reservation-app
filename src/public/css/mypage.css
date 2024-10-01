@@ -92,12 +92,29 @@
 }
 .status-card__edit-btn--link{
     text-decoration: none;
-    color: #fff;
+    color: #3560F6;
     font-size: 14px;
-    background-color: #6a87ed;
+    background-color: #fff;
     padding: 8px 16px;
     border-radius: 5px;
 }
+
+.review-btn{
+    margin-top: 30px;
+}
+.review-btn__link{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background-color: #6a87ed;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
+    padding: 20px 40px;
+}
+.review-btn__link i{
+    margin-left: 20px;
+}
+
 
 .mypage-right{
     width: 55%;

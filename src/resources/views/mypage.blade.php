@@ -12,50 +12,55 @@
         </div>
         <div class="mypage__flex">
             <div class="mypage-left">
-                <div class="reservation-status__title">
-                    <h2>予約状況</h2>
+                <div class="reservation-status">
+                    <div class="reservation-status__title">
+                        <h2>予約状況</h2>
+                    </div>
+                    <div class="reservation-status__container">
+                        @foreach($reservations as $reservation)
+                            <div class="status-card">
+                                <div class="status-card__heading-btn--flex">
+                                    <div class="status-card__heading">
+                                        <i class="fa-regular fa-clock"></i><h3>予約{{ $loop->iteration }}</h3>
+                                    </div>
+                                    <div class="status-card__btn--modal">
+                                        <a class="status-card__link--delete modal-trigger" href="#modal"
+                                            data-id="{{ $reservation->id }}"
+                                            data-shop="{{ $reservation->shop->shopName }}"
+                                            data-date="{{ $reservation->date }}"
+                                            data-time="{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}"
+                                            data-number="{{ $reservation->numberPeople }}">
+                                            &times;
+                                        </a>
+                                    </div>
+                                </div>
+                                <table class="status-card-table">
+                                    <tr class="status-card-table__row">
+                                        <th class="status-card-table__heading">Shop</th>
+                                        <td class="status-card-table__item">{{ $reservation->shop->shopName }}</td>
+                                    </tr>
+                                    <tr class="status-card-table__row">
+                                        <th class="status-card-table__heading">Date</th>
+                                        <td class="status-card-table__item">{{ $reservation->date }}</td>
+                                    </tr>
+                                    <tr class="status-card-table__row">
+                                        <th class="status-card-table__heading">Time</th>
+                                        <td class="status-card-table__item">{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}</td>
+                                    </tr>
+                                    <tr class="status-card-table__row">
+                                        <th class="status-card-table__heading">Number</th>
+                                        <td class="status-card-table__item">{{ $reservation->numberPeople }}人</td>
+                                    </tr>
+                                </table>
+                                <div class="status-card__edit-btn">
+                                    <a class="status-card__edit-btn--link" href="{{ route('reservation.edit', $reservation->id) }}">予約内容の変更</a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-                <div class="reservation-status__container">
-                    @foreach($reservations as $reservation)
-                        <div class="status-card">
-                            <div class="status-card__heading-btn--flex">
-                                <div class="status-card__heading">
-                                    <i class="fa-regular fa-clock"></i><h3>予約{{ $loop->iteration }}</h3>
-                                </div>
-                                <div class="status-card__btn--modal">
-                                    <a class="status-card__link--delete modal-trigger" href="#modal"
-                                        data-id="{{ $reservation->id }}"
-                                        data-shop="{{ $reservation->shop->shopName }}"
-                                        data-date="{{ $reservation->date }}"
-                                        data-time="{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}"
-                                        data-number="{{ $reservation->numberPeople }}">
-                                        &times;
-                                    </a>
-                                </div>
-                            </div>
-                            <table class="status-card-table">
-                                <tr class="status-card-table__row">
-                                    <th class="status-card-table__heading">Shop</th>
-                                    <td class="status-card-table__item">{{ $reservation->shop->shopName }}</td>
-                                </tr>
-                                <tr class="status-card-table__row">
-                                    <th class="status-card-table__heading">Date</th>
-                                    <td class="status-card-table__item">{{ $reservation->date }}</td>
-                                </tr>
-                                <tr class="status-card-table__row">
-                                    <th class="status-card-table__heading">Time</th>
-                                    <td class="status-card-table__item">{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}</td>
-                                </tr>
-                                <tr class="status-card-table__row">
-                                    <th class="status-card-table__heading">Number</th>
-                                    <td class="status-card-table__item">{{ $reservation->numberPeople }}人</td>
-                                </tr>
-                            </table>
-                            <div class="status-card__edit-btn">
-                                <a class="status-card__edit-btn--link" href="{{ route('reservation.edit', $reservation->id) }}">予約内容の変更</a>
-                            </div>
-                        </div>
-                    @endforeach
+                <div class="review-btn">
+                    <a class="review-btn__link" href="">過去の利用店舗の口コミを投稿する<i class="fa-solid fa-circle-chevron-right"></i></a>
                 </div>
             </div>
             <div class="mypage-right">
