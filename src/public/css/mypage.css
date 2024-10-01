@@ -87,6 +87,18 @@
 .status-card-table__item{
     width: 74%;
 }
+.status-card__edit-btn{
+    margin-top: 10px;
+}
+.status-card__edit-btn--link{
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    background-color: #6a87ed;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
 .mypage-right{
     width: 55%;
     padding: 0 17px;

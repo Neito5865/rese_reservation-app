@@ -32,9 +32,9 @@
                     <h2>予約</h2>
                 </div>
                 <div class="form">
-                    <form method="POST" action="{{ route('reservation.store', ['id' => $shop['id']]) }}" class="reservation-form">
+                    <form method="POST" action="{{ route('reservation.store', ['shop_id' => $shop->id]) }}" class="reservation-form">
                     @csrf
-                        <input class="reservation-form__input" type="date" name="date" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                        <input class="reservation-form__input" type="date" name="date" value="{{ old('date', \Carbon\Carbon::now()->format('Y-m-d')) }}">
                         <div class="reservation-form__error">
                             @error('date')
                             {{ $message }}
@@ -46,7 +46,7 @@
                                     @php
                                         $time = sprintf('%02d:%02d', intdiv($i, 4), ($i % 4) * 15);
                                     @endphp
-                                    <option value="{{ $time }}" {{ $time == '12:00' ? 'selected' : '' }}>{{ $time }}</optioin>
+                                    <option value="{{ $time }}" {{ $time == old('time', '12:00') ? 'selected' : '' }}>{{ $time }}</option>
                                 @endfor
                             </select>
                             <i class="fa-solid fa-sort-down custom-arrow"></i>
@@ -59,7 +59,7 @@
                         <div class="reservation-form__select">
                             <select class="reservation-form__select--number" name="numberPeople">
                                 @for ($i = 1; $i <= 100; $i++ )
-                                    <option value="{{ $i }}" {{ $i == '1' ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</optioin>
+                                    <option value="{{ $i }}" {{ $i == old('numberPeople', '1') ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
                                 @endfor
                             </select>
                             <i class="fa-solid fa-sort-down custom-arrow"></i>

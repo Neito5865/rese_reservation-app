@@ -33,7 +33,6 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                         <input class="search-form__item-input-keyword" type="text" name="keyword" value="{{ request('keyword') }}" id="keyword" placeholder="Search ...">
                     </div>
-                    {{-- <button type="submit">検索</button> --}}
                 </div>
             </form>
         </div>
@@ -56,7 +55,7 @@
                             </div>
                             <div class="shop-card__content--flex">
                                 <div class="shop-card__link">
-                                    <a href="{{ route('shop.detail', ['id' => $shop['id']]) }}" class="shop-card__link-detail">詳しくみる</a>
+                                    <a href="{{ route('shop.detail', ['shop_id' => $shop['id']]) }}" class="shop-card__link-detail">詳しくみる</a>
                                 </div>
                                 @if(Auth::check())
                                     @if(Auth::user()->isFavorite($shop->id))

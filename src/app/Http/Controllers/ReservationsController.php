@@ -14,7 +14,7 @@ use App\Http\Requests\ReservationRequest;
 class ReservationsController extends Controller
 {
     // 新規予約登録
-    public function store(ReservationRequest $request, $id){
+    public function store(ReservationRequest $request, $shop_id){
         $user_id = Auth::id();
         $reservation = $request->only([
             'date',
@@ -22,15 +22,27 @@ class ReservationsController extends Controller
             'numberPeople',
         ]);
         $reservation['user_id'] = $user_id;
-        $reservation['shop_id'] = $id;
+        $reservation['shop_id'] = $shop_id;
         Reservation::create($reservation);
 
-        return view('done');
+        return view('reservation.done');
+    }
+
+    // 予約内容変更ページの表示
+    public function edit($id){
+        $reservation = Reservation::findOrFail($id);
+        return view('reservation.reservation_edit', compact('reservation'));
+    }
+
+    public function update(ReservationRequest $request, $id){
+        $reservation = $request->all();
+        Reservation::findOrFail($id)->update($reservation);
+        return view('reservation.edit_done');
     }
 
     // 予約削除
-    public function destroy(Request $request, $id){
-        $reservation = Reservation::findOrFail($request->id);
+    public function destroy($id){
+        $reservation = Reservation::findOrFail($id);
         if(\Auth::id() === $reservation->user_id){
             $reservation->delete();
         }

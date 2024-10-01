@@ -50,16 +50,20 @@ Route::get('/', [ShopsController::class, 'index'])->name('shops');
 // 店舗検索機能
 Route::get('/search', [ShopsController::class, 'search'])->name('shops.search');
 // 店舗詳細ページ
-Route::get('/detail/{id}', [ShopsController::class, 'show'])->name('shop.detail');
+Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.detail');
 
 
 // ログイン後
 Route::middleware(['auth', 'verified'])->group(function(){
-    Route::group(['prefix' => 'reservations/{id}'], function(){
+    Route::group(['prefix' => 'reservations'], function(){
         // 新規予約登録
-        Route::post('/', [ReservationsController::class, 'store'])->name('reservation.store');
+        Route::post('{shop_id}', [ReservationsController::class, 'store'])->name('reservation.store');
+        // 予約内容編集ページの表示
+        Route::get('{id}/edit', [ReservationsController::class, 'edit'])->name('reservation.edit');
+        // 予約内容の変更
+        Route::put('{id}/edit', [ReservationsController::class, 'update'])->name('reservation.update');
         // 予約削除
-        Route::delete('/delete', [ReservationsController::class, 'destroy'])->name('reservation.destroy');
+        Route::delete('{id}/delete', [ReservationsController::class, 'destroy'])->name('reservation.destroy');
     });
 
     // マイページの表示

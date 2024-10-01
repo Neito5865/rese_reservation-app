@@ -1,0 +1,100 @@
+.reservation-edit__heading {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 24px;
+}
+
+.form {
+    width: 500px;
+    height: auto;
+    margin: 40px auto 0 auto;
+    padding: 35px;
+    background-color: #3560F6;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
+}
+
+.edit-form {
+    width: 100%;
+}
+.edit-table{
+    width: 100%;
+}
+
+.edit-table__heading{
+    color: #fff;
+    font-size: 18px;
+    text-align: left;
+    width: 30%;
+    height: 50px;
+}
+.edit-table__item{
+    width: 70%;
+    height: 50px;
+}
+.edit-form__input--shopName{
+    border: none;
+    background-color: #3560F6;
+    color: #fff;
+    font-size: 18px;
+}
+.edit-form__input--date{
+    width: 40%;
+    height: 60%;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.edit-form__select--time, .edit-form__select--number{
+    width: 100%;
+    height: 60%;
+    border-radius: 5px;
+    appearance: none;
+    padding-left: 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.item__select {
+    position: relative;
+}
+
+.custom-arrow {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-70%);
+    pointer-events: none;
+    font-size: 20px;
+    color: #E2E2E2;
+}
+
+.edit-table__item--error {
+    font-size: 14px;
+    color: #ef9a54;
+}
+
+.edit-form__button{
+    text-align: center;
+}
+
+.edit-form__button{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+.edit-form__button--link{
+    text-decoration: none;
+    color: #fff;
+}
+.edit-form__button--submit{
+    border: none;
+    border-radius: 5px;
+    padding: 6px 16px;
+    background-color: #fff;
+    font-size: 16px;
+    color: #3560F6;
+}

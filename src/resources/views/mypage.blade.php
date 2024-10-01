@@ -51,6 +51,9 @@
                                     <td class="status-card-table__item">{{ $reservation->numberPeople }}人</td>
                                 </tr>
                             </table>
+                            <div class="status-card__edit-btn">
+                                <a class="status-card__edit-btn--link" href="{{ route('reservation.edit', $reservation->id) }}">予約内容の変更</a>
+                            </div>
                         </div>
                     @endforeach
                 </div>
@@ -73,7 +76,7 @@
                                 </div>
                                 <div class="favorite-card__content--flex">
                                     <div class="favorite-card__link">
-                                        <a href="{{ route('shop.detail', ['id' => $shop['id']]) }}" class="favorite-card__link-detail">詳しくみる</a>
+                                        <a href="{{ route('shop.detail', ['shop_id' => $shop['id']]) }}" class="favorite-card__link-detail">詳しくみる</a>
                                     </div>
                                     @if(Auth::check())
                                         @if(Auth::user()->isFavorite($shop->id))
