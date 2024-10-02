@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="review-btn">
-                    <a class="review-btn__link" href="">過去の利用店舗の口コミを投稿する<i class="fa-solid fa-circle-chevron-right"></i></a>
+                    <a class="review-btn__link" href="{{ route('reviews.index') }}">過去の利用店舗の口コミを投稿する<i class="fa-solid fa-circle-chevron-right"></i></a>
                 </div>
             </div>
             <div class="mypage-right">

@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\ReviewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,5 +76,17 @@ Route::middleware(['auth', 'verified'])->group(function(){
         Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite');
         // お気に入り解除
         Route::delete('unfavorite', [FavoriteController::class, 'destroy'])->name('unfavorite');
+    });
+
+    // 評価投稿
+    Route::group(['prefix' => 'reviews'], function(){
+        // 一覧ページ
+        Route::get('', [ReviewsController::class, 'index'])->name('reviews.index');
+        // 投稿ページ
+        Route::get('create', [ReviewsController::class, 'create'])->name('reviews.create');
+        // 投稿内容確認
+        Route::post('confirm', [ReviewsController::class, 'confirm'])->name('reviews.confirm');
+        // 投稿処理
+        Route::post('store', [ReviewsController::class, 'store'])->name('reviews.store');
     });
 });

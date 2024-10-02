@@ -21,6 +21,7 @@ class CreateShopsTable extends Migration
             $table->text('detail');
             $table->string('shopImg');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

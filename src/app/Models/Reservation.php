@@ -24,4 +24,8 @@ class Reservation extends Model
     public function shop(){
         return $this->belongsTo(Shop::class);
     }
+
+    public function review(){
+        return $this->hasOne(Review::class);
+    }
 }

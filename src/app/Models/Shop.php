@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Shop extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
     protected $fillable = [
         'area_id',
         'genre_id',
@@ -48,5 +51,9 @@ class Shop extends Model
 
     public function favoriteUsers(){
         return $this->belongsToMany(User::class, 'favorites', 'shop_id', 'user_id')->withTimestamps();
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
     }
 }
