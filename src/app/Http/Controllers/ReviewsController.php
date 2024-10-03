@@ -20,4 +20,9 @@ class ReviewsController extends Controller
                             ->get();
         return view('review.review-index', compact('reservations'));
     }
+
+    public function create($id){
+        $reservation = Reservation::findOrFail($id);
+        return view('review.review-create', compact('reservation'));
+    }
 }

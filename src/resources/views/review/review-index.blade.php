@@ -7,7 +7,7 @@
 @section('content')
     @include('commons.header')
     <div class="reviews__header">
-        <h1>口コミ投稿</h1>
+        <h2>レビュー投稿</h2>
     </div>
     <div class="reviews__container">
         @foreach($reservations as $reservation)
@@ -30,7 +30,7 @@
                 </div>
                 <div class="review-card__link">
                     <a class="link__shop-detail" href="{{ route('shop.detail', ['shop_id' => $reservation->shop->id]) }}">店舗詳細</a>
-                    <a class="link__shop-review" href="{{ route('reviews.create', ['reservation => $reservation->id']) }}">口コミを投稿する</a>
+                    <a class="link__shop-review" href="{{ route('reviews.create', ['id' => $reservation->id]) }}">レビューを投稿する</a>
                 </div>
             </div>
         @endforeach
