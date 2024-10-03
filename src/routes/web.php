@@ -83,7 +83,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
         // 一覧ページ
         Route::get('', [ReviewsController::class, 'index'])->name('reviews.index');
         // 投稿ページ
-        Route::get('create', [ReviewsController::class, 'create'])->name('reviews.create');
+        Route::get('create/{reservation_id}', [ReviewsController::class, 'create'])->name('reviews.create');
         // 投稿内容確認
         Route::post('confirm', [ReviewsController::class, 'confirm'])->name('reviews.confirm');
         // 投稿処理
