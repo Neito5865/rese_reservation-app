@@ -1,0 +1,147 @@
+.review-confirm__heading {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.review-confirm__heading h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.review-confirm__table-form {
+    width: 90%;
+    max-width: 800px;
+    height: auto;
+    margin: 40px auto;
+    padding: 40px 0;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
+}
+
+.review-confirm-table__inner {
+    margin: 0 auto;
+    width: 90%;
+    text-align: left;
+}
+
+.review-confirm-table__row {
+    width: 100%;
+}
+
+.review-confirm-table__heading {
+    width: 30%;
+    height: 80px;
+    padding-left: 30px;
+    background-color: #9db1f8;
+    border-top: 2px solid #3560F6;
+    font-size: 1.1rem;
+}
+
+.review-confirm-table__heading--last,
+.review-confirm-table__item--last {
+    border-bottom: 2px solid #3560F6;
+    height: 160px;
+}
+
+.review-confirm-table__item {
+    width: 70%;
+    height: 80px;
+    padding-left: 30px;
+    border-top: 2px solid #3560F6;
+}
+
+.review-confirm-form__anonymous--flex {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.review-confirm-table__heading .required {
+    display: inline-block;
+    font-size: 12px;
+    background-color: #e85f41;
+    color: #fff;
+    font-weight: 400;
+    padding: 3px 5px;
+    margin-left: 15px;
+    border-radius: 4px;
+}
+
+.review-confirm-form__textarea {
+    width: 90%;
+    height: 80%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+}
+
+.rating-confirm {
+    font-size: 2rem;
+    color: #f5b301;
+}
+
+.review-confirm-form__btn {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.review-confirm-form__btn--review {
+    border: none;
+    background-color: #3560F6;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .review-confirm__table-form {
+        width: 95%;
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .review-confirm-table__inner {
+        margin: 0;
+        width: 100%;
+    }
+
+    .review-confirm-table__row {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .review-confirm-table__heading {
+        width: 100%;
+        height: 60px;
+        padding: 15px;
+    }
+
+    .review-confirm-table__item {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .review-confirm-form__textarea {
+        width: 100%;
+        height: 120px;
+    }
+
+    .review-confirm-table__heading--last {
+        border-bottom: none;
+        height: 60px;
+    }
+
+    .review-confirm-table__item--last {
+        width: 100%;
+        height: 155px;
+    }
+
+    .review-confirm-form__btn {
+        margin-top: 20px;
+        text-align: center;
+    }
+}

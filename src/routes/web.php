@@ -85,7 +85,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
         // 投稿ページ
         Route::get('create/{id}', [ReviewsController::class, 'create'])->name('reviews.create');
         // 投稿内容確認
-        Route::post('confirm', [ReviewsController::class, 'confirm'])->name('reviews.confirm');
+        Route::post('confirm/{id}', [ReviewsController::class, 'confirm'])->name('reviews.confirm');
         // 投稿処理
         Route::post('store', [ReviewsController::class, 'store'])->name('reviews.store');
     });
