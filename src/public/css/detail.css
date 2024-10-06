@@ -120,6 +120,9 @@
     border-radius: 5px;
     margin-left: 28px;
 }
+.reservation-summary p{
+    color: #fff;
+}
 .reservation-summary-table{
     width: 100%;
     margin-bottom: 20px;
@@ -158,6 +161,68 @@
     border-radius: 0 0 5px 5px;
     cursor: pointer;
 }
+
+.detail-review__container{
+    margin-top: 40px;
+}
+.detail-review__heading h2{
+    margin: 0;
+    padding: 0;
+}
+.detail-review__average{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.detail-review__average{
+    margin-top: 20px;
+}
+.detail-review__average p{
+    margin: 0;
+    padding: 0;
+    font-size: 1.2rem;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+.stars-outer{
+    position: relative;
+    display: inline-block;
+    font-family: FontAwesome;
+    color: #dcdcdc;
+}
+.stars-inner{
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    color: #f8ce0b;
+}
+.stars-outer::before{
+    content: "★★★★★";
+}
+.stars-inner::before{
+    content: "★★★★★";
+}
+.average-rating-number{
+    font-size: 1.2rem;
+    color: #c00;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.detail-review__link{
+    margin: 10px 0;
+}
+.detail-review__link--all-review{
+    color: #3560F6;
+}
+
+
 
 @media screen and (max-width: 768px) {
     .content-flex {

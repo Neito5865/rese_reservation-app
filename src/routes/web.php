@@ -52,6 +52,8 @@ Route::get('/', [ShopsController::class, 'index'])->name('shops');
 Route::get('/search', [ShopsController::class, 'search'])->name('shops.search');
 // 店舗詳細ページ
 Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.detail');
+// 店舗のレビュー一覧
+Route::get('/detail/reviews/{shop_id}', [ShopsController::class, 'showReviews'])->name('shop.reviews');
 
 
 // ログイン後

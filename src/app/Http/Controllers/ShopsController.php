@@ -8,6 +8,7 @@ use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Shop;
 use App\Models\Reservation;
+use App\Models\Review;
 use Carbon\Carbon;
 
 
@@ -30,6 +31,10 @@ class ShopsController extends Controller
     public function show($shop_id){
         $shop = Shop::findOrFail($shop_id);
 
+        $reviews = Review::where('shop_id', $shop_id)->get();
+        $averageRating = $reviews->avg('evaluation') ? : 0;
+        $reviewCount = $reviews->count();
+
         $userReservations = collect();
         if(Auth::check()){
             $today = Carbon::today();
@@ -40,6 +45,13 @@ class ShopsController extends Controller
                                             ->get();
         }
 
-        return view('detail', compact('shop', 'userReservations'));
+        return view('detail', compact('shop', 'userReservations', 'averageRating', 'reviewCount'));
+    }
+
+    public function showReviews($shop_id){
+        $shop = Shop::findOrFail($shop_id);
+        $reviews = Review::where('shop_id', $shop_id)->orderBy('id','desc')->paginate(10);
+
+        return view('shop-reviews', compact('shop', 'reviews'));
     }
 }

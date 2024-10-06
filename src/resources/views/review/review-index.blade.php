@@ -38,5 +38,6 @@
                 </div>
             </div>
         @endforeach
+        {{ $reservations->links() }}
     </div>
 @endsection

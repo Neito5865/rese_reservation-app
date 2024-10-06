@@ -24,6 +24,23 @@
                     <p>{{ $shop['detail'] }}</p>
                 </div>
             </div>
+            <div class="detail-review__container">
+                <div class="detail-review__heading">
+                    <h2 class="detail-review__title">お店のレビュー</h2>
+                </div>
+                <div class="detail-review__average">
+                    <p>評価平均</p>
+                    <div class="rating">
+                        <div class="stars-outer">
+                            <div class="stars-inner" style="width: {{ ($averageRating / 5) * 100 }}%;"></div>
+                        </div>
+                        <span class="average-rating-number">{{ number_format($averageRating, 2) }}</span>
+                    </div>
+                </div>
+                <div class="detail-review__link">
+                    <a class="detail-review__link--all-review" href="{{ route('shop.reviews', ['shop_id' => $shop->id]) }}"><i class="fa-regular fa-comments"></i>全てのレビューを見る （{{$reviewCount}}件）</a>
+                </div>
+            </div>
         </div>
 
         <div class="content-right">
