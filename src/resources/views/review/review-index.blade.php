@@ -38,6 +38,8 @@
                 </div>
             </div>
         @endforeach
-        {{ $reservations->links() }}
+        <div class="user-review__paginate">
+            {{ $reservations->links() }}
+        </div>
     </div>
 @endsection

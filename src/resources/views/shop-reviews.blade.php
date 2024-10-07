@@ -36,7 +36,9 @@
                     <p class="comment__content">{!! nl2br(e($review->comment)) !!}</p>
                 </div>
             </div>
-            {{ $reviews->links() }}
         @endforeach
+        <div class="shop-review__paginate">
+            {{ $reviews->links() }}
+        </div>
     </div>
 @endsection
