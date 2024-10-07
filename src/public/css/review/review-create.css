@@ -108,6 +108,11 @@
     border-radius: 5px;
 }
 
+.review-form__error{
+    font-size: 0.8rem;
+    color: #e45b49;
+}
+
 
 @media screen and (max-width: 768px) {
     .review__table-form {

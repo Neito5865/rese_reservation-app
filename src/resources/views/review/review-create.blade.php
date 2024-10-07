@@ -27,6 +27,11 @@
                                     匿名を希望
                                 </label>
                             </div>
+                            <div class="review-form__error">
+                                @error('is_anonymous')
+                                    {{ $message }}
+                                @enderror
+                            </div>
                         </td>
                     </tr>
                     <tr class="review-table__row">
@@ -52,12 +57,22 @@
                                 <input class="review-form__input--rate" type="radio" id="star1" name="evaluation" value="1">
                                 <label class="review-form__label--rate" for="star1" title="1 star">★</label>
                             </div>
+                            <div class="review-form__error">
+                                @error('evaluation')
+                                    {{ $message }}
+                                @enderror
+                            </div>
                         </td>
                     </tr>
                     <tr class="review-table__row">
                         <th class="review-table__heading review-table__heading--last">感想・コメント</th>
                         <td class="review-table__item review-table__item--last">
-                            <textarea class="review-form__textarea" name="comment" id="comment"></textarea>
+                            <textarea class="review-form__textarea" name="comment" id="comment">{{ old('comment') }}</textarea>
+                            <div class="review-form__error">
+                                @error('comment')
+                                    {{ $message }}
+                                @enderror
+                            </div>
                         </td>
                     </tr>
                 </table>

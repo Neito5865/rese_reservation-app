@@ -9,6 +9,7 @@ use App\Models\Shop;
 use App\Models\User;
 use App\Models\Review;
 use Carbon\Carbon;
+use App\Http\Requests\ReviewRequest;
 
 class ReviewsController extends Controller
 {
@@ -28,7 +29,7 @@ class ReviewsController extends Controller
         return view('review.review-create', compact('reservation'));
     }
 
-    public function confirm(Request $request, $id){
+    public function confirm(ReviewRequest $request, $id){
         $user = Auth::user();
         $reservation = Reservation::with('shop')->findOrFail($id);
         $review = $request->only([
