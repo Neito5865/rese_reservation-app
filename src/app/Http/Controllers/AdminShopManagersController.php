@@ -24,4 +24,12 @@ class AdminShopManagersController extends Controller
         return view('admin.index', compact('shopManagers'));
     }
 
+    public function show($id){
+        $shopManager = User::find($id);
+        if(!$shopManager){
+            return response()->view('errors.shopManager-detail', ['message' => '該当のユーザーが存在しません。'], 404);
+        }
+        return view('admin.detail', compact('shopManager'));
+    }
+
 }

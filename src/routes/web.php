@@ -99,5 +99,6 @@ Route::middleware(['auth', 'verified', 'can:admin-higher'])->group(function(){
     Route::group(['prefix' => 'admin'], function(){
         // 管理画面表示、店舗ユーザー一覧表示、検索機能
         Route::get('', [AdminShopManagersController::class, 'index'])->name('admin.index');
+        Route::get('detail/{id}', [AdminShopManagersController::class, 'show'])->name('admin.detail');
     });
 });
