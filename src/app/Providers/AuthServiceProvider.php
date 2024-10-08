@@ -15,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -32,6 +32,18 @@ class AuthServiceProvider extends ServiceProvider
             ->subject('認証メール通知')
             ->line('以下のボタンをクリックして、メールアドレスを認証してください。')
             ->action('メールアドレスを認証する', $url);
+        });
+
+        Gate::define('admin-higher', function($user){
+            return($user->role == 1);
+        });
+
+        Gate::define('shopManager-higher', function($user){
+            return($user->role == 2);
+        });
+
+        Gate::define('user-higher', function($user){
+            return($user->role == 3);
         });
     }
 }

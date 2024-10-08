@@ -57,20 +57,22 @@
                                 <div class="shop-card__link">
                                     <a href="{{ route('shop.detail', ['shop_id' => $shop['id']]) }}" class="shop-card__link-detail">詳しくみる</a>
                                 </div>
-                                @if(Auth::check())
-                                    @if(Auth::user()->isFavorite($shop->id))
-                                        <form class="shop-card__form" method="POST" action="{{ route('unfavorite', $shop->id) }}">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button class="shop-card__btn--favorite favorited" type="submit"><i class="fa-solid fa-heart"></i></button>
-                                        </form>
-                                    @else
-                                        <form class="shop-card__form" method="POST" action="{{ route('favorite', $shop->id) }}">
-                                            @csrf
-                                            <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
-                                        </form>
+                                @can('user-higher')
+                                    @if(Auth::check())
+                                        @if(Auth::user()->isFavorite($shop->id))
+                                            <form class="shop-card__form" method="POST" action="{{ route('unfavorite', $shop->id) }}">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="shop-card__btn--favorite favorited" type="submit"><i class="fa-solid fa-heart"></i></button>
+                                            </form>
+                                        @else
+                                            <form class="shop-card__form" method="POST" action="{{ route('favorite', $shop->id) }}">
+                                                @csrf
+                                                <button class="shop-card__btn--favorite" type="submit"><i class="fa-solid fa-heart"></i></button>
+                                            </form>
+                                        @endif
                                     @endif
-                                @endif
+                                @endcan
                             </div>
                         </div>
                     </div>

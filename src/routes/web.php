@@ -9,6 +9,7 @@ use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\AdminShopManagersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,8 +57,8 @@ Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.de
 Route::get('/detail/reviews/{shop_id}', [ShopsController::class, 'showReviews'])->name('shop.reviews');
 
 
-// ログイン後
-Route::middleware(['auth', 'verified'])->group(function(){
+// ログイン後：一般ユーザー
+Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function(){
     Route::group(['prefix' => 'reservations'], function(){
         // 新規予約登録
         Route::post('{shop_id}', [ReservationsController::class, 'store'])->name('reservation.store');
@@ -90,5 +91,13 @@ Route::middleware(['auth', 'verified'])->group(function(){
         Route::post('confirm/{id}', [ReviewsController::class, 'confirm'])->name('reviews.confirm');
         // 投稿処理
         Route::post('store', [ReviewsController::class, 'store'])->name('reviews.store');
+    });
+});
+
+// ログイン後：管理者
+Route::middleware(['auth', 'verified', 'can:admin-higher'])->group(function(){
+    Route::group(['prefix' => 'admin'], function(){
+        // 管理画面表示、店舗ユーザー一覧表示、検索機能
+        Route::get('', [AdminShopManagersController::class, 'index'])->name('admin.index');
     });
 });

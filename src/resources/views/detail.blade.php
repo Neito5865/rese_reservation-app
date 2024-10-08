@@ -44,84 +44,86 @@
         </div>
 
         <div class="content-right">
-            <div class="reservation-container">
-                <div class="reservation__heading">
-                    <h2>予約</h2>
-                </div>
-                <div class="form">
-                    <form method="POST" action="{{ route('reservation.store', ['shop_id' => $shop->id]) }}" class="reservation-form">
-                    @csrf
-                        <input class="reservation-form__input" type="date" name="date" value="{{ old('date', \Carbon\Carbon::now()->format('Y-m-d')) }}">
-                        <div class="reservation-form__error">
-                            @error('date')
-                            {{ $message }}
-                            @enderror
-                        </div>
-                        <div class="reservation-form__select">
-                            <select class="reservation-form__select--time" name="time">
-                                @for ($i = 0; $i < 24 * 4; $i++ )
-                                    @php
-                                        $time = sprintf('%02d:%02d', intdiv($i, 4), ($i % 4) * 15);
-                                    @endphp
-                                    <option value="{{ $time }}" {{ $time == old('time', '12:00') ? 'selected' : '' }}>{{ $time }}</option>
-                                @endfor
-                            </select>
-                            <i class="fa-solid fa-sort-down custom-arrow"></i>
-                        </div>
-                        <div class="reservation-form__error">
-                            @error('time')
-                            {{ $message }}
-                            @enderror
-                        </div>
-                        <div class="reservation-form__select">
-                            <select class="reservation-form__select--number" name="numberPeople">
-                                @for ($i = 1; $i <= 100; $i++ )
-                                    <option value="{{ $i }}" {{ $i == old('numberPeople', '1') ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
-                                @endfor
-                            </select>
-                            <i class="fa-solid fa-sort-down custom-arrow"></i>
-                        </div>
-                        <div class="reservation-form__error">
-                            @error('numberPeople')
-                            {{ $message }}
-                            @enderror
-                        </div>
-                        <div class="reservation-summary">
-                            @if(Auth::check())
-                                @if ($userReservations->isEmpty())
-                                <p>現在、この店舗での予約はありません。</p>
+            @can('user-higher')
+                <div class="reservation-container">
+                    <div class="reservation__heading">
+                        <h2>予約</h2>
+                    </div>
+                    <div class="form">
+                        <form method="POST" action="{{ route('reservation.store', ['shop_id' => $shop->id]) }}" class="reservation-form">
+                        @csrf
+                            <input class="reservation-form__input" type="date" name="date" value="{{ old('date', \Carbon\Carbon::now()->format('Y-m-d')) }}">
+                            <div class="reservation-form__error">
+                                @error('date')
+                                {{ $message }}
+                                @enderror
+                            </div>
+                            <div class="reservation-form__select">
+                                <select class="reservation-form__select--time" name="time">
+                                    @for ($i = 0; $i < 24 * 4; $i++ )
+                                        @php
+                                            $time = sprintf('%02d:%02d', intdiv($i, 4), ($i % 4) * 15);
+                                        @endphp
+                                        <option value="{{ $time }}" {{ $time == old('time', '12:00') ? 'selected' : '' }}>{{ $time }}</option>
+                                    @endfor
+                                </select>
+                                <i class="fa-solid fa-sort-down custom-arrow"></i>
+                            </div>
+                            <div class="reservation-form__error">
+                                @error('time')
+                                {{ $message }}
+                                @enderror
+                            </div>
+                            <div class="reservation-form__select">
+                                <select class="reservation-form__select--number" name="numberPeople">
+                                    @for ($i = 1; $i <= 100; $i++ )
+                                        <option value="{{ $i }}" {{ $i == old('numberPeople', '1') ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
+                                    @endfor
+                                </select>
+                                <i class="fa-solid fa-sort-down custom-arrow"></i>
+                            </div>
+                            <div class="reservation-form__error">
+                                @error('numberPeople')
+                                {{ $message }}
+                                @enderror
+                            </div>
+                            <div class="reservation-summary">
+                                @if(Auth::check())
+                                    @if ($userReservations->isEmpty())
+                                    <p>現在、この店舗での予約はありません。</p>
+                                    @else
+                                        @foreach($userReservations as $reservation)
+                                            <table class="reservation-summary-table">
+                                                <tr class="reservation-summary-table__row">
+                                                    <th class="reservation-summary-table__heading">Shop</th>
+                                                    <td class="reservation-summary-table__item">{{ $reservation->shop->shopName }}</td>
+                                                </tr>
+                                                <tr class="reservation-summary-table__row">
+                                                    <th class="reservation-summary-table__heading">Date</th>
+                                                    <td class="reservation-summary-table__item">{{ $reservation->date }}</td>
+                                                </tr>
+                                                <tr class="reservation-summary-table__row">
+                                                    <th class="reservation-summary-table__heading">Time</th>
+                                                    <td class="reservation-summary-table__item">{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}</td>
+                                                </tr>
+                                                <tr class="reservation-summary-table__row">
+                                                    <th class="reservation-summary-table__heading">Number</th>
+                                                    <td class="reservation-summary-table__item">{{ $reservation->numberPeople }}人</td>
+                                                </tr>
+                                            </table>
+                                        @endforeach
+                                    @endif
                                 @else
-                                    @foreach($userReservations as $reservation)
-                                        <table class="reservation-summary-table">
-                                            <tr class="reservation-summary-table__row">
-                                                <th class="reservation-summary-table__heading">Shop</th>
-                                                <td class="reservation-summary-table__item">{{ $reservation->shop->shopName }}</td>
-                                            </tr>
-                                            <tr class="reservation-summary-table__row">
-                                                <th class="reservation-summary-table__heading">Date</th>
-                                                <td class="reservation-summary-table__item">{{ $reservation->date }}</td>
-                                            </tr>
-                                            <tr class="reservation-summary-table__row">
-                                                <th class="reservation-summary-table__heading">Time</th>
-                                                <td class="reservation-summary-table__item">{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}</td>
-                                            </tr>
-                                            <tr class="reservation-summary-table__row">
-                                                <th class="reservation-summary-table__heading">Number</th>
-                                                <td class="reservation-summary-table__item">{{ $reservation->numberPeople }}人</td>
-                                            </tr>
-                                        </table>
-                                    @endforeach
+                                    <p>この店舗での予約状況を確認するには<br>ログインしてください。</p>
                                 @endif
-                            @else
-                                <p>この店舗での予約状況を確認するには<br>ログインしてください。</p>
-                            @endif
-                        </div>
-                        <div class="reservation-form__button">
-                            <input class="reservation-form__button--submit" type="submit" value="予約する">
-                        </div>
-                    </form>
+                            </div>
+                            <div class="reservation-form__button">
+                                <input class="reservation-form__button--submit" type="submit" value="予約する">
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endcan
         </div>
     </div>
 @endsection
