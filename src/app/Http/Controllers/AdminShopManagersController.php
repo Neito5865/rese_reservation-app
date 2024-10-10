@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Http\Requests\ShopManagerRequest;
+use Illuminate\Support\Facades\Hash;
 
 class AdminShopManagersController extends Controller
 {
@@ -30,6 +32,26 @@ class AdminShopManagersController extends Controller
             return response()->view('errors.shopManager-detail', ['message' => '該当のユーザーが存在しません。'], 404);
         }
         return view('admin.detail', compact('shopManager'));
+    }
+
+    public function update(ShopManagerRequest $request, $id){
+        $shopManager = $request->all();
+        User::findOrFail($id)->update($shopManager);
+        return back()->with('success', '保存が成功しました。');
+    }
+
+    public function create(){
+        return view('admin.create');
+    }
+
+    public function store(ShopManagerRequest $request){
+        User::create([
+            'role' => 2,
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ]);
+        return back()->with('success', '店舗責任者が作成されました。');
     }
 
 }

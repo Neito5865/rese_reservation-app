@@ -99,6 +99,12 @@ Route::middleware(['auth', 'verified', 'can:admin-higher'])->group(function(){
     Route::group(['prefix' => 'admin'], function(){
         // 管理画面表示、店舗ユーザー一覧表示、検索機能
         Route::get('', [AdminShopManagersController::class, 'index'])->name('admin.index');
+        // 店舗ユーザー情報詳細画面
         Route::get('detail/{id}', [AdminShopManagersController::class, 'show'])->name('admin.detail');
+        // 店舗ユーザー編集機能
+        Route::put('{id}/edit', [AdminShopManagersController::class, 'update'])->name('admin.update');
+        // 店舗ユーザー新規作成
+        Route::get('create', [AdminShopManagersController::class, 'create'])->name('admin.create');
+        Route::post('create', [AdminShopManagersController::class, 'store'])->name('admin.store');
     });
 });

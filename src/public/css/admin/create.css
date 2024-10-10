@@ -1,0 +1,73 @@
+.shopManager-create__alert--success {
+    color: #176a45;
+    background-color: #b7eed5;
+    height: 40px;
+    padding: 10px;
+}
+
+.shopManager-create__content{
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.shopManager-create__heading{
+    text-align: center;
+    margin-top: 40px;
+}
+.shopManager-create__heading h2{
+    margin: 0;
+    padding: 0;
+}
+
+.shopManager-create__form{
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.shopManager-create-form__group{
+    margin-bottom: 20px;
+}
+.shopManager-create-form__inner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.shopManager-create-form__label{
+    display: inline-block;
+    width: 20%;
+}
+.shopManager-create-form__input{
+    width: 80%;
+    height: 40px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.shopManager-create-form__btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+.shopManager-create-form__btn-link--back{
+    text-decoration: none;
+    color: #000;
+}
+.shopManager-create-form__btn-submit--create{
+    background-color: #3560F6;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    padding: 6px 16px;
+    border-radius: 5px;
+}
+
+.shopManager-create-form__error{
+    font-size: 14px;
+    color: #ff0000;
+    margin-left: 20%;
+    margin-top: 5px;
+}

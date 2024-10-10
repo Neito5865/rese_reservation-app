@@ -6,6 +6,9 @@
 
 @section('content')
     @include('commons.header')
+    <div class="shopManager-index__heading">
+        <h2>店舗代表者一覧</h2>
+    </div>
     <div class="shopManager-search">
         <form method="GET" action="{{ route('admin.index') }}" class="shopManager-search-form">
             @csrf
@@ -24,6 +27,9 @@
             </div>
         </form>
     </div>
+    <div class="shopManager-index__create-btn">
+        <a class="shopManager-index__create-btn--link" href="{{ route('admin.create') }}"><i class="fa-solid fa-plus"></i> 新規作成</a>
+    </div>
     <div class="shopManagers-list__content">
         @if($shopManagers->isEmpty())
             <p>該当するデータが見つかりませんでした。</p>
@@ -41,7 +47,7 @@
                             <td class="shopManagers-table__item">{{ $shopManager->email }}</td>
                             <td class="shopManagers-table__item">
                                 <button class="shopManagers-table__btn">
-                                    <a class="shopManagers-table__btn--detail" href="{{ route('admin.detail', $shopManager->id)}}">詳細を見る</a>
+                                    <a class="shopManagers-table__btn--detail" href="{{ route('admin.detail', $shopManager->id)}}"><i class="fa-solid fa-pen-to-square"></i> 編集</a>
                                 </button>
                             </td>
                         </tr>

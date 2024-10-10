@@ -1,0 +1,85 @@
+.shopManager-detail__alert--success{
+    color: #176a45;
+    background-color: #b7eed5;
+    height: 40px;
+    padding: 10px;
+}
+
+.shopManager-detail__container, .shopManager-shopList__container{
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.shopManager-detail__btn {
+    margin-top: 10px;
+}
+.shopManager-detail__header, .shopManager-shopList__header{
+    margin-top: 40px;
+}
+.shopManager-detail__btn--Link-back{
+    text-decoration: none;
+    color: #3560F6;
+}
+
+.shopManager-detail__header h2, .shopManager-shopList__header h2{
+    margin: 0;
+    padding: 0;
+}
+
+.shopManagers-edit-table__wrapper{
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+.shopManager-detail__form{
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.shopManager-edit-form{
+    width: 100%;
+}
+
+.shopManager-edit-table__content{
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+}
+.shopManager-edit-table__row{
+    width: 100%;
+    height: 60px;
+}
+.shopManager-edit-table__heading{
+    width: 25%;
+    text-align: left;
+    padding-left: 10px;
+}
+.shopManager-edit-table__item{
+    width: 75%;
+    padding-left: 10px;
+}
+.shopManager-edit__input{
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+.shopManager-edit-table__item--error{
+    color: #ff0000;
+    font-size: 14px;
+}
+.shopManager-edit-form__btn{
+    margin-top: 20px;
+    text-align: right;
+}
+.shopManager-edit-form__btn--submit{
+    border: none;
+    color: #fff;
+    background-color: #3560F6;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
