@@ -19,7 +19,7 @@
                     @can('admin-higher')
                         <li class="header-nav__item"><a class="header-nav__link" href="{{ route('admin.index') }}">Dashboard</a></li>
                     @elsecan('shopManager-higher')
-                        <li class="header-nav__item"><a class="header-nav__link" href="">Dashboard</a></li>
+                        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('shopManager.index') }}">Dashboard</a></li>
                     @elsecan('user-higher')
                         <li class="header-nav__item"><a class="header-nav__link" href="{{ route('mypage.show') }}">Mypage</a></li>
                     @endcan

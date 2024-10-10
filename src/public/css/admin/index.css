@@ -1,8 +1,8 @@
-.shopManager-index__heading{
+.admin-index__heading{
     text-align: center;
     margin-top: 40px;
 }
-.shopManager-index__heading h2{
+.admin-index__heading h2{
     margin: 0;
     padding: 0;
 }
@@ -51,12 +51,12 @@
     border-radius: 5px;
 }
 
-.shopManager-index__create-btn{
+.admin-index__shopManager-create-btn{
     width: 90%;
     max-width: 800px;
     margin: 0 auto 20px auto;
 }
-.shopManager-index__create-btn--link{
+.shopManager-create-btn__link{
     text-decoration: none;
     background-color: #a0b2f4;
     color: #000;

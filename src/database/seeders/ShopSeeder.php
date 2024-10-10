@@ -20,11 +20,12 @@ class ShopSeeder extends Seeder
 
         while(($data = fgetcsv($file)) !== FALSE){
             Shop::create([
-                'area_id' => $data[1],
-                'genre_id' => $data[2],
-                'shopName' => $data[3],
-                'detail' => $data[4],
-                'shopImg' => $data[5],
+                'user_id' => $data[1],
+                'area_id' => $data[2],
+                'genre_id' => $data[3],
+                'shopName' => $data[4],
+                'detail' => $data[5],
+                'shopImg' => $data[6],
             ]);
         }
 

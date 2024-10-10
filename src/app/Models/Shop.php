@@ -27,6 +27,10 @@ class Shop extends Model
         return $this->belongsTo(Genre::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     public function scopeAreaSearch($query, $area_id){
         if(!empty($area_id)){
             $query->where('area_id', $area_id);

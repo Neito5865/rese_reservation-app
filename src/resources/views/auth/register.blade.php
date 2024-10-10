@@ -13,6 +13,7 @@
         <div class="form">
             <form method="POST" action="{{ route('create.register') }}" class="register-form">
                 @csrf
+                <input type="hidden" name="role" value="3">
                 <div class="register-form__group">
                     <div class="register-form__item">
                         <div class="icon">

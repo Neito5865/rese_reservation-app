@@ -6,7 +6,7 @@
 
 @section('content')
     @include('commons.header')
-    <div class="shopManager-index__heading">
+    <div class="admin-index__heading">
         <h2>店舗代表者一覧</h2>
     </div>
     <div class="shopManager-search">
@@ -27,8 +27,8 @@
             </div>
         </form>
     </div>
-    <div class="shopManager-index__create-btn">
-        <a class="shopManager-index__create-btn--link" href="{{ route('admin.create') }}"><i class="fa-solid fa-plus"></i> 新規作成</a>
+    <div class="admin-index__shopManager-create-btn">
+        <a class="shopManager-create-btn__link" href="{{ route('admin.create') }}"><i class="fa-solid fa-plus"></i> 新規作成</a>
     </div>
     <div class="shopManagers-list__content">
         @if($shopManagers->isEmpty())

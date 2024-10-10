@@ -10,6 +10,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\AdminShopManagersController;
+use App\Http\Controllers\ShopManagerShopsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,5 +107,13 @@ Route::middleware(['auth', 'verified', 'can:admin-higher'])->group(function(){
         // 店舗ユーザー新規作成
         Route::get('create', [AdminShopManagersController::class, 'create'])->name('admin.create');
         Route::post('create', [AdminShopManagersController::class, 'store'])->name('admin.store');
+    });
+});
+
+// ログイン後：店舗ユーザー
+Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(function(){
+    Route::group(['prefix' => 'shop-manager'], function(){
+        // 管理画面表示、所有店舗一覧
+        Route::get('', [ShopManagerShopsController::class, 'index'])->name('shopManager.index');
     });
 });
