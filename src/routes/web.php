@@ -115,5 +115,9 @@ Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(functio
     Route::group(['prefix' => 'shop-manager'], function(){
         // 管理画面表示、所有店舗一覧
         Route::get('', [ShopManagerShopsController::class, 'index'])->name('shopManager.index');
+        // 店舗作成画面
+        Route::get('create', [ShopManagerShopsController::class, 'create'])->name('shopManager.create');
+        // 店舗作成処理
+        Route::post('create', [ShopManagerShopsController::class, 'store'])->name('shopManager.store');
     });
 });

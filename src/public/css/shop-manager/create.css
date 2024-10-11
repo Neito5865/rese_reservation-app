@@ -1,0 +1,117 @@
+.shopManagerShop-create__alert--success {
+    color: #176a45;
+    background-color: #b7eed5;
+    height: 40px;
+    padding: 10px;
+}
+
+.shopManagerShop-create__content {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.shopManagerShop-create__heading {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.shopManagerShop-create__heading h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.shopManagerShop-create__form {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.shopManagerShop-create-form__group {
+    margin-bottom: 20px;
+}
+
+.shopManagerShop-create-form__inner {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.shopManagerShop-create-form__label {
+    display: inline-block;
+    width: 20%;
+}
+
+.shopManagerShop-create-form__input {
+    width: 80%;
+    height: 40px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.shopManagerShop-create-form__select--area, .shopManagerShop-create-form__select--genre{
+    width: 400px;
+    height: 40px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding-left: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.custom-arrow-area {
+    position: absolute;
+    top: 43%;
+    right: 39%;
+    pointer-events: none;
+    font-size: 30px;
+    color: #cdcdcd;
+}
+
+.custom-arrow-genre {
+    position: absolute;
+    top: 36%;
+    right: 39%;
+    pointer-events: none;
+    font-size: 30px;
+    color: #cdcdcd;
+}
+
+.shopManagerShop-create-form__textarea{
+    width: 80%;
+    height: 100px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.shopManagerShop-create-form__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.shopManagerShop-create-form__btn-link--back {
+    text-decoration: none;
+    color: #000;
+}
+
+.shopManagerShop-create-form__btn-submit--create {
+    background-color: #3560F6;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    padding: 6px 16px;
+    border-radius: 5px;
+}
+
+.shopManagerShop-create-form__error {
+    font-size: 14px;
+    color: #ff0000;
+    margin-left: 20%;
+    margin-top: 5px;
+}
