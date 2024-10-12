@@ -119,5 +119,8 @@ Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(functio
         Route::get('create', [ShopManagerShopsController::class, 'create'])->name('shopManager.create');
         // 店舗作成処理
         Route::post('create', [ShopManagerShopsController::class, 'store'])->name('shopManager.store');
+        // 店舗情報詳細画面表示、予約一覧表示
+        Route::get('detail/{id}', [ShopManagerShopsController::class, 'show'])->name('shopManager.detail');
+        Route::put('{id}/edit', [shopManagerShopsController::class, 'update'])->name('shopManager.update');
     });
 });
