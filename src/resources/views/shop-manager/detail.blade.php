@@ -125,12 +125,46 @@
             </form>
         </div>
     </div>
-    <div class="shopManagerShop-reservationList__container">
-        <div class="shopManagerShop-reservationList__header">
+    <div class="reservationList__container">
+        <div class="reservationList__header">
             <h2>予約一覧</h2>
         </div>
-        <div class="shopManagerShop-reservationList-table">
+        <div class="reservationList__reservation-create-btn">
+            <a class="shopManagerReservation-create-btn__link" href=""><i class="fa-solid fa-plus"></i> 新規作成</a>
         </div>
+        <div class="reservationList__inner">
+        @if($shopManagerReservations->isEmpty())
+            <p>予約がありません。</p>
+        @else
+            <div class="reservationList-table__wrapper">
+                <table class="reservationList-table">
+                    <tr class="reservationList-table__row">
+                        <th class="reservationList-table__heading">予約日</th>
+                        <th class="reservationList-table__heading">時間</th>
+                        <th class="reservationList-table__heading">予約者名</th>
+                        <th class="reservationList-table__heading">人数</th>
+                        <th class="reservationList-table__heading"></th>
+                    </tr>
+                    @foreach($shopManagerReservations as $reservation)
+                        <tr class="reservationList-table__row">
+                            <td class="reservationList-table__item">{{ $reservation->date }}</td>
+                            <td class="reservationList-table__item">{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</td>
+                            <td class="reservationList-table__item">{{ $reservation->user->name }}</td>
+                            <td class="reservationList-table__item">{{ $reservation->numberPeople }}</td>
+                            <td class="reservationList-table__item">
+                                <button class="reservationList-table__btn">
+                                    <a class="reservationList-table__btn--detail" href="{{ route('shopManagerReservation.show', $reservation->id) }}"><i class="fa-solid fa-pen-to-square"></i> 編集</a>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+        @endif
+    </div>
+    <div class="reservationList__paginate">
+        {{ $shopManagerReservations->links() }}
+    </div>
     </div>
 @endsection
 

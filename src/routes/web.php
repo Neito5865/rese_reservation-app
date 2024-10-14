@@ -122,5 +122,18 @@ Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(functio
         // 店舗情報詳細画面表示、予約一覧表示
         Route::get('detail/{id}', [ShopManagerShopsController::class, 'show'])->name('shopManager.detail');
         Route::put('{id}/edit', [shopManagerShopsController::class, 'update'])->name('shopManager.update');
+
+        Route::group(['prefix' => 'reservations'], function(){
+            // 新規予約作成画面表示
+            Route::get('create', [ShopManagerReservationsController::class, 'create'])->name('shopManagerReservation.create');
+            // 新規予約作成
+            Route::post('create', [ShopManagerReservationsController::class, 'store'])->name('shopManagerReservation.store');
+            // 予約詳細画面
+            Route::get('show/{id}', [ShopManagerReservationsController::class, 'show'])->name('shopManagerReservation.show');
+            // 予約編集処理
+            Route::put('{id}/edit', [ShopManagerReservationsController::class, 'update'])->name('shopManagerReservation.update');
+            // 予約削除処理
+            Route::put('{id}/delete', [ShopManagerReservationsController::class, 'destroy'])->name('shopManagerReservation.destroy');
+        });
     });
 });

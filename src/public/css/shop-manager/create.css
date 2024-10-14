@@ -50,6 +50,14 @@
     border-radius: 5px;
     padding-left: 10px;
 }
+.shopManagerShop-create-form__group:nth-of-type(5) .shopManagerShop-create-form__input{
+    border: none;
+    padding-top: 10px;
+}
+.shopImg-preview{
+    margin-top: 10px;
+    margin-left: 20%;
+}
 
 .shopManagerShop-create-form__select--area, .shopManagerShop-create-form__select--genre{
     width: 400px;
@@ -65,7 +73,7 @@
 .custom-arrow-area {
     position: absolute;
     top: 43%;
-    right: 39%;
+    right: 40%;
     pointer-events: none;
     font-size: 30px;
     color: #cdcdcd;
@@ -74,7 +82,7 @@
 .custom-arrow-genre {
     position: absolute;
     top: 36%;
-    right: 39%;
+    right: 40%;
     pointer-events: none;
     font-size: 30px;
     color: #cdcdcd;

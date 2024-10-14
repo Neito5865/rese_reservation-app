@@ -83,6 +83,9 @@
                         <label class="shopManagerShop-create-form__label" for="shopImg">店舗写真</label>
                         <input class="shopManagerShop-create-form__input" id="shopImg" type="file" name="shopImg">
                     </div>
+                    <div class="shopImg-preview">
+                        <img id="uploaded-image-preview" style="display: none; max-width: 200px; max-height: 150px;">
+                    </div>
                     <div class="shopManagerShop-create-form__error">
                         @error('shopImg')
                         {{ $message }}
@@ -101,3 +104,31 @@
         </div>
     </div>
 @endsection
+
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 要素の取得
+            const shopImgInput = document.getElementById('shopImg');
+            const uploadedImagePreview = document.getElementById('uploaded-image-preview');
+
+            // 新しい画像のプレビュー表示
+            shopImgInput.addEventListener('change', function (event) {
+                const file = event.target.files[0];
+
+                if (file) {
+                    // 新しい画像のプレビュー表示
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        uploadedImagePreview.src = e.target.result;
+                        uploadedImagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    uploadedImagePreview.style.display = 'none';
+                }
+            });
+        });
+    </script>
+@endsection
+
