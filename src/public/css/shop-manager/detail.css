@@ -220,6 +220,10 @@
 .reservationList-table__item:nth-of-type(5) {
     text-align: center;
 }
+.shopManagerShop-create-form__select--area, .shopManagerShop-create-form__select--genre{
+    border-top: 1px solid #b1b1b1;
+    border-radius: 5px;
+}
 
 .reservationList-table__btn {
     border: none;

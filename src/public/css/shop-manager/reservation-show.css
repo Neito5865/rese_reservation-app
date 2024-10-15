@@ -1,0 +1,210 @@
+.shopManagerReservation-show__alert--success {
+    color: #176a45;
+    background-color: #b7eed5;
+    height: 40px;
+    padding: 10px;
+}
+
+.shopManagerReservation-show__container,
+.user-detail__container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.shopManagerReservation-show__btn {
+    margin-top: 10px;
+}
+
+.shopManagerReservation-show__header, .user-detail__header {
+    margin-top: 40px;
+}
+
+.shopManagerReservation-show__btn--Link-back {
+    text-decoration: none;
+    color: #3560F6;
+}
+
+.shopManagerReservation-show__header h2, .user-detail__header h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.shopManagerReservation-edit-table__wrapper {
+    width: 100%;
+}
+
+.shopManagerReservation-edit__form {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.shopManagerReservation-edit-form {
+    width: 100%;
+}
+
+.shopManagerReservation-edit-table__content {
+    width: 100%;
+}
+
+.shopManagerReservation-edit-table__row {
+    width: 100%;
+    height: 60px;
+}
+
+.shopManagerReservation-edit-table__heading {
+    width: 25%;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.shopManagerReservation-edit-table__item {
+    width: 75%;
+    padding-left: 10px;
+}
+
+.shopManagerReservation-edit-form__input {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.shopManagerReservation-edit-form__input[readonly]{
+    border: none;
+}
+
+.shopManagerReservation-edit-table__content tr:nth-of-type(2) .shopManagerReservation-edit-form__input{
+    width: 40%;
+}
+
+.shopManagerReservation-edit-form__select {
+    width: 40%;
+    height: 40px;
+    position: relative;
+}
+
+.shopManagerReservation-edit-form__select--time,
+.shopManagerReservation-edit-form__select--number {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border: 1px solid #b1b1b1;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-left: 10px;
+}
+
+.custom-arrow-time {
+    position: absolute;
+    top: 0;
+    right: 5%;
+    pointer-events: none;
+    font-size: 30px;
+    color: #cdcdcd;
+}
+
+.custom-arrow-number {
+    position: absolute;
+    top: 0;
+    right: 5%;
+    pointer-events: none;
+    font-size: 30px;
+    color: #cdcdcd;
+}
+
+.shopManagerReservation-edit-table__item--error {
+    color: #ff0000;
+    font-size: 14px;
+}
+
+
+.shopManagerReservation-edit-form__btn {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.shopManagerReservation-edit-form__btn--submit {
+    border: none;
+    color: #fff;
+    background-color: #3560F6;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.user-detail-table{
+    background-color: #fff;
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+}
+.user-detail-table__content{
+    width: 100%;
+}
+.user-detail-table__row{
+    width: 100%;
+    height: 60px;
+}
+.user-detail-table__heading {
+    width: 25%;
+    text-align: left;
+    padding-left: 10px;
+    background-color: #eaeaea;
+    border-bottom: 1px solid #b1b1b1;
+}
+.user-detail-table__content tr:nth-of-type(1) .user-detail-table__heading{
+    border-top: 1px solid #b1b1b1;
+}
+
+.user-detail-table__item{
+    width: 75%;
+    padding-left: 10px;
+    border-bottom: 1px solid #b1b1b1;
+}
+.user-detail-table__content tr:nth-of-type(1) .user-detail-table__item {
+    border-top: 1px solid #b1b1b1;
+}
+
+
+@media screen and (max-width: 768px) {
+    .shopManagerReservation-edit-table__heading {
+        width: 30%;
+    }
+    .shopManagerReservation-edit-table__item {
+        width: 70%;
+    }
+    .shopManagerReservation-edit-table__content tr:nth-of-type(2) .shopManagerReservation-edit-form__input {
+        width: 100%;
+    }
+    .shopManagerReservation-edit-form__select {
+        width: 100%;
+    }
+
+    .user-detail-table__row{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+    .user-detail-table__heading {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+    }
+    .user-detail-table__item {
+        width: 100%;
+        height: 60px;
+        line-height: 60px;
+    }
+    .user-detail-table__content tr:nth-of-type(1) .user-detail-table__item {
+        border-top: none;
+    }
+}
+
+

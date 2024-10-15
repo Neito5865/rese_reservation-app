@@ -54,7 +54,7 @@ class ShopManagerShopsController extends Controller
         $areas = Area::all();
         $genres = Genre::all();
 
-        $shopManagerReservations = $shopManagerShop->reservations()->orderBy('date', 'asc')->paginate(10);
+        $shopManagerReservations = $shopManagerShop->reservations()->orderBy('date', 'asc')->orderBy('time', 'asc')->paginate(10);
         return view('shop-manager.detail', compact('shopManagerShop', 'areas', 'genres', 'shopManagerReservations'));
     }
 

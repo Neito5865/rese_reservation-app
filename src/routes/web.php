@@ -11,6 +11,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\AdminShopManagersController;
 use App\Http\Controllers\ShopManagerShopsController;
+use App\Http\Controllers\ShopManagerReservationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,7 +126,7 @@ Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(functio
 
         Route::group(['prefix' => 'reservations'], function(){
             // 新規予約作成画面表示
-            Route::get('create', [ShopManagerReservationsController::class, 'create'])->name('shopManagerReservation.create');
+            Route::get('create/{id}', [ShopManagerReservationsController::class, 'create'])->name('shopManagerReservation.create');
             // 新規予約作成
             Route::post('create', [ShopManagerReservationsController::class, 'store'])->name('shopManagerReservation.store');
             // 予約詳細画面
