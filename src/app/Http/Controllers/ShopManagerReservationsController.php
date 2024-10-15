@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Shop;
+use App\Models\User;
 use App\Http\Requests\ReservationRequest;
 
 class ShopManagerReservationsController extends Controller
 {
     public function create($id){
         $shop = Shop::findOrFail($id);
-        return view('shop-manager.reservation-create', compact('shop'));
+        $users = User::where('role', 3)->get();
+        return view('shop-manager.reservation-create', compact('shop', 'users'));
     }
 
     public function show($id){

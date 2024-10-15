@@ -130,7 +130,7 @@
             <h2>予約一覧</h2>
         </div>
         <div class="reservationList__reservation-create-btn">
-            <a class="shopManagerReservation-create-btn__link" href="{{ route('shopManagerReservation.create') }}"><i class="fa-solid fa-plus"></i> 新規作成</a>
+            <a class="shopManagerReservation-create-btn__link" href="{{ route('shopManagerReservation.create', $shopManagerShop->id) }}"><i class="fa-solid fa-plus"></i> 新規作成</a>
         </div>
         <div class="reservationList__inner">
         @if($shopManagerReservations->isEmpty())
