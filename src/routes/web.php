@@ -128,7 +128,7 @@ Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(functio
             // 新規予約作成画面表示
             Route::get('create/{id}', [ShopManagerReservationsController::class, 'create'])->name('shopManagerReservation.create');
             // 新規予約作成
-            Route::post('create', [ShopManagerReservationsController::class, 'store'])->name('shopManagerReservation.store');
+            Route::post('create/{id}', [ShopManagerReservationsController::class, 'store'])->name('shopManagerReservation.store');
             // 予約詳細画面
             Route::get('show/{id}', [ShopManagerReservationsController::class, 'show'])->name('shopManagerReservation.show');
             // 予約編集処理

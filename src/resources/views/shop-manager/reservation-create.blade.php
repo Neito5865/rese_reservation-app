@@ -16,7 +16,7 @@
             <h2>新規予約作成</h2>
         </div>
         <div class="shopManagerReservation-create__form">
-            <form method="POST" action="" class="shopManagerReservation-create-form__content">
+            <form method="POST" action="{{ route('shopManagerReservation.store', $shop->id) }}" class="shopManagerReservation-create-form__content">
                 @csrf
                 <div class="shopManagerReservation-create-form__group">
                     <div class="shopManagerReservation-create-form__inner">
@@ -47,7 +47,7 @@
                                     <option value="{{ $time }}" {{ $time == old('time', '12:00') ? 'selected' : '' }}>{{ $time }}</option>
                                 @endfor
                             </select>
-                            <i class="fa-solid fa-sort-down custom-arrow-time"></i>
+                            <i class="fa-solid fa-sort-down custom-arrow"></i>
                         </div>
                     </div>
                     <div class="shopManagerReservation-create-form__error">
@@ -65,7 +65,7 @@
                                     <option value="{{ $i }}" {{ $i == old('numberPeople', '1') ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
                                 @endfor
                             </select>
-                            <i class="fa-solid fa-sort-down custom-arrow-number"></i>
+                            <i class="fa-solid fa-sort-down custom-arrow"></i>
                         </div>
                     </div>
                     <div class="shopManagerReservation-create-form__error">
@@ -79,6 +79,7 @@
                         <label class="shopManagerReservation-create-form__label" for="user">予約者</label>
                         <button class="shopManagerReservation-create-form__btn--userChoise" type="button" id="user">ユーザーを選択</button>
                     </div>
+                    <p id="selectedUserName" class="shopManagerReservation-create-form__selected-user"></p>
                     <div class="shopManagerReservation-create-form__error">
                         @error('user_id')
                         {{ $message }}
@@ -130,9 +131,10 @@
             var modal = document.getElementById('userModal');
             var btn = document.getElementById('user');
             var span = document.getElementsByClassName('close')[0];
+            var selectedUserNameDisplay = document.getElementById('selectedUserName'); // 追加した要素を取得
 
-            // ユーザーリストアイテムを取得
-            var userListItems = document.querySelectorAll('#userList tr');
+            // ユーザーリストの各行を取得
+            var userListRows = document.querySelectorAll('#userList tr.userList-table__row:not(:first-child)'); // 修正箇所
 
             // ボタンをクリックするとモーダルを表示
             btn.onclick = function() {
@@ -155,8 +157,10 @@
             document.getElementById('userSearch').addEventListener('input', function () {
                 var searchValue = this.value.toLowerCase();
                 userListRows.forEach(function (row) {
-                    var userName = row.getAttribute('data-user-name').toLowerCase();
-                    var userEmail = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                    var userName = row.getAttribute('data-user-name') ? row.getAttribute('data-user-name').toLowerCase() : '';
+                    var userEmailElement = row.querySelector('td:nth-child(2)');
+                    var userEmail = userEmailElement ? userEmailElement.textContent.toLowerCase() : '';
+
                     if (userName.includes(searchValue) || userEmail.includes(searchValue)) {
                         row.style.display = '';
                     } else {
@@ -166,13 +170,16 @@
             });
 
             // ユーザーをクリックして選択
-            userListItems.forEach(function (row) {
+            userListRows.forEach(function (row) {  // 修正箇所
                 row.addEventListener('click', function () {
                     var userId = this.getAttribute('data-user-id');
                     var userName = this.getAttribute('data-user-name');
 
-                    // フォームに選択したユーザー名をセット
-                    document.getElementById('user').textContent = userName;
+                    // ボタンのテキストを更新
+                    document.getElementById('user').textContent = 'ユーザーを選択';
+
+                    // 追加した要素にユーザー名を表示
+                    selectedUserNameDisplay.textContent = `選択したユーザー: ${userName}`;
 
                     // 既に hidden input が存在する場合は削除
                     var existingInput = document.querySelector('input[name="user_id"]');

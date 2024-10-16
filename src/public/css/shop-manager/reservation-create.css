@@ -66,6 +66,7 @@
 
 .shopManagerReservation-create-form__select{
     width: 80%;
+    position: relative;
 }
 .shopManagerReservation-create-form__select--time,
 .shopManagerReservation-create-form__select--number {
@@ -74,27 +75,22 @@
     border: 1px solid #b1b1b1;
     border-radius: 5px;
     padding-left: 10px;
+    padding-right: 40px;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    position: relative;
+    z-index: 1;
 }
 
-.custom-arrow-time {
+.custom-arrow {
     position: absolute;
-    top: 43%;
-    right: 50%;
+    top: 0;
+    right: 62%;
     pointer-events: none;
     font-size: 30px;
     color: #cdcdcd;
-}
-
-.custom-arrow-number {
-    position: absolute;
-    top: 50%;
-    right: 50%;
-    pointer-events: none;
-    font-size: 30px;
-    color: #cdcdcd;
+    z-index: 2;
 }
 
 .shopManagerReservation-create-form__btn {
@@ -118,6 +114,10 @@
     border-radius: 5px;
 }
 
+.shopManagerReservation-create-form__selected-user{
+    margin-left: 20%;
+}
+
 .shopManagerReservation-create-form__error {
     font-size: 14px;
     color: #ff0000;
@@ -129,7 +129,7 @@
 /* モーダル */
 .modal{
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     left: 0;
     top: 0;
     width: 100%;
@@ -141,6 +141,9 @@
     margin: 10% auto;
     padding: 30px;
     width: 80%;
+    height: 80%;
+    overflow: hidden;
+    position: relative;
 }
 .close{
     color: #aaa;
@@ -167,9 +170,73 @@
     padding-left: 10px;
 }
 .modal-userList{
+    max-height: calc(100% - 150px);
     width: 100%;
+    overflow-y: auto;
+    margin-top: 20px;
 }
 .userList-table{
     width: 100%;
-    border: 1px solid #ff0000;
+    border-collapse: collapse;
+}
+.userList-table__row{
+    width: 100%;
+    border-bottom: 1px solid #b1b1b1;
+}
+.userList-table__row:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.userList-table__header{
+    text-align: left;
+    height: 30px;
+    padding-left: 10px;
+}
+.userList-table__item{
+    height: 60px;
+    padding-left: 10px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .shopManagerReservation-create-form__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .shopManagerReservation-create-form__label {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .shopManagerReservation-create-form__group:nth-of-type(2) .shopManagerReservation-create-form__input {
+        width: 100%;
+    }
+
+    .shopManagerReservation-create-form__select {
+        width: 100%;
+    }
+
+    .shopManagerReservation-create-form__select--time,
+    .shopManagerReservation-create-form__select--number {
+        width: 100%;
+    }
+
+    .custom-arrow {
+        position: absolute;
+        top: 0;
+        right: 5%;
+        pointer-events: none;
+        font-size: 30px;
+        color: #cdcdcd;
+        z-index: 2;
+    }
+
+    .modal__userSearch input {
+        width: 100%;
+    }
+
 }

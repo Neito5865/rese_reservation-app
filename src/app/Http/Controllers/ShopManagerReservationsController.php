@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use App\Models\Shop;
 use App\Models\User;
 use App\Http\Requests\ReservationRequest;
+use App\Http\Requests\ShopManagerReservationRequest;
 
 class ShopManagerReservationsController extends Controller
 {
@@ -14,6 +15,20 @@ class ShopManagerReservationsController extends Controller
         $shop = Shop::findOrFail($id);
         $users = User::where('role', 3)->get();
         return view('shop-manager.reservation-create', compact('shop', 'users'));
+    }
+
+    public function store(ShopManagerReservationRequest $request, $id){
+        $shop = Shop::findOrFail($id);
+        $reservation = $request->only([
+            'date',
+            'time',
+            'numberPeople',
+            'user_id',
+        ]);
+        $reservation['shop_id'] = $shop->id;
+        Reservation::create($reservation);
+
+        return back()->with('success', '新規予約を作成しました');
     }
 
     public function show($id){
