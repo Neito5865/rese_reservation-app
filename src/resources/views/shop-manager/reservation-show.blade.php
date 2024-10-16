@@ -8,10 +8,17 @@
     @include('commons.header')
     <div class="shopManagerReservation-show__container">
         <div class="shopManagerReservation-show__btn">
-            <a class="shopManagerReservation-show__btn--Link-back" href="{{ route('shopManager.detail', $shopManagerReservation->shop->id) }}">&lt; 予約一覧に戻る</a>
+            <a class="shopManagerReservation-show__btn--Link-back" href="{{ route('shopManager.detail', ['id' => $shopManagerReservation->shop->id]) }}">&lt; 予約一覧に戻る</a>
         </div>
-        <div class="shopManagerReservation-show__header">
-            <h2>予約情報</h2>
+        <div class="header-deleteBtn--flex">
+            <div class="shopManagerReservation-show__header">
+                <h2>予約情報</h2>
+            </div>
+            <div class="shopManagerReservation-show__btn--modal">
+                <a class="shopManagerReservation-show__link--delete modal-trigger" href="#modal" data-id="{{ $shopManagerReservation->id }}">
+                    <i class="fa-solid fa-trash-can"></i> 予約をキャンセル
+                </a>
+            </div>
         </div>
         @if(session('success'))
             <div class="shopManagerReservation-show__alert--success">
@@ -119,4 +126,74 @@
             </table>
         </div>
     </div>
+
+    <div id="modal" class="modal">
+        <div class="modal__contents">
+            <div class="modal-close">
+                <a class="modal-close__link" href="#">&times;</a>
+            </div>
+            <div class="modal__content">
+                <div class="modal__message">
+                    <h2>予約をキャンセルしてもよろしいですか？</h2>
+                </div>
+                <div class="delete-form">
+                    <form class="delete-form__content" action="" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <div class="delete-form__button">
+                            <input type="hidden" name="id" id="modal-id" value="">
+                            <input class="delete-form__button-submit" type="submit" value="キャンセル">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            // 「予約をキャンセル」リンクを取得
+            var deleteLink = document.querySelector('.modal-trigger');
+
+            // モーダルと関連要素を取得
+            var modal = document.getElementById('modal');
+            var closeModalLink = document.querySelector('.modal-close__link');
+            var modalForm = document.querySelector('.delete-form__content');
+            var modalIdInput = document.getElementById('modal-id');
+
+            // キャンセルリンクにクリックイベントを追加
+            if(deleteLink){
+                deleteLink.addEventListener('click', function(event){
+                    event.preventDefault();
+                    var reservationId = this.getAttribute('data-id');
+
+                    // フォームのaction URLを更新
+                    modalForm.setAttribute('action', `/shop-manager/reservations/${reservationId}/delete`);
+
+                    // hidden inputに予約IDをセット
+                    modalIdInput.value = reservationId;
+
+                    // モーダルを表示
+                    modal.style.display = 'block';
+                });
+            }
+
+            // モーダルを閉じるイベント
+            if(closeModalLink){
+                closeModalLink.addEventListener('click', function(event){
+                    event.preventDefault();
+                    modal.style.display = 'none';
+                });
+            }
+
+            // モーダル枠外をクリックした時にモーダルを閉じる
+            window.addEventListener('click', function(event){
+                if(event.target == modal){
+                    modal.style.display = 'none';
+                }
+            });
+        })
+    </script>
 @endsection

@@ -45,4 +45,11 @@ class ShopManagerReservationsController extends Controller
 
         return back()->with('success', '予約情報が変更されました');
     }
+
+    public function destroy($id){
+        $shopManagerReservation = Reservation::findOrFail($id);
+        $shopId = $shopManagerReservation->shop->id;
+        $shopManagerReservation->delete();
+        return redirect()->route('shopManager.detail', ['id' => $shopId])->with('success', '予約を削除しました');
+    }
 }

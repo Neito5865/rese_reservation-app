@@ -134,7 +134,7 @@ Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(functio
             // 予約編集処理
             Route::put('{id}/edit', [ShopManagerReservationsController::class, 'update'])->name('shopManagerReservation.update');
             // 予約削除処理
-            Route::put('{id}/delete', [ShopManagerReservationsController::class, 'destroy'])->name('shopManagerReservation.destroy');
+            Route::delete('{id}/delete', [ShopManagerReservationsController::class, 'destroy'])->name('shopManagerReservation.destroy');
         });
     });
 });

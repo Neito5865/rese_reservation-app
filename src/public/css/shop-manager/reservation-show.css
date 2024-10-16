@@ -16,7 +16,23 @@
     margin-top: 10px;
 }
 
-.shopManagerReservation-show__header, .user-detail__header {
+.header-deleteBtn--flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.shopManagerReservation-show__link--delete{
+    text-decoration: none;
+    background-color: #3560F6;
+    color: #fff;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.user-detail__header {
     margin-top: 40px;
 }
 
@@ -171,6 +187,69 @@
 .user-detail-table__content tr:nth-of-type(1) .user-detail-table__item {
     border-top: 1px solid #b1b1b1;
 }
+
+
+/* モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__contents {
+    position: relative;
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close__link {
+    text-decoration: none;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-close__link:hover,
+.modal-close__link:focus {
+    color: #000;
+}
+
+.modal__message{
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+.modal__message h2{
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+.delete-form__button{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.delete-form__button-submit{
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    background-color: #3560F6;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 
 
 @media screen and (max-width: 768px) {
