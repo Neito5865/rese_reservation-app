@@ -124,6 +124,9 @@
                     </td>
                 </tr>
             </table>
+            <div class="mail-to-user__button">
+                <a class="mail-to-user__button--link" href="{{ route('shopManagerSendMail.form', ['id' => $shopManagerReservation->id]) }}">メールを送る</a>
+            </div>
         </div>
     </div>
 

@@ -12,6 +12,7 @@ use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\AdminShopManagersController;
 use App\Http\Controllers\ShopManagerShopsController;
 use App\Http\Controllers\ShopManagerReservationsController;
+use App\Http\Controllers\ShopManagerSendMailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,5 +137,8 @@ Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(functio
             // 予約削除処理
             Route::delete('{id}/delete', [ShopManagerReservationsController::class, 'destroy'])->name('shopManagerReservation.destroy');
         });
+
+        Route::get('email-form/{id}', [ShopManagerSendMailsController::class, 'mailForm'])->name('shopManagerSendMail.form');
+        Route::post('send-mail', [ShopManagerSendMailsController::class, 'sendMail'])->name('shopManagerSendMail.sendMail');
     });
 });
