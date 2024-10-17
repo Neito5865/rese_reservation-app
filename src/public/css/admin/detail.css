@@ -83,3 +83,141 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.shopManagerShops-list__content {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.shopManagerShops-table__wrapper {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+.shopManagerShops-table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+}
+
+.shopManagerShops-table__heading {
+    text-align: left;
+    height: 80px;
+    padding-left: 10px;
+}
+
+.shopManagerShops-table__heading:nth-of-type(1),
+.shopManagerShops-table__item:nth-of-type(1) {
+    width: 20%;
+}
+
+.shopManagerShops-table__heading:nth-of-type(2),
+.shopManagerShops-table__item:nth-of-type(2) {
+    width: 50%;
+}
+
+.shopManagerShops-table__heading:nth-of-type(3),
+.shopManagerShops-table__item:nth-of-type(3) {
+    width: 30%;
+}
+
+.shopManagerShops-table__item {
+    height: 80px;
+    border-top: 1px solid #b1b1b1;
+    padding-left: 10px;
+}
+
+.shopManagerShops-table__item:nth-of-type(1) img {
+    width: 60%;
+    height: 80%;
+    object-fit: cover;
+}
+
+.shopManagerShops-table__item:nth-of-type(3) i {
+    display: inline-block;
+    margin-right: 20px;
+    color: #f4695a;
+}
+
+.shopManagerShops-table__item:nth-of-type(4) {
+    text-align: center;
+}
+
+.shopManagerShops-table__btn {
+    border: none;
+    background-color: #3560F6;
+    border-radius: 5px;
+}
+
+.shopManagerShops-table__btn--detail {
+    display: inline-block;
+    padding: 8px;
+    text-decoration: none;
+    color: #fff;
+}
+
+
+.shopManagerShop__paginate {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.shopManagerShop__paginate nav {
+    display: inline-block;
+}
+
+.pagination__inner {
+    display: flex;
+    border: 1px solid #adadad;
+}
+
+.pagination__item,
+.pagination__item-current,
+.pagination__arrow {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-left: 1px solid #adadad;
+    vertical-align: top;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 30px;
+    background-color: #fff;
+}
+
+.pagination__arrow:first-child {
+    border-left: none;
+}
+
+.pagination__item a,
+.pagination__arrow a {
+    text-decoration: none;
+    color: #3560F6;
+    width: 100%;
+    height: 100%;
+}
+
+.pagination__item-current {
+    background-color: #3560F6;
+    color: #fff;
+}
+
+.pagination__item-current span,
+.pagination__arrow span {
+    width: 100%;
+    height: 100%;
+}
+
+.custom-arrow {
+    width: 20px;
+    height: 20px;
+}

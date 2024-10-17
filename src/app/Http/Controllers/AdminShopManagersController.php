@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Shop;
 use App\Http\Requests\ShopManagerRequest;
 use Illuminate\Support\Facades\Hash;
 
@@ -31,7 +32,8 @@ class AdminShopManagersController extends Controller
         if(!$shopManager){
             return response()->view('errors.shopManager-detail', ['message' => '該当のユーザーが存在しません。'], 404);
         }
-        return view('admin.detail', compact('shopManager'));
+        $shopManagerShops = Shop::where('user_id', $id)->paginate(5);
+        return view('admin.detail', compact('shopManager', 'shopManagerShops'));
     }
 
     public function update(ShopManagerRequest $request, $id){

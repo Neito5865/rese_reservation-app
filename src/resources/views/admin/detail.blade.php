@@ -64,7 +64,33 @@
         <div class="shopManager-shopList__header">
             <h2>店舗一覧</h2>
         </div>
-        <div class="shopManager-shopList-table">
+        <div class="shopManagerShops-list__content">
+            @if($shopManagerShops->isEmpty())
+                <p>該当するデータが見つかりませんでした。</p>
+            @else
+                <div class="shopManagerShops-table__wrapper">
+                    <table class="shopManagerShops-table">
+                        <tr class="shopManagerShops-table__row">
+                            <th class="shopManagerShops-table__heading">写真</th>
+                            <th class="shopManagerShops-table__heading">店名</th>
+                            <th class="shopManagerShops-table__heading">お気に入り</th>
+                        </tr>
+                        @foreach($shopManagerShops as $shop)
+                            <tr class="shopManagerShops-table__row">
+                                <td class="shopManagerShops-table__item"><img src="{{ asset('storage/' . $shop->shopImg) }}" alt="{{ $shop->shopName }}"></td>
+                                <td class="shopManagerShops-table__item">{{ $shop->shopName }}</td>
+                                @php
+                                    $countFavoriteUsers = $shop->favoriteUsers()->count();
+                                @endphp
+                                <td class="shopManagerShops-table__item"><i class="fa-solid fa-heart"></i> {{ $countFavoriteUsers }}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            @endif
         </div>
+    </div>
+    <div class="shopManagerShop__paginate">
+        {{ $shopManagerShops->links() }}
     </div>
 @endsection
