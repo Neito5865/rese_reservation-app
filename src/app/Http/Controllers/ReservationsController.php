@@ -10,20 +10,24 @@ use App\Models\Shop;
 use App\Models\User;
 use App\Models\Reservation;
 use App\Http\Requests\ReservationRequest;
+use App\Mail\ReservationConfirmed;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationsController extends Controller
 {
     // 新規予約登録
     public function store(ReservationRequest $request, $shop_id){
         $user_id = Auth::id();
-        $reservation = $request->only([
+        $reservationData = $request->only([
             'date',
             'time',
             'numberPeople',
         ]);
-        $reservation['user_id'] = $user_id;
-        $reservation['shop_id'] = $shop_id;
-        Reservation::create($reservation);
+        $reservationData['user_id'] = $user_id;
+        $reservationData['shop_id'] = $shop_id;
+        $reservation = Reservation::create($reservationData);
+
+        Mail::to($reservation->user->email)->send(new ReservationConfirmed($reservation));
 
         return view('reservation.done');
     }
@@ -35,8 +39,12 @@ class ReservationsController extends Controller
     }
 
     public function update(ReservationRequest $request, $id){
-        $reservation = $request->all();
-        Reservation::findOrFail($id)->update($reservation);
+        $reservation = Reservation::findOrFail($id);
+        $reservationData = $request->all();
+        $reservation->update($reservationData);
+
+        Mail::to($reservation->user->email)->send(new ReservationConfirmed($reservation));
+
         return view('reservation.edit_done');
     }
 

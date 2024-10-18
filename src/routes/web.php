@@ -59,6 +59,9 @@ Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.de
 // 店舗のレビュー一覧
 Route::get('/detail/reviews/{shop_id}', [ShopsController::class, 'showReviews'])->name('shop.reviews');
 
+// QRコードリンク先
+Route::get('/reservations/qr/{reservation}', [ReservationsController::class, 'qrConfirmed'])->name('reservation.qrConfirmed');
+
 
 // ログイン後：一般ユーザー
 Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function(){
