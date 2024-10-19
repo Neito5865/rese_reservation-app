@@ -56,4 +56,8 @@ class ReservationsController extends Controller
         }
         return redirect()->route('mypage.show');
     }
+
+    public function qrConfirmed(Reservation $reservation){
+        return view('reservation.qr-result', compact('reservation'));
+    }
 }
