@@ -8,6 +8,8 @@ use App\Models\Shop;
 use App\Models\User;
 use App\Http\Requests\ReservationRequest;
 use App\Http\Requests\ShopManagerReservationRequest;
+use App\Mail\ReservationConfirmed;
+use Illuminate\Support\Facades\Mail;
 
 class ShopManagerReservationsController extends Controller
 {
@@ -19,14 +21,16 @@ class ShopManagerReservationsController extends Controller
 
     public function store(ShopManagerReservationRequest $request, $id){
         $shop = Shop::findOrFail($id);
-        $reservation = $request->only([
+        $reservationData = $request->only([
             'date',
             'time',
             'numberPeople',
             'user_id',
         ]);
-        $reservation['shop_id'] = $shop->id;
-        Reservation::create($reservation);
+        $reservationData['shop_id'] = $shop->id;
+        $reservation = Reservation::create($reservationData);
+
+        Mail::to($reservation->user->email)->send(new ReservationConfirmed($reservation));
 
         return back()->with('success', '新規予約を作成しました');
     }
@@ -40,8 +44,11 @@ class ShopManagerReservationsController extends Controller
     }
 
     public function update(ReservationRequest $request, $id){
-        $shopManagerReservation = $request->all();
-        Reservation::findOrFail($id)->update($shopManagerReservation);
+        $reservationData = $request->all();
+        $reservation = Reservation::findOrFail($id)->update($reservationData);
+
+        $updatedReservation = Reservation::findOrFail($id);
+        Mail::to($updatedReservation->user->email)->send(new ReservationConfirmed($updatedReservation));
 
         return back()->with('success', '予約情報が変更されました');
     }

@@ -11,8 +11,8 @@
     <p>ご予約ありがとうございます。<br>ご予約内容は以下の通りとなります。</p>
     <ul>
         <li>店名: {{ $reservation->shop->shopName }}</li>
-        <li>日付: {{ $reservation->date }}</li>
-        <li>時間: {{ $reservation->time }}</li>
+        <li>日付: {{ \Carbon\Carbon::parse($reservation->date)->format('Y年m月d日') }}</li>
+        <li>時間: {{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</li>
         <li>人数: {{ $reservation->numberPeople }}人</li>
     </ul>
 
