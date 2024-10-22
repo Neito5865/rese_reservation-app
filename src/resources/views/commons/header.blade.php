@@ -22,6 +22,7 @@
                         <li class="header-nav__item"><a class="header-nav__link" href="{{ route('shopManager.index') }}">Dashboard</a></li>
                     @elsecan('user-higher')
                         <li class="header-nav__item"><a class="header-nav__link" href="{{ route('mypage.show') }}">Mypage</a></li>
+                        <li class="header-nav__item"><a class="header-nav__link" href="{{ route('payment.form') }}">Payment</a></li>
                     @endcan
                 @else
                     <li class="header-nav__item"><a class="header-nav__link" href="{{ route('shops') }}">Home</a></li>

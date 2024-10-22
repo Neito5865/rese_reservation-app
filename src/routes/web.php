@@ -13,6 +13,7 @@ use App\Http\Controllers\AdminShopManagersController;
 use App\Http\Controllers\ShopManagerShopsController;
 use App\Http\Controllers\ShopManagerReservationsController;
 use App\Http\Controllers\ShopManagerSendMailsController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,6 +99,10 @@ Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function(){
         // 投稿処理
         Route::post('store', [ReviewsController::class, 'store'])->name('reviews.store');
     });
+
+    // 決済機能
+    Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
+    Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
 });
 
 // ログイン後：管理者
