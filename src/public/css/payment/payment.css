@@ -1,0 +1,132 @@
+.payment__alert--success{
+    color: #176a45;
+    background-color: #b7eed5;
+    height: 40px;
+    padding: 10px;
+}
+.payment__alert--error{
+    color: #a53128;
+    background-color: #eab8b6;
+    height: 40px;
+    padding: 10px;
+}
+
+.payment__content{
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.payment__heading{
+    text-align: center;
+    margin-top: 40px;
+}
+.payment__heading h2{
+    padding: 0;
+    margin: 0;
+}
+
+.payment__form{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+
+.payment-form__group{
+    margin-bottom: 30px;
+}
+.payment-form__group-inner{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.payment-form__label{
+    display: inline-block;
+    width: 25%;
+    font-size: 18px;
+}
+.payment-form__select{
+    width: 75%;
+    position: relative;
+}
+.payment-form__select--shopName{
+    width: 50%;
+    height: 40px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.custom-arrow{
+    position: absolute;
+    top: 0;
+    right: 52%;
+    pointer-events: none;
+    font-size: 30px;
+    color: #cdcdcd;
+}
+.payment-form__input{
+    width: 37.5%;
+    height: 40px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.payment-card-form__content{
+    border: 3px solid #3560F6;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.payment-card-form__heading{
+    margin-bottom: 30px;
+    border-bottom: 1px solid #b1b1b1;
+}
+.payment-card-form__heading p{
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+}
+.payment-form__card-form{
+    width: 37.5%;
+    height: 40px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+
+.payment-form__btn{
+    text-align: center;
+    margin-top: 40px;
+}
+.payment-form__btn--submit{
+    background-color: #3560F6;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .payment-form__group-inner{
+        flex-direction: column;
+        gap: 15px;
+    }
+    .payment-form__label{
+        width: 100%;
+    }
+    .payment-form__select{
+        width: 100%;
+    }
+    .payment-form__select--shopName{
+        width: 100%;
+    }
+}
