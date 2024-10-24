@@ -17,7 +17,7 @@
             <div class="payment__alert--error">{{ session('error') }}</div>
         @endif
         <div class="payment__form">
-            <form class="payment-form__content" action="">
+            <form id="payment-form" class="payment-form__content" action="{{ route('payment.process') }}" method="POST">
                 @csrf
                 <div class="payment-form__group">
                     <div class="payment-form__group-inner">
@@ -26,7 +26,7 @@
                             <select class="payment-form__select--shopName" name="shop_id" id="shop">
                                 <option value="">選択してください</option>
                                 @foreach ($shops as $shop)
-                                    <option value="{{ $shop->id }}" {{ old('shop_id') ? 'selected' : '' }}>{{ $shop->shopName }}</option>
+                                    <option value="{{ $shop->id }}" {{ old('shop_id') == $shop->id ? 'selected' : '' }}>{{ $shop->shopName }}</option>
                                 @endforeach
                             </select>
                             <i class="fa-solid fa-sort-down custom-arrow"></i>
@@ -41,10 +41,10 @@
                 <div class="payment-form__group">
                     <div class="payment-form__group-inner">
                         <label class="payment-form__label" for="amount">金額を入力</label>
-                        <input class="payment-form__input" type="number" name="amount" id="amount">
+                        <input class="payment-form__input" type="number" name="amount" id="amount" value="{{ old('amount') }}">
                     </div>
                     <div class="payment-form__error">
-                        @error('shop_id')
+                        @error('amount')
                         {{ $message }}
                         @enderror
                     </div>
@@ -71,7 +71,7 @@
                             <div id="card-cvc" class="payment-form__card-form"></div>
                         </div>
                     </div>
-                    <div id="card-errors" class="text-danger"></div>
+                    <div id="card-errors" class="payment-card-form__error"></div>
                 </div>
                 <div class="payment-form__btn">
                     <input class="payment-form__btn--submit" type="submit" value="決済を行う">
@@ -97,8 +97,6 @@
             },
             invalid: {
                 color: '#fa755a',
-                iconColor: '#fa755a',
-                borderColor: '#fa755a'
             }
         };
 
@@ -107,7 +105,13 @@
         cardNumber.on('change', function(event){
             var displayError = document.getElementById('card-errors');
             if (event.error){
-                displayError.textContent = event.error.message;
+                if (event.error.code === 'incomplete_number'){
+                    displayError.textContent = 'カード番号を入力してください';
+                } else if (event.error.code === 'invalid_number'){
+                    displayError.textContent = 'カード番号が無効です';
+                } else {
+                    displayError.textContent = event.error.message;
+                }
             } else {
                 displayError.textContent = '';
             }
@@ -118,7 +122,13 @@
         cardExpiry.on('change', function(event){
             var displayError = document.getElementById('card-errors');
             if (event.error){
-                displayError.textContent = event.error.message;
+                if (event.error.code === 'incomplete_expiry'){
+                    displayError.textContent = '有効期限を入力してください';
+                } else if (event.error.code === 'invalid_expiry_month_past'){
+                    displayError.textContent = '有効期限の月が無効です';
+                } else {
+                    displayError.textContent = event.error.message;
+                }
             } else {
                 displayError.textContent = '';
             }
@@ -129,7 +139,13 @@
         cardCvc.on('change', function(event){
             var displayError = document.getElementById('card-errors');
             if (event.error){
-                displayError.textContent = event.error.message;
+                if (event.error.code === 'incomplete_cvc'){
+                    displayError.textContent = 'セキュリティコードを入力してください';
+                } else if (event.error.code === 'invalid_cvc'){
+                    displayError.textContent = 'セキュリティコードが無効です';
+                } else {
+                    displayError.textContent = event.error.message;
+                }
             } else {
                 displayError.textContent = '';
             }
@@ -142,6 +158,8 @@
             stripe.createToken(cardNumber).then(function(result){
                 if (result.error) {
                     // エラー表示
+                    var displayError = document.getElementById('card-errors');
+                    displayError.textContent = result.error.message;
                 } else {
                     var hiddenInput = document.createElement('input');
                     hiddenInput.setAttribute('type', 'hidden');

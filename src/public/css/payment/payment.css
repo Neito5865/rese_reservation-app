@@ -33,7 +33,10 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     padding: 30px;
 }
-
+.payment-form__error{
+    margin-left: 25%;
+    color: #ff0000;
+}
 .payment-form__group{
     margin-bottom: 30px;
 }
@@ -78,15 +81,9 @@
     padding-left: 10px;
 }
 
-.payment-card-form__content{
-    border: 3px solid #3560F6;
-    padding: 20px;
-    border-radius: 5px;
-}
-
 .payment-card-form__heading{
     margin-bottom: 30px;
-    border-bottom: 1px solid #b1b1b1;
+    border-bottom: 2px solid #3560F6;
 }
 .payment-card-form__heading p{
     margin: 0;
@@ -97,8 +94,13 @@
     width: 37.5%;
     height: 40px;
     border: 1px solid #b1b1b1;
+    background-color: #fff;
     border-radius: 5px;
-    padding-left: 10px;
+    padding: 10px;
+}
+
+.payment-card-form__error{
+    color: #ff0000;
 }
 
 .payment-form__btn{
@@ -128,5 +130,18 @@
     }
     .payment-form__select--shopName{
         width: 100%;
+    }
+    .custom-arrow {
+        right: 6%;
+    }
+    .payment-form__input {
+        width: 100%;
+    }
+    .payment-form__card-form {
+        width: 100%;
+    }
+    .payment-form__error {
+        margin-left: 0;
+        color: #ff0000;
     }
 }
