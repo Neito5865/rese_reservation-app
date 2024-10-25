@@ -89,7 +89,6 @@
         var style = {
             base: {
                 color: '#32325d',
-                fontSmoothing: 'antialiased',
                 fontSize: '16px',
                 '::placeholder': {
                     color: '#aab7c4'
@@ -159,7 +158,17 @@
                 if (result.error) {
                     // エラー表示
                     var displayError = document.getElementById('card-errors');
-                    displayError.textContent = result.error.message;
+
+                    var errorMessage = result.error.message;
+
+                    if (errorMessage.includes('Your card was declined')) {
+                        errorMessage = 'カードが拒否されました。別のカードを試してください。';
+                    } else if (errorMessage.includes('Your card has expired')) {
+                        errorMessage = 'カードの有効期限が切れています。';
+                    } else if (errorMessage.includes('Your card number is incorrect')) {
+                        errorMessage = 'カード番号が間違っています。';
+                    }
+                    displayError.textContent = errorMessage;
                 } else {
                     var hiddenInput = document.createElement('input');
                     hiddenInput.setAttribute('type', 'hidden');

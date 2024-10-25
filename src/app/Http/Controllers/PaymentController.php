@@ -16,6 +16,7 @@ class PaymentController extends Controller
     }
 
     public function processPayment(PaymentRequest $request){
+
         $shop = Shop::findOrFail($request->input('shop_id'));
 
         Stripe::setApikey(config('services.stripe.secret'));
@@ -23,7 +24,7 @@ class PaymentController extends Controller
         try {
             // 決済処理
             Charge::create([
-                'amount' => $request->input('amount') * 100,
+                'amount' => $request->input('amount'),
                 'currency' => 'jpy',
                 'source' => $request->input('stripeToken'),
                 'description' => '店舗名: ' . $shop->shopName . ' - 飲食店のお会計',
