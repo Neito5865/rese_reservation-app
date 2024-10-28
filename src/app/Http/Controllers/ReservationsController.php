@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Mail;
 
 class ReservationsController extends Controller
 {
-    // 新規予約登録
     public function store(ReservationRequest $request, $shop_id){
         $user_id = Auth::id();
         $reservationData = $request->only([
@@ -32,7 +31,6 @@ class ReservationsController extends Controller
         return view('reservation.done');
     }
 
-    // 予約内容変更ページの表示
     public function edit($id){
         $reservation = Reservation::findOrFail($id);
         return view('reservation.reservation_edit', compact('reservation'));
@@ -48,7 +46,6 @@ class ReservationsController extends Controller
         return view('reservation.edit_done');
     }
 
-    // 予約削除
     public function destroy($id){
         $reservation = Reservation::findOrFail($id);
         if(\Auth::id() === $reservation->user_id){

@@ -13,23 +13,17 @@ class RegisterController extends Controller
 {
     public function create(Request $request)
     {
-        // バリデーションルールを設定
         $this->validator($request->all())->validate();
 
-        // 新規ユーザーの作成
         $user = $this->createUser($request->all());
 
-        // イベントを発火（メール確認などのため）
         event(new Registered($user));
 
-        // ログイン状態にする
         auth()->login($user);
 
-        // thanksページにリダイレクト
         return redirect()->route('verification.notice');
     }
 
-    // バリデーションルール
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -39,7 +33,6 @@ class RegisterController extends Controller
         ]);
     }
 
-    // ユーザー作成ロジック
     protected function createUser(array $data)
     {
         return User::create([

@@ -188,8 +188,6 @@
     border-top: 1px solid #b1b1b1;
 }
 
-
-/* モーダル */
 .modal {
     display: none;
     position: fixed;
@@ -262,8 +260,6 @@
     padding: 8px 16px;
     border-radius: 5px;
 }
-
-
 
 @media screen and (max-width: 768px) {
     .shopManagerReservation-edit-table__heading {

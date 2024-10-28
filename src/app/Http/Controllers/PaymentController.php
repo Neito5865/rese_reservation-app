@@ -22,7 +22,6 @@ class PaymentController extends Controller
         Stripe::setApikey(config('services.stripe.secret'));
 
         try {
-            // 決済処理
             Charge::create([
                 'amount' => $request->input('amount'),
                 'currency' => 'jpy',
