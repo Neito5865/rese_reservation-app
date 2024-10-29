@@ -119,7 +119,9 @@ STRIPE_KEY=your_test_stripe_key
 STRIPE_SECRET=your_test_stripe_secret_key
 ```
 ※Stripeアカウントを所有している場合は、ご自身のアカウントにて決済機能をお試しいただけます。
+
 その場合「your_test_stripe_key」にはStripeテスト環境の公開キーを、
+
 「your_test_stripe_secret_key」にはStripeテスト環境のシークレットキーを
 記述してください。
 
@@ -133,6 +135,7 @@ php artisan key:generate
 php artisan migrate
 ```
 7. シーディングの実行
+
 エリアの取得
 ```
 php artisan db:seed --class=AreaSeeder
@@ -153,8 +156,7 @@ php artisan db:seed --class=UserSeeder
 ### URL
  - トップページ：http://localhost/
 
- - phpMyAdmin
-http://localhost:8080
+ - phpMyAdmin：http://localhost:8080
 
 ## その他
 以下のユーザー情報でログイン可能です。
