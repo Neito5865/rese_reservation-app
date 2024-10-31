@@ -66,13 +66,12 @@
 1. リポジトリのクローン
 ```
 git clone git@github.com:Neito5865/rese_reservation-app.git
-docker-compose up -d --build
 ```
 ＊MySQLは、OSによって起動しない場合があるので、それぞれのPCに合わせてdocker-compose.ymlファイルを編集してください。
 
 2. Dockerのビルド
 ```
-cd contact-form app
+cd rese_reservation-app
 docker-compose up -d --build
 ```
 
@@ -144,13 +143,18 @@ php artisan db:seed --class=AreaSeeder
 ```
 php artisan db:seed --class=GenreSeeder
 ```
+ユーザー情報の取得
+```
+php artisan db:seed --class=UsersTableSeeder
+```
+
 店舗の取得
 ```
 php artisan db:seed --class=ShopSeeder
 ```
-ユーザー情報の取得
+8. シンボリックリンクの作成
 ```
-php artisan db:seed --class=UserSeeder
+php artisan storage:link
 ```
 
 ### URL
