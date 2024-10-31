@@ -165,13 +165,19 @@ php artisan storage:link
 ## その他
 以下のユーザー情報でログイン可能です。
  - 一般ユーザー
+
 メールアドレス：user1@example.com
+
 パスワード：password
 
  - 店舗責任者
+
 メールアドレス：shop1@example.com
+
 パスワード：password
 
  - 管理者
+
 メールアドレス：admin1@example.com
+
 パスワード：password
