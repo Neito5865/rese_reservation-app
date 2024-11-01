@@ -70,8 +70,12 @@ git clone git@github.com:Neito5865/rese_reservation-app.git
 ＊MySQLは、OSによって起動しない場合があるので、それぞれのPCに合わせてdocker-compose.ymlファイルを編集してください。
 
 2. Dockerのビルド
+ - Laravelプロジェクトディレクトリへ移動
 ```
 cd rese_reservation-app
+```
+ - Dockerのビルドを実行
+ ```
 docker-compose up -d --build
 ```
 
@@ -85,8 +89,17 @@ docker-compose exec php bash
 ```
 composer install
 ```
+ - PHPコンテナからログアウトしておく
+ ```
+exit
+```
 
 3. .env.exampleファイルから.envファイルを作成する
+ - srcディレクトリへ移動
+ ```
+cd src
+```
+ - .envファイルを作成
 ```
 cp .env.example .env
 ```
@@ -126,6 +139,15 @@ STRIPE_SECRET=your_test_stripe_secret_key
 
 
 5. キーを作成する
+ - srcディレクトリの一つ上のディレクトリに戻る
+```
+cd ../
+```
+ - PHPコンテナへログイン
+ ```
+docker-compose exec php bash
+```
+ - キーを作成
 ```
 php artisan key:generate
 ```
@@ -133,6 +155,7 @@ php artisan key:generate
 ```
 php artisan migrate
 ```
+
 7. シーディングの実行
 
 エリアの取得
