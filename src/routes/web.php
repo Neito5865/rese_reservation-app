@@ -46,7 +46,7 @@ Route::get('/thanks', function(){
     return view('auth.thanks');
 })->name('thanks');
 
-Route::get('/', [ShopsController::class, 'index'])->name('shops');
+Route::get('/', [ShopsController::class, 'index'])->name('shop.index');
 Route::get('/search', [ShopsController::class, 'search'])->name('shops.search');
 Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.detail');
 Route::get('/detail/reviews/{shop_id}', [ShopsController::class, 'showReviews'])->name('shop.reviews');

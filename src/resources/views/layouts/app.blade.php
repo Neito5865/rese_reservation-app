@@ -15,9 +15,8 @@
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
-    <div class="container">
-        @yield('content')
-    </div>
+    @include('commons.header')
+    @yield('content')
     @yield('script')
     <script src="https://kit.fontawesome.com/bbc02bbca9.js" crossorigin="anonymous"></script>
 </body>

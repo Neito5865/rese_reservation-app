@@ -5,37 +5,37 @@
 @endsection
 
 @section('content')
-    <div class="header-search__flex">
-        @include('commons.header')
-        <div class="search">
-            <form method="GET" action="{{ route('shops.search') }}" class="search-form" id="search-form">
-                @csrf
-                <div class="search-form__inner">
-                    <div class="search-form__item-select">
-                        <select name="area_id" id="area" class="search-form__item-select-area">
-                            <option value="">All area</option>
-                            @foreach($areas as $area)
-                                <option value="{{ $area['id'] }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>{{ $area['area'] }}</option>
-                            @endforeach
-                        </select>
-                        <i class="fa-solid fa-sort-down custom-arrow"></i>
-                    </div>
-                    <div class="search-form__item-select">
-                        <select name="genre_id" id="genre" class="search-form__item-select-genre">
-                            <option value="">All genre</option>
-                            @foreach($genres as $genre)
-                                <option value="{{ $genre['id'] }}" {{ request('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre['genre'] }}</option>
-                            @endforeach
-                        </select>
-                        <i class="fa-solid fa-sort-down custom-arrow"></i>
-                    </div>
-                    <div class="search-form__item-input">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input class="search-form__item-input-keyword" type="text" name="keyword" value="{{ request('keyword') }}" id="keyword" placeholder="Search ...">
-                    </div>
-                </div>
-            </form>
+    <div class="search">
+        <div class="search__header">
+            <h2>自分にピッタリなお店を探す</h2>
         </div>
+        <form method="GET" action="{{ route('shops.search') }}" class="search-form" id="search-form">
+            @csrf
+            <div class="search-form__inner">
+                <div class="search-form__item-select">
+                    <select name="area_id" id="area" class="search-form__item-select-area">
+                        <option value="">エリア</option>
+                        @foreach($areas as $area)
+                            <option value="{{ $area['id'] }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>{{ $area['area'] }}</option>
+                        @endforeach
+                    </select>
+                    <i class="fa-solid fa-sort-down custom-arrow"></i>
+                </div>
+                <div class="search-form__item-select">
+                    <select name="genre_id" id="genre" class="search-form__item-select-genre">
+                        <option value="">ジャンル</option>
+                        @foreach($genres as $genre)
+                            <option value="{{ $genre['id'] }}" {{ request('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre['genre'] }}</option>
+                        @endforeach
+                    </select>
+                    <i class="fa-solid fa-sort-down custom-arrow"></i>
+                </div>
+                <div class="search-form__item-input">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input class="search-form__item-input-keyword" type="text" name="keyword" value="{{ request('keyword') }}" id="keyword" placeholder="キーワードを入力">
+                </div>
+            </div>
+        </form>
     </div>
     <div class="shopAll__content" id="shop-list">
         <div class="shop-card__flex">
