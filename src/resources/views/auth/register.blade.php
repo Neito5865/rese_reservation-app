@@ -5,10 +5,9 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="register__inner">
         <div class="register__heading">
-            <h2>Register</h2>
+            <h2>会員登録</h2>
         </div>
         <div class="form">
             <form method="POST" action="{{ route('create.register') }}" class="register-form">

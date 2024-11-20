@@ -2,13 +2,13 @@
     width: 400px;
     background-color: #fff;
     border-radius: 4px;
-    margin: 140px auto 0 auto;
+    margin: 140px auto;
     box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
 }
 
 .login__heading{
     color: #fff;
-    background-color: #3560F6;
+    background-color: #e69335;
     height: 60px;
     border-radius: 4px 4px 0 0;
     padding-left: 20px;
@@ -50,7 +50,7 @@
 .login-form__button-submit{
     font-size: 13px;
     color: #fff;
-    background-color: #3560F6;
+    background-color: #e69335;
     border: none;
     padding: 8px 17px;
     border-radius: 4px;

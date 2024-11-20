@@ -18,6 +18,7 @@
     @include('commons.header')
     @yield('content')
     @yield('script')
+    @include('commons.footer')
     <script src="https://kit.fontawesome.com/bbc02bbca9.js" crossorigin="anonymous"></script>
 </body>
 </html>

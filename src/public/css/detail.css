@@ -1,4 +1,7 @@
 .content-flex{
+    max-width: 1280px;
+    padding: 0 20px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
 }
@@ -57,11 +60,12 @@
 }
 .reservation-container{
     width: 100%;
-    background-color: #3560F6;
+    background-color: #e69335;
     border-radius: 5px;
     box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
     padding-top: 35px;
-    margin-top: 40px;
+    margin-top: 60px;
+    margin-bottom: 40px;
 }
 .reservation__heading h2{
     margin: 0 0 0 28px;
@@ -112,7 +116,7 @@
 .reservation-form__error{
     margin-left: 28px;
     font-size: 14px;
-    color: #ef9a54;
+    color: #fff1bb;
 }
 .reservation-summary{
     width: 83%;
@@ -126,7 +130,7 @@
 .reservation-summary-table{
     width: 100%;
     margin-bottom: 20px;
-    background-color: #5580F7;
+    background-color: #e9a65b;
 }
 .reservation-summary-table__row{
     width: 100%;
@@ -155,7 +159,7 @@
     height: 100%;
     display: block;
     color: #fff;
-    background-color: #003FF5;
+    background-color: #bb7627;
     border: none;
     font-size: 16px;
     border-radius: 0 0 5px 5px;
@@ -216,7 +220,7 @@
     margin-left: 10px;
 }
 .detail-review__link{
-    margin: 10px 0;
+    margin: 10px 0 40px 0;
 }
 .detail-review__link--all-review{
     color: #3560F6;

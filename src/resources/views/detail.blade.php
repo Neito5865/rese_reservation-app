@@ -7,10 +7,9 @@
 @section('content')
     <div class="content-flex">
         <div class="content-left">
-            @include('commons.header')
             <div class="detail-container">
                 <div class="detail__heading">
-                    <button class="back-button"><a href="{{ route('shops') }}">&lt;</a></button>
+                    <button class="back-button"><a href="{{ route('shop.index') }}">&lt;</a></button>
                     <h2 class="detail__shop-name">{{ $shop['shopName'] }}</h2>
                 </div>
                 <div class="detail__img">

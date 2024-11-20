@@ -41,11 +41,15 @@ body{
     list-style: none;
     font-size: 14px;
 }
-.header-nav__item:hover{
-    color: #f38a1a;
+.header-nav__item--logout-btn{
+    border: none;
+    font-size: 14px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
-.header-nav__item:last-child{
-    margin-bottom: 0;
+.header-nav__item--logout-btn:hover {
+    color: #f38a1a;
 }
 .header-nav__link{
     text-decoration: none;
@@ -55,6 +59,19 @@ body{
 .header-nav__link:hover {
     color: #f38a1a;
 }
+.footer {
+    background-color: #f2e5be;
+}
+.footer__inner {
+    max-width: 1280px;
+    padding: 0 20px;
+    margin: 0 auto;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media screen and (max-width: 768px) {
     .container {
         max-width: 100%;

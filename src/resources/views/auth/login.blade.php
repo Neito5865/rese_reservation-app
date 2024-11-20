@@ -5,10 +5,9 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="login__inner">
         <div class="login__heading">
-            <h2>Login</h2>
+            <h2>ログイン</h2>
         </div>
         <div class="form">
             <form method="POST" action="{{ route('login') }}" class="login-form">

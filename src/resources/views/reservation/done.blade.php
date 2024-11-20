@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/done.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/reservation/done.css') }}">
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="done__inner">
         <div class="done__heading">
             <h2>ご予約ありがとうございます</h2>
