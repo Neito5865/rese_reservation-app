@@ -5,8 +5,7 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
-    <div class="mypage-content">
+    <div class="mypage-container">
         <div class="mypage__user-name">
             <p>{{ Auth::user()->name }}さん</p>
         </div>

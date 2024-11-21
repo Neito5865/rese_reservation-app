@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="done__inner">
         <div class="done__heading">
             <h2>ご予約の変更が完了しました</h2>

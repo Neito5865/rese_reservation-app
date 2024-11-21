@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="verify__content">
         <div class="verify__heading">
             <h2>認証メールを送信しました</h2>

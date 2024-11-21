@@ -2,7 +2,7 @@
     width: 400px;
     background-color: #fff;
     border-radius: 4px;
-    margin: 40px auto 0 auto;
+    margin: 40px auto;
     text-align: center;
     padding: 100px 0;
     box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
@@ -21,7 +21,7 @@
     text-decoration: none;
     font-size: 13px;
     color: #fff;
-    background-color: #3560F6;
+    background-color: #e69335;
     border: none;
     padding: 8px 17px;
     border-radius: 4px;

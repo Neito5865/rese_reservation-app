@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="reservation-edit__content">
         <div class="reservation-edit__heading">
             <h2>予約内容の変更</h2>

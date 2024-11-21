@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="thanks__inner">
         <div class="thanks__heading">
             <h2>会員登録ありがとうございます</h2>
