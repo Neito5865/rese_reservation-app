@@ -32,21 +32,21 @@ class UsersTableSeeder extends Seeder
             'role' => 3,
         ]);
         DB::table('users')->insert([
-            'name' => 'テストユーザー1',
+            'name' => 'テストユーザー3',
             'email' => 'user3@example.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('password'),
             'role' => 3,
         ]);
         DB::table('users')->insert([
-            'name' => 'テストユーザー1',
+            'name' => 'テストユーザー4',
             'email' => 'user4@example.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('password'),
             'role' => 3,
         ]);
         DB::table('users')->insert([
-            'name' => 'テストユーザー1',
+            'name' => 'テストユーザー5',
             'email' => 'user5@example.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('password'),
