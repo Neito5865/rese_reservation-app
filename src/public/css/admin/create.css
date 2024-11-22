@@ -21,9 +21,11 @@
 
 .shopManager-create__form{
     margin-top: 40px;
+    margin-bottom: 40px;
     padding: 30px;
     background-color: #fff;
     border-radius: 5px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .shopManager-create-form__group{
@@ -57,7 +59,7 @@
     color: #000;
 }
 .shopManager-create-form__btn-submit--create{
-    background-color: #3560F6;
+    background-color: #e69335;
     border: none;
     color: #fff;
     font-size: 14px;

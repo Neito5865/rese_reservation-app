@@ -23,9 +23,11 @@
 
 .shopManagerShop-create__form {
     margin-top: 40px;
+    margin-bottom: 40px;
     padding: 30px;
     background-color: #fff;
     border-radius: 5px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .shopManagerShop-create-form__group {
@@ -39,7 +41,7 @@
 }
 
 .shopManagerShop-create-form__label {
-    display: inline-block;
+    display: block;
     width: 20%;
 }
 
@@ -58,9 +60,14 @@
     margin-top: 10px;
     margin-left: 20%;
 }
-
+.shopManagerShop-create-form__select {
+    width: 60%;
+    position: relative;
+    box-sizing: border-box;
+}
 .shopManagerShop-create-form__select--area, .shopManagerShop-create-form__select--genre{
-    width: 400px;
+    max-width: none;
+    width: 80%;
     height: 40px;
     border: 1px solid #b1b1b1;
     border-radius: 5px;
@@ -69,20 +76,10 @@
     -webkit-appearance: none;
     -moz-appearance: none;
 }
-
-.custom-arrow-area {
+.custom-arrow-area, .custom-arrow-genre {
     position: absolute;
-    top: 43%;
-    right: 40%;
-    pointer-events: none;
-    font-size: 30px;
-    color: #cdcdcd;
-}
-
-.custom-arrow-genre {
-    position: absolute;
-    top: 36%;
-    right: 40%;
+    top: 0;
+    right: 25%;
     pointer-events: none;
     font-size: 30px;
     color: #cdcdcd;
@@ -109,7 +106,7 @@
 }
 
 .shopManagerShop-create-form__btn-submit--create {
-    background-color: #3560F6;
+    background-color: #e69335;
     border: none;
     color: #fff;
     font-size: 14px;
@@ -122,4 +119,35 @@
     color: #ff0000;
     margin-left: 20%;
     margin-top: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .shopManagerShop-create-form__inner {
+        justify-content: flex-start;
+        flex-direction: column;
+        text-align: left;
+    }
+    .shopManagerShop-create-form__label {
+        display: block;
+        width: 90%;
+    }
+    .shopManagerShop-create-form__input {
+        width: 90%;
+    }
+    .shopManagerShop-create-form__textarea {
+        width: 90%;
+    }
+    .shopManagerShop-create-form__select {
+        width: 100%;
+        position: relative;
+        text-align: center;
+    }
+    .shopManagerShop-create-form__select--area,
+    .shopManagerShop-create-form__select--genre {
+        width: 90%;
+    }
+    .custom-arrow-area,
+    .custom-arrow-genre {
+        right: 10%;
+    }
 }

@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="qr-result__content">
         <div class="qr-result__heading">
             <h1>{{ $reservation->user->name }}様の予約内容</h1>

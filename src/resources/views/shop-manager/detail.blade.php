@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="shopManagerShop-detail__container">
         <div class="shopManagerShop-detail__btn">
             <a class="shopManagerShop-detail__btn--Link-back" href="{{ route('shopManager.index') }}">&lt; 一覧に戻る</a>
@@ -171,7 +170,6 @@
 @section('script')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // 画像削除ボタンの処理
             const deleteImageBtn = document.getElementById('delete-image-btn');
             const currentImageWrapper = document.getElementById('current-image-wrapper');
             const shopImgInput = document.getElementById('shopImg');
@@ -179,25 +177,20 @@
 
             if (deleteImageBtn) {
                 deleteImageBtn.addEventListener('click', function () {
-                    // 画像を削除したい場合、既存の画像を非表示に
                     currentImageWrapper.style.display = 'none';
-                    // 画像フィールドのリセット
                     shopImgInput.value = '';
-                    uploadedImagePreview.style.deiplay = 'none';
+                    uploadedImagePreview.style.display = 'none';
                 });
             }
 
-            // 新しい画像のプレビュー表示
             shopImgInput.addEventListener('change', function (event) {
                 const file = event.target.files[0];
 
                 if (file) {
-                    // 新しい画像が選択されたら、既存の画像を非表示にする
                     if (currentImageWrapper){
                         currentImageWrapper.style.display = 'none';
                     }
 
-                    // 新しい画像のプレビュー表示
                     const reader = new FileReader();
                     reader.onload = function (e) {
                         uploadedImagePreview.src = e.target.result;

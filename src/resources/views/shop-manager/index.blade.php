@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="shopManager-index__heading">
         <h2>店舗一覧</h2>
     </div>

@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="shopManagerReservation-show__container">
         <div class="shopManagerReservation-show__btn">
             <a class="shopManagerReservation-show__btn--Link-back" href="{{ route('shopManager.detail', ['id' => $shopManagerReservation->shop->id]) }}">&lt; 予約一覧に戻る</a>

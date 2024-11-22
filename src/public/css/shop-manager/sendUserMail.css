@@ -16,7 +16,9 @@
     max-width: 1000px;
     margin: 0 auto;
 }
-
+.sendUserMail__btn{
+    margin-top: 10px;
+}
 .sendUserMail__btn--link-back{
     text-decoration: none;
     color: #3560F6;
@@ -102,7 +104,7 @@
     border: none;
     font-size: 18px;
     color: #fff;
-    background-color: #3560F6;
+    background-color: #e69335;
     padding: 10px 16px;
     border-radius: 5px;
 }

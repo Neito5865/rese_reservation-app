@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="shopManager-detail__container">
         <div class="shopManager-detail__btn">
             <a class="shopManager-detail__btn--Link-back" href="{{ route('admin.index') }}">&lt; 一覧に戻る</a>

@@ -5,11 +5,13 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="reviews__header">
         <h2>レビュー投稿</h2>
     </div>
     <div class="reviews__container">
+        <div class="reviews__back">
+            <a class="reviews__back--link" href="{{ route('mypage.show') }}">&lt; マイページに戻る</a>
+        </div>
         @foreach($reservations as $reservation)
             <div class="review-card">
                 <div class="card__heading">

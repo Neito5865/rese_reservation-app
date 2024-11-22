@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="shopManager-create__content">
         @if(session('success'))
             <div class="shopManager-create__alert--success">

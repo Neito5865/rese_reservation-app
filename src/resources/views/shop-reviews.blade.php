@@ -5,9 +5,8 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="shop-reviews__header">
-        <h1>{{ $shop->shopName }} のレビュー</h1>
+        <h2>{{ $shop->shopName }} のレビュー</h2>
     </div>
     <div class="shop-reviews__container">
         <div class="shop-reviews__back">

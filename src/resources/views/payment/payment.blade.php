@@ -5,10 +5,9 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="payment__content">
         <div class="payment__heading">
-            <h1>オンライン決済</h1>
+            <h2>オンライン決済</h2>
         </div>
         @if (session('success'))
             <div class="payment__alert--success">{{ session('success') }}</div>
@@ -83,10 +82,10 @@
 
 @section('script')
     <script>
-        var stripe = Stripe('{{ env('STRIPE_KEY') }}');
-        var elements = stripe.elements();
+        let stripe = Stripe('{{ env('STRIPE_KEY') }}');
+        let elements = stripe.elements();
 
-        var style = {
+        let style = {
             base: {
                 color: '#32325d',
                 fontSize: '16px',
@@ -99,10 +98,10 @@
             }
         };
 
-        var cardNumber = elements.create('cardNumber', {style: style});
+        let cardNumber = elements.create('cardNumber', {style: style});
         cardNumber.mount('#card-number');
         cardNumber.on('change', function(event){
-            var displayError = document.getElementById('card-errors');
+            let displayError = document.getElementById('card-errors');
             if (event.error){
                 if (event.error.code === 'incomplete_number'){
                     displayError.textContent = 'カード番号を入力してください';
@@ -116,10 +115,10 @@
             }
         });
 
-        var cardExpiry = elements.create('cardExpiry', {style: style});
+        let cardExpiry = elements.create('cardExpiry', {style: style});
         cardExpiry.mount('#card-expiry');
         cardExpiry.on('change', function(event){
-            var displayError = document.getElementById('card-errors');
+            let displayError = document.getElementById('card-errors');
             if (event.error){
                 if (event.error.code === 'incomplete_expiry'){
                     displayError.textContent = '有効期限を入力してください';
@@ -133,10 +132,10 @@
             }
         });
 
-        var cardCvc = elements.create('cardCvc', {style: style});
+        let cardCvc = elements.create('cardCvc', {style: style});
         cardCvc.mount('#card-cvc');
         cardCvc.on('change', function(event){
-            var displayError = document.getElementById('card-errors');
+            let displayError = document.getElementById('card-errors');
             if (event.error){
                 if (event.error.code === 'incomplete_cvc'){
                     displayError.textContent = 'セキュリティコードを入力してください';
@@ -150,16 +149,16 @@
             }
         });
 
-        var form = document.getElementById('payment-form');
+        let form = document.getElementById('payment-form');
         form.addEventListener('submit', function(event){
             event.preventDefault();
 
             stripe.createToken(cardNumber).then(function(result){
                 if (result.error) {
                     // エラー表示
-                    var displayError = document.getElementById('card-errors');
+                    let displayError = document.getElementById('card-errors');
 
-                    var errorMessage = result.error.message;
+                    let errorMessage = result.error.message;
 
                     if (errorMessage.includes('Your card was declined')) {
                         errorMessage = 'カードが拒否されました。別のカードを試してください。';
@@ -170,7 +169,7 @@
                     }
                     displayError.textContent = errorMessage;
                 } else {
-                    var hiddenInput = document.createElement('input');
+                    let hiddenInput = document.createElement('input');
                     hiddenInput.setAttribute('type', 'hidden');
                     hiddenInput.setAttribute('name', 'stripeToken');
                     hiddenInput.setAttribute('value', result.token.id);

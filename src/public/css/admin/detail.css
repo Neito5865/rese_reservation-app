@@ -78,7 +78,7 @@
 .shopManager-edit-form__btn--submit{
     border: none;
     color: #fff;
-    background-color: #3560F6;
+    background-color: #e69335;
     padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
@@ -166,7 +166,7 @@
 .shopManagerShop__paginate {
     text-align: center;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .shopManagerShop__paginate nav {
@@ -192,6 +192,7 @@
     font-size: 16px;
     line-height: 30px;
     background-color: #fff;
+    font-size: 14px;
 }
 
 .pagination__arrow:first-child {
@@ -201,13 +202,13 @@
 .pagination__item a,
 .pagination__arrow a {
     text-decoration: none;
-    color: #3560F6;
+    color: #e69335;
     width: 100%;
     height: 100%;
 }
 
 .pagination__item-current {
-    background-color: #3560F6;
+    background-color: #e69335;
     color: #fff;
 }
 

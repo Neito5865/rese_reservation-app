@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="admin-index__heading">
         <h2>店舗代表者一覧</h2>
     </div>

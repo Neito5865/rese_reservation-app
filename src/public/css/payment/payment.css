@@ -80,10 +80,12 @@
     border-radius: 5px;
     padding-left: 10px;
 }
-
+.payment-card-form__content{
+    margin-top: 50px;
+}
 .payment-card-form__heading{
     margin-bottom: 30px;
-    border-bottom: 2px solid #3560F6;
+    border-bottom: 2px solid #e69335;
 }
 .payment-card-form__heading p{
     margin: 0;
@@ -108,7 +110,7 @@
     margin-top: 40px;
 }
 .payment-form__btn--submit{
-    background-color: #3560F6;
+    background-color: #e69335;
     color: #fff;
     font-size: 18px;
     border: none;
