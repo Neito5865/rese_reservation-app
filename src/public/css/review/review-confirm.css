@@ -33,14 +33,14 @@
     width: 30%;
     height: 80px;
     padding-left: 30px;
-    background-color: #9db1f8;
-    border-top: 2px solid #3560F6;
+    background-color: #f6c996;
+    border-top: 2px solid #e69335;
     font-size: 1.1rem;
 }
 
 .review-confirm-table__heading--last,
 .review-confirm-table__item--last {
-    border-bottom: 2px solid #3560F6;
+    border-bottom: 2px solid #e69335;
     height: 160px;
 }
 
@@ -48,7 +48,7 @@
     width: 70%;
     height: 80px;
     padding-left: 30px;
-    border-top: 2px solid #3560F6;
+    border-top: 2px solid #e69335;
 }
 
 .review-confirm-form__anonymous--flex {
@@ -81,18 +81,26 @@
     color: #f5b301;
 }
 
-.review-confirm-form__btn {
+.review-confirm-form__btns {
     margin-top: 30px;
     text-align: center;
+}
+.review-confirm-form__btn--back{
+    margin-right: 30px;
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .review-confirm-form__btn--review {
     border: none;
-    background-color: #3560F6;
+    background-color: #e69335;
     color: #fff;
     font-size: 1.2rem;
     padding: 10px 20px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 
@@ -140,8 +148,11 @@
         height: 155px;
     }
 
-    .review-confirm-form__btn {
+    .review-confirm-form__btns {
         margin-top: 20px;
         text-align: center;
+    }
+    .review-confirm-form__btn--back {
+        margin-bottom: 20px;
     }
 }

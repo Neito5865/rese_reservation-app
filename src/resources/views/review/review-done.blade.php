@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="review-done__inner">
         <div class="review-done__heading">
             <h2>レビューの投稿が完了しました</h2>

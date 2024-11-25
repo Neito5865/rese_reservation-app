@@ -37,6 +37,15 @@ class ReviewsController extends Controller
             'evaluation',
             'comment',
         ]);
+
+        if($request->input('action') === '＜ 修正する'){
+            return redirect()->route('reviews.create', ['id' => $id])->withInput();
+        }
+
+        if($request->input('action') === 'レビューを投稿する'){
+            return $this->store($request);
+        }
+
         return view('review.review-confirm', compact('review', 'user', 'reservation'));
     }
 

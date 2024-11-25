@@ -5,13 +5,12 @@
 @endsection
 
 @section('content')
-    @include('commons.header')
     <div class="review-confirm__content">
         <div class="review-confirm__heading">
             <h2>投稿内容の確認</h2>
         </div>
         <div class="review-confirm__table-form">
-            <form class="review-confirm-form" action="{{ route('reviews.store', ['reservation' => $reservation->id]) }}" method="POST">
+            <form class="review-confirm-form" action="{{ route('reviews.confirm', ['id' => $reservation->id]) }}" method="POST">
                 @csrf
                 <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
                 <input type="hidden" name="shop_id" value="{{ $reservation->shop->id }}">
@@ -40,7 +39,7 @@
                         <td class="review-confirm-table__item">
                             <div class="rating-confirm">
                                 @for($i =1; $i <=5; $i++)
-                                    @if($i <= old('evaluation', $review['evaluation']))
+                                    @if($i <= $review['evaluation'])
                                         ★
                                     @else
                                         ☆
@@ -57,8 +56,9 @@
                         </td>
                     </tr>
                 </table>
-                <div class="review-confirm-form__btn">
-                    <input class="review-confirm-form__btn--review" type="submit" value="レビューを投稿する">
+                <div class="review-confirm-form__btns">
+                    <input class="review-confirm-form__btn--back" type="submit" name="action" value="＜ 修正する">
+                    <input class="review-confirm-form__btn--review" type="submit" name="action" value="レビューを投稿する">
                 </div>
             </form>
         </div>
