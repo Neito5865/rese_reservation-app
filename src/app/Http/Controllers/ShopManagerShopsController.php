@@ -16,8 +16,8 @@ class ShopManagerShopsController extends Controller
     public function index(){
         $shopManager = Auth::user();
         $shopManagerShops = $shopManager->shops()
-                    ->orderBy('id', 'asc')
-                    ->paginate(10);
+            ->orderBy('id', 'asc')
+            ->paginate(10);
         return view('shop-manager.index', compact('shopManagerShops'));
     }
 

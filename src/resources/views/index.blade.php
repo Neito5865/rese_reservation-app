@@ -7,7 +7,7 @@
 @section('content')
     <div class="search">
         <div class="search__header">
-            <h2>自分にピッタリなお店を探す</h2>
+            <h2>マイベストなお店を探す</h2>
         </div>
         <form method="GET" action="{{ route('shops.search') }}" class="search-form" id="search-form">
             @csrf

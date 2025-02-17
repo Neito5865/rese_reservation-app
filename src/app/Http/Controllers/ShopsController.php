@@ -42,10 +42,10 @@ class ShopsController extends Controller
         if(Auth::check()){
             $today = Carbon::today();
             $userReservations = Reservation::where('user_id', Auth::id())
-                                            ->where('shop_id', $shop_id)
-                                            ->where('date', '>=', $today)
-                                            ->with('shop')
-                                            ->get();
+                ->where('shop_id', $shop_id)
+                ->where('date', '>=', $today)
+                ->with('shop')
+                ->get();
         }
 
         return view('detail', compact('shop', 'userReservations', 'averageRating', 'reviewCount'));

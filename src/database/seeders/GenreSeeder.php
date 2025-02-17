@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Genre;
+use Carbon\Carbon;
 
 class GenreSeeder extends Seeder
 {
@@ -14,16 +15,24 @@ class GenreSeeder extends Seeder
      */
     public function run()
     {
-        $file = fopen(storage_path('app/public/genres.csv'), 'r');
+        $genres = [
+            'イタリアン',
+            'ラーメン',
+            '居酒屋',
+            '寿司',
+            '焼肉',
+        ];
 
-        $header = fgetcsv($file);
+        $now = Carbon::now();
 
-        while(($data = fgetcsv($file)) !== FALSE){
-            Genre::create([
-                'genre' => $data[1],
-            ]);
-        }
+        $data = array_map(function($genre) use ($now) {
+            return [
+                'genre' => $genre,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+        }, $genres);
 
-        fclose($file);
+        Genre::insert($data);
     }
 }

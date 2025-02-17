@@ -1,7 +1,7 @@
 <header class="header">
     <div class="header__inner">
         <div class="header__logo">
-            <h1><a href="{{ route('shop.index') }}">Rese</a></h1>
+            <h1><a href="{{ route('shop.index') }}">MyBestRese</a></h1>
         </div>
         <div class="header-nav">
             <nav>
