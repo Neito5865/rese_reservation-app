@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Review;
+use App\Models\Reservation;
 use Carbon\Carbon;
 
 class ReviewsTableSeeder extends Seeder
@@ -15,10 +16,10 @@ class ReviewsTableSeeder extends Seeder
      */
     public function run()
     {
-        $reservations = DB::table('reservations')->get();
+        $reservations = Reservation::all();
 
         foreach ($reservations as $reservation) {
-            DB::table('reviews')->insert([
+            Review::insert([
                 'user_id' => $reservation->user_id,
                 'shop_id' => $reservation->shop_id,
                 'reservation_id' => $reservation->id,

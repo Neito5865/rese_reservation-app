@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Reservation;
 use Carbon\Carbon;
 
 class ReservationsTableSeeder extends Seeder
@@ -29,7 +29,7 @@ class ReservationsTableSeeder extends Seeder
                     $randomMinutes = rand(0, 95) * 15;
                     $randomTime = Carbon::create($randomDate->year, $randomDate->month, $randomDate->day, 0, 0, 0)->addMinutes($randomMinutes);
 
-                    DB::table('reservations')->insert([
+                    Reservation::insert([
                         'user_id' => $user,
                         'shop_id' => $shop,
                         'date' => $randomDate->toDateString(),
