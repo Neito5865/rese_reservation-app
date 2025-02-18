@@ -26,13 +26,13 @@
                         <tr class="shopManagerShop-edit-table__row">
                             <th class="shopManagerShop-edit-table__heading">店名</th>
                             <td class="shopManagerShop-edit-table__item">
-                                <input class="shopManagerShop-edit__input" type="text" name="shopName" value="{{ old('shopName', $shopManagerShop->shopName) }}">
+                                <input class="shopManagerShop-edit__input" type="text" name="shop_name" value="{{ old('shop_name', $shopManagerShop->shop_name) }}">
                             </td>
                         </tr>
                         <tr class="shopManagerShop-edit-table__row--error">
                             <th></th>
                             <td class="shopManagerShop-edit-table__item--error">
-                                @error('shopName')
+                                @error('shop_name')
                                 {{ $message }}
                                 @enderror
                             </td>
@@ -98,20 +98,20 @@
                         <tr class="shopManagerShop-edit-table__row">
                             <th class="shopManagerShop-edit-table__heading">店舗写真</th>
                             <td class="shopManagerShop-edit-table__item">
-                                @if($shopManagerShop->shopImg)
+                                @if($shopManagerShop->shop_img)
                                     <div id="current-image-wrapper">
-                                        <img id="current-image" src="{{ asset('storage/' . $shopManagerShop->shopImg) }}" alt="店舗写真" style="max-width: 200px; max-height: 150px;">
+                                        <img id="current-image" src="{{ asset('storage/' . $shopManagerShop->shop_img) }}" alt="店舗写真" style="max-width: 200px; max-height: 150px;">
                                         <button type="button" id="delete-image-btn"><i class="fa-solid fa-trash-can"></i></button>
                                     </div>
                                 @endif
-                                <input class="shopManagerShop-edit-form__input" id="shopImg" type="file" name="shopImg" value="">
+                                <input class="shopManagerShop-edit-form__input" id="shop_img" type="file" name="shop_img" value="">
                                 <img id="uploaded-image-preview" style="display: none; max-width: 200px; max-height: 150px;">
                             </td>
                         </tr>
                         <tr class="shopManagerShop-edit-table__row--error">
                             <th></th>
                             <td class="shopManagerShop-edit-table__item--error">
-                                @error('shopImg')
+                                @error('shop_img')
                                 {{ $message }}
                                 @enderror
                             </td>
@@ -172,7 +172,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             const deleteImageBtn = document.getElementById('delete-image-btn');
             const currentImageWrapper = document.getElementById('current-image-wrapper');
-            const shopImgInput = document.getElementById('shopImg');
+            const shopImgInput = document.getElementById('shop_img');
             const uploadedImagePreview = document.getElementById('uploaded-image-preview');
 
             if (deleteImageBtn) {

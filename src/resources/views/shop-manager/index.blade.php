@@ -25,8 +25,8 @@
                     </tr>
                     @foreach($shopManagerShops as $shop)
                         <tr class="shopManagerShops-table__row">
-                            <td class="shopManagerShops-table__item"><img src="{{ asset('storage/' . $shop->shopImg) }}" alt="{{ $shop->shopName }}"></td>
-                            <td class="shopManagerShops-table__item">{{ $shop->shopName }}</td>
+                            <td class="shopManagerShops-table__item"><img src="{{ asset('storage/' . $shop->shop_img) }}" alt="{{ $shop->shop_name }}"></td>
+                            <td class="shopManagerShops-table__item">{{ $shop->shop_name }}</td>
                             @php
                                 $countFavoriteUsers = $shop->favoriteUsers()->count();
                             @endphp

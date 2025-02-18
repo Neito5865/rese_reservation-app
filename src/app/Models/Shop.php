@@ -55,7 +55,7 @@ class Shop extends Model
     }
 
     public function favoriteUsers(){
-        return $this->belongsToMany(User::class, 'favorites', 'shop_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'favorites', 'shop_id', 'user_id');
     }
 
     public function reviews(){

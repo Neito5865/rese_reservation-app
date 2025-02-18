@@ -18,9 +18,9 @@ class CreateShopsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('area_id')->constrained();
             $table->foreignId('genre_id')->constrained();
-            $table->string('shopName');
+            $table->string('shop_name');
             $table->text('detail');
-            $table->string('shopImg');
+            $table->string('shop_img');
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();
             $table->softDeletes();

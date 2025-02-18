@@ -25,7 +25,7 @@
                             <select class="payment-form__select--shopName" name="shop_id" id="shop">
                                 <option value="">選択してください</option>
                                 @foreach ($shops as $shop)
-                                    <option value="{{ $shop->id }}" {{ old('shop_id') == $shop->id ? 'selected' : '' }}>{{ $shop->shopName }}</option>
+                                    <option value="{{ $shop->id }}" {{ old('shop_id') == $shop->id ? 'selected' : '' }}>{{ $shop->shop_name }}</option>
                                 @endforeach
                             </select>
                             <i class="fa-solid fa-sort-down custom-arrow"></i>

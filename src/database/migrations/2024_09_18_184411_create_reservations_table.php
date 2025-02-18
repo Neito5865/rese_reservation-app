@@ -22,6 +22,7 @@ class CreateReservationsTable extends Migration
             $table->integer('numberPeople');
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();
+            $table->softDeletes();
         });
     }
 

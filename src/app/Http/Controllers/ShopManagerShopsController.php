@@ -30,14 +30,14 @@ class ShopManagerShopsController extends Controller
     public function store(ShopRequest $request){
         $user_id = Auth::id();
         $shopManagerShop = $request->only([
-            'shopName',
+            'shop_name',
             'area_id',
             'genre_id',
             'detail',
         ]);
-        if($request->hasFile('shopImg')){
-            $path = $request->file('shopImg')->store('public/shops');
-            $shopManagerShop->shopImg  = 'shops/' . basename($path);
+        if($request->hasFile('shop_img')){
+            $path = $request->file('shop_img')->store('public/shops');
+            $shopManagerShop->shop_img  = 'shops/' . basename($path);
         }
         $shopManagerShop['user_id'] = $user_id;
         Shop::create($shopManagerShop);
@@ -61,16 +61,16 @@ class ShopManagerShopsController extends Controller
     public function update(ShopRequest $request, $id){
         $shopManagerShop = Shop::findOrFail($id);
 
-        if($request->hasFile('shopImg')){
-            if($shopManagerShop->shopImg && Storage::exists('public/' . $shopManagerShop->shopImg)){
-                Storage::delete('public/' . $shopManagerShop->shopImg);
+        if($request->hasFile('shop_img')){
+            if($shopManagerShop->shop_img && Storage::exists('public/' . $shopManagerShop->shop_img)){
+                Storage::delete('public/' . $shopManagerShop->shop_img);
             }
 
-            $path = $request->file('shopImg')->store('public/shops');
-            $shopManagerShop->shopImg = 'shops/' . basename($path);
+            $path = $request->file('shop_img')->store('public/shops');
+            $shopManagerShop->shop_img = 'shops/' . basename($path);
         }
 
-        $shopManagerShop->shopName = $request->input('shopName');
+        $shopManagerShop->shop_name = $request->input('shop_name');
         $shopManagerShop->area_id = $request->input('area_id');
         $shopManagerShop->genre_id = $request->input('genre_id');
         $shopManagerShop->detail = $request->input('detail');

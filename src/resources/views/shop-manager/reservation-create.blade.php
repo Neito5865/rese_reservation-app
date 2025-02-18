@@ -19,8 +19,8 @@
                 @csrf
                 <div class="shopManagerReservation-create-form__group">
                     <div class="shopManagerReservation-create-form__inner">
-                        <label class="shopManagerReservation-create-form__label" for="shopName">店名</label>
-                        <input class="shopManagerReservation-create-form__input" id="shopName" type="text" name="shopName" value="{{ $shop->shopName }}" readonly>
+                        <label class="shopManagerReservation-create-form__label" for="shop_name">店名</label>
+                        <input class="shopManagerReservation-create-form__input" id="shop_name" type="text" name="shop_name" value="{{ $shop->shop_name }}" readonly>
                     </div>
                 </div>
                 <div class="shopManagerReservation-create-form__group">

@@ -17,10 +17,10 @@ class ReviewsController extends Controller
         $user = Auth::user();
         $today = Carbon::now();
         $reservations = $user->reservations()
-                            ->with(['shop', 'review'])
-                            ->where(Reservation::raw("CONCAT(date, ' ', time)"), '<', $today)
-                            ->orderBy('date', 'desc')
-                            ->paginate(10);
+            ->with(['shop', 'review'])
+            ->where(Reservation::raw("CONCAT(date, ' ', time)"), '<', $today)
+            ->orderBy('date', 'desc')
+            ->paginate(10);
         return view('review.review-index', compact('reservations'));
     }
 

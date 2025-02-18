@@ -10,17 +10,17 @@
             <div class="detail-container">
                 <div class="detail__heading">
                     <button class="back-button"><a href="{{ route('shop.index') }}">&lt;</a></button>
-                    <h2 class="detail__shop-name">{{ $shop['shopName'] }}</h2>
+                    <h2 class="detail__shop-name">{{ $shop->shop_name }}</h2>
                 </div>
                 <div class="detail__img">
-                    <img src="{{ asset('storage/' . $shop['shopImg']) }}" alt="{{ $shop['shopName'] }}">
+                    <img src="{{ asset('storage/' . $shop->shop_img) }}" alt="{{ $shop->shop_name }}">
                 </div>
                 <div class="detail__tag">
-                    <span class="detail__tag--area">#{{ $shop['area']['area'] }}</span>
-                    <span class="detail__tag--genre">#{{ $shop['genre']['genre'] }}</span>
+                    <span class="detail__tag--area">#{{ $shop->area->area }}</span>
+                    <span class="detail__tag--genre">#{{ $shop->genre->genre }}</span>
                 </div>
                 <div class="detail__description">
-                    <p>{{ $shop['detail'] }}</p>
+                    <p>{{ $shop->detail }}</p>
                 </div>
             </div>
             <div class="detail-review__container">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="detail-review__link">
-                    <a class="detail-review__link--all-review" href="{{ route('shop.reviews', ['shop_id' => $shop->id]) }}"><i class="fa-regular fa-comments"></i>全てのレビューを見る （{{$reviewCount}}件）</a>
+                    <a class="detail-review__link--all-review" href="{{ route('shop.reviews', $shop->id) }}"><i class="fa-regular fa-comments"></i>全てのレビューを見る （{{$reviewCount}}件）</a>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                     <h2>予約</h2>
                 </div>
                 <div class="form">
-                    <form method="POST" action="{{ route('reservation.store', ['shop_id' => $shop->id]) }}" class="reservation-form">
+                    <form method="POST" action="{{ route('reservation.store', $shop->id) }}" class="reservation-form">
                     @csrf
                         <input class="reservation-form__input" type="date" name="date" value="{{ old('date', \Carbon\Carbon::now()->format('Y-m-d')) }}">
                         <div class="reservation-form__error">
@@ -100,7 +100,7 @@
                                         <table class="reservation-summary-table">
                                             <tr class="reservation-summary-table__row">
                                                 <th class="reservation-summary-table__heading">Shop</th>
-                                                <td class="reservation-summary-table__item">{{ $reservation->shop->shopName }}</td>
+                                                <td class="reservation-summary-table__item">{{ $reservation->shop->shop_name }}</td>
                                             </tr>
                                             <tr class="reservation-summary-table__row">
                                                 <th class="reservation-summary-table__heading">Date</th>

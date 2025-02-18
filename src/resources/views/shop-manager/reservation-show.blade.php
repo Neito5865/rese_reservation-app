@@ -33,7 +33,7 @@
                         <tr class="shopManagerReservation-edit-table__row">
                             <th class="shopManagerReservation-edit-table__heading">店名</th>
                             <td class="shopManagerReservation-edit-table__item">
-                                <input class="shopManagerReservation-edit-form__input" type="text" name="shopName" value="{{ old('shopName', $shopManagerReservation->shop->shopName) }}" readonly>
+                                <input class="shopManagerReservation-edit-form__input" type="text" name="shop_name" value="{{ old('shop_name', $shopManagerReservation->shop->shop_name) }}" readonly>
                             </td>
                         </tr>
                         <tr class="shopManagerReservation-edit-table__row">

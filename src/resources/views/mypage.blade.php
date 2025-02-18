@@ -25,7 +25,7 @@
                                     <div class="status-card__btn--modal">
                                         <a class="status-card__link--delete modal-trigger" href="#modal"
                                             data-id="{{ $reservation->id }}"
-                                            data-shop="{{ $reservation->shop->shopName }}"
+                                            data-shop="{{ $reservation->shop->shop_name }}"
                                             data-date="{{ $reservation->date }}"
                                             data-time="{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}"
                                             data-number="{{ $reservation->numberPeople }}">
@@ -36,7 +36,7 @@
                                 <table class="status-card-table">
                                     <tr class="status-card-table__row">
                                         <th class="status-card-table__heading">Shop</th>
-                                        <td class="status-card-table__item">{{ $reservation->shop->shopName }}</td>
+                                        <td class="status-card-table__item">{{ $reservation->shop->shop_name }}</td>
                                     </tr>
                                     <tr class="status-card-table__row">
                                         <th class="status-card-table__heading">Date</th>
@@ -70,10 +70,10 @@
                     @foreach($favoriteShops as $shop)
                         <div class="favorite-card">
                             <div class="favorite-card__img">
-                                <img src="{{ asset('storage/' . $shop['shopImg']) }}" alt="{{ $shop['shopName'] }}">
+                                <img src="{{ asset('storage/' . $shop['shopImg']) }}" alt="{{ $shop['shop_name'] }}">
                             </div>
                             <div class="favorite-card__content">
-                                <h3 class="favorite-card__shop-name">{{ $shop['shopName'] }}</h3>
+                                <h3 class="favorite-card__shop-name">{{ $shop['shop_name'] }}</h3>
                                 <div class="favorite-card__tag">
                                     <span class="favorite-card__tag--area">#{{ $shop['area']['area'] }}</span>
                                     <span class="favorite-card__tag--genre">#{{ $shop['genre']['genre'] }}</span>

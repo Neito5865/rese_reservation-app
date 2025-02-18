@@ -13,7 +13,7 @@
             <a class="review__back--link" href="{{ route('reviews.index') }}">&lt; 利用店舗一覧に戻る</a>
         </div>
         <div class="review__table-form">
-            <form class="review-form" action="{{ route('reviews.confirm', ['id' => $reservation->id]) }}" method="POST">
+            <form class="review-form" action="{{ route('reviews.confirm', $reservation->id) }}" method="POST">
                 @csrf
                 <table class="review-table__inner">
                     <tr class="review-table__row">
@@ -38,7 +38,7 @@
                     </tr>
                     <tr class="review-table__row">
                         <th class="review-table__heading">店名</th>
-                        <td class="review-table__item">{{ $reservation->shop->shopName }}</td>
+                        <td class="review-table__item">{{ $reservation->shop->shop_name }}</td>
                     </tr>
                     <tr class="review-table__row">
                         <th class="review-table__heading">来店日</th>

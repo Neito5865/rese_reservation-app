@@ -16,10 +16,10 @@
                 <table class="edit-table">
                     <tr class="edit-table__row">
                         <th class="edit-table__heading">
-                            <label class="edit-form__label" for="shopName">店名</label>
+                            <label class="edit-form__label" for="shop_name">店名</label>
                         </th>
                         <td class="edit-table__item">
-                            <input class="edit-form__input--shopName" id="shopName" type="text" name="shopName" value="{{ $reservation->shop->shopName }}" readonly>
+                            <input class="edit-form__input--shop_name" id="shop_name" type="text" name="shop_name" value="{{ $reservation->shop->shop_name }}" readonly>
                         </td>
                     </tr>
                     <tr class="edit-table__row">

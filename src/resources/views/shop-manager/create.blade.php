@@ -19,11 +19,11 @@
                 @csrf
                 <div class="shopManagerShop-create-form__group">
                     <div class="shopManagerShop-create-form__inner">
-                        <label class="shopManagerShop-create-form__label" for="shopName">店名</label>
-                        <input class="shopManagerShop-create-form__input" id="shopName" type="text" name="shopName" value="{{ old('shopName') }}">
+                        <label class="shopManagerShop-create-form__label" for="shop_name">店名</label>
+                        <input class="shopManagerShop-create-form__input" id="shop_name" type="text" name="shop_name" value="{{ old('shop_name') }}">
                     </div>
                     <div class="shopManagerShop-create-form__error">
-                        @error('shopName')
+                        @error('shop_name')
                         {{ $message }}
                         @enderror
                     </div>
@@ -79,14 +79,14 @@
                 </div>
                 <div class="shopManagerShop-create-form__group">
                     <div class="shopManagerShop-create-form__inner">
-                        <label class="shopManagerShop-create-form__label" for="shopImg">店舗写真</label>
-                        <input class="shopManagerShop-create-form__input" id="shopImg" type="file" name="shopImg">
+                        <label class="shopManagerShop-create-form__label" for="shop_img">店舗写真</label>
+                        <input class="shopManagerShop-create-form__input" id="shop_img" type="file" name="shop_img">
                     </div>
-                    <div class="shopImg-preview">
+                    <div class="shop_img-preview">
                         <img id="uploaded-image-preview" style="display: none; max-width: 200px; max-height: 150px;">
                     </div>
                     <div class="shopManagerShop-create-form__error">
-                        @error('shopImg')
+                        @error('shop_img')
                         {{ $message }}
                         @enderror
                     </div>
@@ -108,7 +108,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // 要素の取得
-            const shopImgInput = document.getElementById('shopImg');
+            const shopImgInput = document.getElementById('shop_img');
             const uploadedImagePreview = document.getElementById('uploaded-image-preview');
 
             // 新しい画像のプレビュー表示

@@ -15,7 +15,7 @@
         @foreach($reservations as $reservation)
             <div class="review-card">
                 <div class="card__heading">
-                    <p class="shop-name">{{ $reservation->shop->shopName }}</p>
+                    <p class="shop-name">{{ $reservation->shop->shop_name }}</p>
                 </div>
                 <div class="review-card__item">
                     <p>来店日時</p>

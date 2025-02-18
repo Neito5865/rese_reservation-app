@@ -16,7 +16,7 @@
                     <select name="area_id" id="area" class="search-form__item-select-area">
                         <option value="">エリア</option>
                         @foreach($areas as $area)
-                            <option value="{{ $area['id'] }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>{{ $area['area'] }}</option>
+                            <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>{{ $area->area }}</option>
                         @endforeach
                     </select>
                     <i class="fa-solid fa-sort-down custom-arrow"></i>
@@ -25,7 +25,7 @@
                     <select name="genre_id" id="genre" class="search-form__item-select-genre">
                         <option value="">ジャンル</option>
                         @foreach($genres as $genre)
-                            <option value="{{ $genre['id'] }}" {{ request('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre['genre'] }}</option>
+                            <option value="{{ $genre->id }}" {{ request('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->genre }}</option>
                         @endforeach
                     </select>
                     <i class="fa-solid fa-sort-down custom-arrow"></i>
@@ -45,17 +45,17 @@
                 @foreach($shops as $shop)
                     <div class="shop-card">
                         <div class="shop-card__img">
-                            <img src="{{ asset('storage/' . $shop['shopImg']) }}" alt="{{ $shop['shopName'] }}">
+                            <img src="{{ asset('storage/' . $shop->shop_img) }}" alt="{{ $shop->shop_name }}">
                         </div>
                         <div class="shop-card__content">
-                            <h3 class="shop-card__heading">{{ $shop['shopName'] }}</h3>
+                            <h3 class="shop-card__heading">{{ $shop->shop_name }}</h3>
                             <div class="shop-card__tag">
-                                <span class="shop-card__tag--area">#{{ $shop['area']['area'] }}</span>
-                                <span class="shop-card__tag--genre">#{{ $shop['genre']['genre'] }}</span>
+                                <span class="shop-card__tag--area">#{{ $shop->area->area }}</span>
+                                <span class="shop-card__tag--genre">#{{ $shop->genre->genre }}</span>
                             </div>
                             <div class="shop-card__content--flex">
                                 <div class="shop-card__link">
-                                    <a href="{{ route('shop.detail', ['shop_id' => $shop['id']]) }}" class="shop-card__link-detail">詳しくみる</a>
+                                    <a href="{{ route('shop.detail', $shop->id) }}" class="shop-card__link-detail">詳しくみる</a>
                                 </div>
                                 @can('user-higher')
                                     @if(Auth::check())
