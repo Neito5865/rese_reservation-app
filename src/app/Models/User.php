@@ -59,7 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     public function favorites(){
-        return $this->belongsToMany(Shop::class, 'favorites', 'user_id', 'shop_id')->withTimestamps();
+        return $this->belongsToMany(Shop::class, 'favorites', 'user_id', 'shop_id');
     }
 
     public function favorite($shopId){
@@ -67,7 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail
         if($exist){
             return false;
         }else{
-            $this->favorites()->attach($shopId);
+            $this->favorites()->attach($shopId, ['created_at' => now()]);
             return true;
         }
     }

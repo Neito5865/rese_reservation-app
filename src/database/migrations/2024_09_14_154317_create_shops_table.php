@@ -15,13 +15,14 @@ class CreateShopsTable extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('area_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('genre_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('area_id')->constrained();
+            $table->foreignId('genre_id')->constrained();
             $table->string('shopName');
             $table->text('detail');
             $table->string('shopImg');
-            $table->timestamps();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable();
             $table->softDeletes();
         });
     }

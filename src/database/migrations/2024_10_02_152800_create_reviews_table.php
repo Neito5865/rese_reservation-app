@@ -15,13 +15,14 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('shop_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('reservation_id')->constrained()->cascadeOnDelete()->unique();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('shop_id')->constrained();
+            $table->foreignId('reservation_id')->constrained()->unique();
             $table->boolean('is_anonymous')->default(false);
             $table->unsignedTinyInteger('evaluation');
             $table->text('comment')->nullable();
-            $table->timestamps();
+            $table->dateTime('created_at')->nullable();
+            $table->dateTime('updated_at')->nullable();
         });
     }
 

@@ -13,9 +13,9 @@ class UsersController extends Controller
         $user = Auth::user();
         $today = Carbon::today();
         $reservations = $user->reservations()
-                            ->where('date', '>=', $today)
-                            ->orderBy('date', 'asc')
-                            ->get();
+            ->where('date', '>=', $today)
+            ->orderBy('date', 'asc')
+            ->get();
         $favoriteShops = $user->favorites()->get();
 
         return view('mypage', compact('reservations', 'favoriteShops'));
