@@ -28,7 +28,7 @@
                                             data-shop="{{ $reservation->shop->shop_name }}"
                                             data-date="{{ $reservation->date }}"
                                             data-time="{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}"
-                                            data-number="{{ $reservation->numberPeople }}">
+                                            data-number="{{ $reservation->number_people }}">
                                             &times;
                                         </a>
                                     </div>
@@ -44,11 +44,11 @@
                                     </tr>
                                     <tr class="status-card-table__row">
                                         <th class="status-card-table__heading">Time</th>
-                                        <td class="status-card-table__item">{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}</td>
+                                        <td class="status-card-table__item">{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</td>
                                     </tr>
                                     <tr class="status-card-table__row">
                                         <th class="status-card-table__heading">Number</th>
-                                        <td class="status-card-table__item">{{ $reservation->numberPeople }}人</td>
+                                        <td class="status-card-table__item">{{ $reservation->number_people }}人</td>
                                     </tr>
                                 </table>
                                 <div class="status-card__edit-btn">
@@ -70,17 +70,17 @@
                     @foreach($favoriteShops as $shop)
                         <div class="favorite-card">
                             <div class="favorite-card__img">
-                                <img src="{{ asset('storage/' . $shop['shopImg']) }}" alt="{{ $shop['shop_name'] }}">
+                                <img src="{{ asset('storage/' . $shop->shop_img) }}" alt="{{ $shop->shop_name }}">
                             </div>
                             <div class="favorite-card__content">
-                                <h3 class="favorite-card__shop-name">{{ $shop['shop_name'] }}</h3>
+                                <h3 class="favorite-card__shop-name">{{ $shop->shop_name }}</h3>
                                 <div class="favorite-card__tag">
-                                    <span class="favorite-card__tag--area">#{{ $shop['area']['area'] }}</span>
-                                    <span class="favorite-card__tag--genre">#{{ $shop['genre']['genre'] }}</span>
+                                    <span class="favorite-card__tag--area">#{{ $shop->area->prefecture }}</span>
+                                    <span class="favorite-card__tag--genre">#{{ $shop->genre->content }}</span>
                                 </div>
                                 <div class="favorite-card__content--flex">
                                     <div class="favorite-card__link">
-                                        <a href="{{ route('shop.detail', ['shop_id' => $shop['id']]) }}" class="favorite-card__link-detail">詳しくみる</a>
+                                        <a href="{{ route('shop.detail', $shop->id) }}" class="favorite-card__link-detail">詳しくみる</a>
                                     </div>
                                     @if(Auth::check())
                                         @if(Auth::user()->isFavorite($shop->id))
@@ -153,34 +153,29 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var modalTriggers = document.querySelectorAll('.modal-trigger');
-            var modal = document.getElementById('modal'); // モーダルの要素を取得
+            var modal = document.getElementById('modal');
             modalTriggers.forEach(function(trigger) {
                 trigger.addEventListener('click', function(event) {
-                    event.preventDefault(); // デフォルトのリンク動作を無効化
+                    event.preventDefault();
 
-                    // モーダル内のデータを更新
                     document.getElementById('modal-shop').innerText = this.getAttribute('data-shop');
                     document.getElementById('modal-date').innerText = this.getAttribute('data-date');
                     document.getElementById('modal-time').innerText = this.getAttribute('data-time');
                     document.getElementById('modal-number').innerText = this.getAttribute('data-number') + '人';
                     document.getElementById('modal-id').value = this.getAttribute('data-id');
 
-                    // フォームのactionを動的に設定
                     var reservationId = this.getAttribute('data-id');
                     document.querySelector('.delete-form').setAttribute('action', `/reservations/${reservationId}/delete`);
 
-                    // モーダルを表示
                     modal.style.display = 'block';
                 });
             });
 
-            // モーダルを閉じる機能を追加
             document.querySelector('.modal-close__link').addEventListener('click', function(event) {
-                event.preventDefault();  // デフォルトのリンク動作を無効化
-                modal.style.display = 'none';  // モーダルを閉
+                event.preventDefault();
+                modal.style.display = 'none';
             });
 
-            // モーダルの外側をクリックしたときにモーダルを閉じる
             window.addEventListener('click', function(event) {
                 if (event.target === modal) {
                     modal.style.display = 'none';

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
     use HasFactory;
-    protected $fillable = ['area'];
+    protected $fillable = ['prefecture'];
 
     public function shops(){
         return $this->hasMany(Shop::class);

@@ -16,8 +16,8 @@
                     <img src="{{ asset('storage/' . $shop->shop_img) }}" alt="{{ $shop->shop_name }}">
                 </div>
                 <div class="detail__tag">
-                    <span class="detail__tag--area">#{{ $shop->area->area }}</span>
-                    <span class="detail__tag--genre">#{{ $shop->genre->genre }}</span>
+                    <span class="detail__tag--area">#{{ $shop->area->prefecture }}</span>
+                    <span class="detail__tag--genre">#{{ $shop->genre->content }}</span>
                 </div>
                 <div class="detail__description">
                     <p>{{ $shop->detail }}</p>
@@ -73,15 +73,15 @@
                             @enderror
                         </div>
                         <div class="reservation-form__select">
-                            <select class="reservation-form__select--number" name="numberPeople">
+                            <select class="reservation-form__select--number" name="number_people">
                                 @for ($i = 1; $i <= 100; $i++ )
-                                    <option value="{{ $i }}" {{ $i == old('numberPeople', '1') ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
+                                    <option value="{{ $i }}" {{ $i == old('number_people', '1') ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
                                 @endfor
                             </select>
                             <i class="fa-solid fa-sort-down custom-arrow"></i>
                         </div>
                         <div class="reservation-form__error">
-                            @error('numberPeople')
+                            @error('number_people')
                             {{ $message }}
                             @enderror
                         </div>
@@ -112,7 +112,7 @@
                                             </tr>
                                             <tr class="reservation-summary-table__row">
                                                 <th class="reservation-summary-table__heading">Number</th>
-                                                <td class="reservation-summary-table__item">{{ $reservation->numberPeople }}人</td>
+                                                <td class="reservation-summary-table__item">{{ $reservation->number_people }}人</td>
                                             </tr>
                                         </table>
                                     @endforeach

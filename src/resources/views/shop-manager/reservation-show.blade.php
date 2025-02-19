@@ -79,9 +79,9 @@
                             <th class="shopManagerReservation-edit-table__heading">予約人数</th>
                             <td class="shopManagerReservation-edit-table__item">
                                 <div class="shopManagerReservation-edit-form__select">
-                                    <select class="shopManagerReservation-edit-form__select--number" name="numberPeople">
+                                    <select class="shopManagerReservation-edit-form__select--number" name="number_people">
                                         @for ($i = 1; $i <= 100; $i++ )
-                                            <option value="{{ $i }}" {{ old('numberPeople', $shopManagerReservation->numberPeople) == $i ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
+                                            <option value="{{ $i }}" {{ old('number_people', $shopManagerReservation->number_people) == $i ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
                                         @endfor
                                     </select>
                                     <i class="fa-solid fa-sort-down custom-arrow-number"></i>
@@ -91,7 +91,7 @@
                         <tr class="shopManagerReservation-edit-table__row--error">
                             <th></th>
                             <td class="shopManagerReservation-edit-table__item--error">
-                                @error('numberPeople')
+                                @error('number_people')
                                 {{ $message }}
                                 @enderror
                             </td>

@@ -14,7 +14,7 @@
                 <li>店名: {{ $reservation->shop->shop_name }}</li>
                 <li>日付: {{ $reservation->date }}</li>
                 <li>時間: {{ $reservation->time }}</li>
-                <li>人数: {{ $reservation->numberPeople }}人</li>
+                <li>人数: {{ $reservation->number_people }}人</li>
             </ul>
         </div>
     </div>

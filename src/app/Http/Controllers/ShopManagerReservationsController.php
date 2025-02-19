@@ -24,7 +24,7 @@ class ShopManagerReservationsController extends Controller
         $reservationData = $request->only([
             'date',
             'time',
-            'numberPeople',
+            'number_people',
             'user_id',
         ]);
         $reservationData['shop_id'] = $shop->id;

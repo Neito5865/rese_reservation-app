@@ -15,9 +15,9 @@ class Shop extends Model
         'area_id',
         'genre_id',
         'user_id',
-        'shopName',
+        'shop_name',
         'detail',
-        'shopImg',
+        'shop_img',
     ];
 
     public function area(){
@@ -46,7 +46,7 @@ class Shop extends Model
 
     public function scopeKeywordSearch($query, $keyword){
         if(!empty($keyword)){
-            $query->where('shopName', 'like', '%' . $keyword . '%');
+            $query->where('shop_name', 'like', '%' . $keyword . '%');
         }
     }
 

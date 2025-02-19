@@ -15,7 +15,7 @@ class CreateGenresTable extends Migration
     {
         Schema::create('genres', function (Blueprint $table) {
             $table->id();
-            $table->string('genre')->unique();
+            $table->string('content')->unique();
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();
         });

@@ -37,7 +37,7 @@ class ShopManagerReservationRequest extends FormRequest
                     $fail('予約時間は現在の時間以降を選択してください');
                 }
             }],
-            'numberPeople' => ['required', 'integer', 'min:1'],
+            'number_people' => ['required', 'integer', 'min:1'],
             'user_id' => ['required', 'exists:users,id'],
         ];
     }
@@ -47,9 +47,9 @@ class ShopManagerReservationRequest extends FormRequest
             'date.required' => '予約日は必須です',
             'date.date' => '正しい日付を入力してください',
             'time.required' => '予約時間は必須です',
-            'numberPeople.required' => '予約人数は必須です',
-            'numberPeople.integer' => '予約人数は整数で入力してください',
-            'numberPeople.min' => '予約人数は1人以上で指定してください',
+            'number_people.required' => '予約人数は必須です',
+            'number_people.integer' => '予約人数は整数で入力してください',
+            'number_people.min' => '予約人数は1人以上で指定してください',
             'user_id.required' => 'ユーザーを選択してください',
             'user_id.exists' => '指定したユーザーは存在しません',
         ];

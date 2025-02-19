@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Genre extends Model
 {
     use HasFactory;
-    protected $fillable = ['genre'];
+    protected $fillable = ['content'];
 
     public function shops(){
         return $this->hasMany(Shop::class);

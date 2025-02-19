@@ -69,7 +69,7 @@ class AreaSeeder extends Seeder
 
         $data = array_map(function($area) use ($now) {
             return [
-                'area' => $area,
+                'prefecture' => $area,
                 'created_at' => $now,
                 'updated_at' => $now,
             ];

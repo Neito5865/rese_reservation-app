@@ -16,7 +16,7 @@
                     <select name="area_id" id="area" class="search-form__item-select-area">
                         <option value="">エリア</option>
                         @foreach($areas as $area)
-                            <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>{{ $area->area }}</option>
+                            <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>{{ $area->prefecture }}</option>
                         @endforeach
                     </select>
                     <i class="fa-solid fa-sort-down custom-arrow"></i>
@@ -25,7 +25,7 @@
                     <select name="genre_id" id="genre" class="search-form__item-select-genre">
                         <option value="">ジャンル</option>
                         @foreach($genres as $genre)
-                            <option value="{{ $genre->id }}" {{ request('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->genre }}</option>
+                            <option value="{{ $genre->id }}" {{ request('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->content }}</option>
                         @endforeach
                     </select>
                     <i class="fa-solid fa-sort-down custom-arrow"></i>
@@ -50,8 +50,8 @@
                         <div class="shop-card__content">
                             <h3 class="shop-card__heading">{{ $shop->shop_name }}</h3>
                             <div class="shop-card__tag">
-                                <span class="shop-card__tag--area">#{{ $shop->area->area }}</span>
-                                <span class="shop-card__tag--genre">#{{ $shop->genre->genre }}</span>
+                                <span class="shop-card__tag--area">#{{ $shop->area->prefecture }}</span>
+                                <span class="shop-card__tag--genre">#{{ $shop->genre->content }}</span>
                             </div>
                             <div class="shop-card__content--flex">
                                 <div class="shop-card__link">

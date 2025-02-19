@@ -27,7 +27,7 @@ class GenreSeeder extends Seeder
 
         $data = array_map(function($genre) use ($now) {
             return [
-                'genre' => $genre,
+                'content' => $genre,
                 'created_at' => $now,
                 'updated_at' => $now,
             ];

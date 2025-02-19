@@ -35,7 +35,7 @@
                             <select name="area_id" id="area" class="shopManagerShop-create-form__select--area">
                                 <option value="">選択してください</option>
                                 @foreach($areas as $area)
-                                    <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>{{ $area->area }}</option>
+                                    <option value="{{ $area->id }}" {{ request('area_id') == $area->id ? 'selected' : '' }}>{{ $area->prefecture }}</option>
                                 @endforeach
                             </select>
                             <i class="fa-solid fa-sort-down custom-arrow-area"></i>
@@ -54,7 +54,7 @@
                             <select name="genre_id" id="genre" class="shopManagerShop-create-form__select--genre">
                                 <option value="">選択してください</option>
                                 @foreach($genres as $genre)
-                                    <option value="{{ $genre->id }}" {{ request('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->genre }}</option>
+                                    <option value="{{ $genre->id }}" {{ request('genre_id') == $genre->id ? 'selected' : '' }}>{{ $genre->content }}</option>
                                 @endforeach
                             </select>
                             <i class="fa-solid fa-sort-down custom-arrow-genre"></i>
@@ -107,16 +107,13 @@
 @section('script')
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // 要素の取得
             const shopImgInput = document.getElementById('shop_img');
             const uploadedImagePreview = document.getElementById('uploaded-image-preview');
 
-            // 新しい画像のプレビュー表示
             shopImgInput.addEventListener('change', function (event) {
                 const file = event.target.files[0];
 
                 if (file) {
-                    // 新しい画像のプレビュー表示
                     const reader = new FileReader();
                     reader.onload = function (e) {
                         uploadedImagePreview.src = e.target.result;

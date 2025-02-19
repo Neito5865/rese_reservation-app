@@ -65,12 +65,12 @@
                     </tr>
                     <tr class="edit-table__row">
                         <th class="edit-table__heading">
-                            <label class="edit-form__label" for="numberPeople">予約人数</label>
+                            <label class="edit-form__label" for="number_people">予約人数</label>
                         </th>
                         <td class="edit-table__item item__select">
-                            <select class="edit-form__select--number" id="numberPeople" name="numberPeople">
+                            <select class="edit-form__select--number" id="number_people" name="number_people">
                                 @for ($i = 1; $i <= 100; $i++ )
-                                    <option value="{{ $i }}" {{ old('numberPeople', $reservation->numberPeople) == $i ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
+                                    <option value="{{ $i }}" {{ old('number_people', $reservation->number_people) == $i ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
                                 @endfor
                             </select>
                             <i class="fa-solid fa-sort-down custom-arrow"></i>
@@ -79,7 +79,7 @@
                     <tr class="edit-table__row--error">
                         <th></th>
                         <td class="edit-table__item--error">
-                            @error('numberPeople')
+                            @error('number_people')
                             {{ $message }}
                             @enderror
                         </td>

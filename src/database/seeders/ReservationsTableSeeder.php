@@ -22,7 +22,7 @@ class ReservationsTableSeeder extends Seeder
 
         foreach ($users as $user) {
             foreach ($shops as $shop) {
-                for ($i = 1; $i <=3; $i++) {
+                for ($i = 1; $i <=2; $i++) {
                     $randomDate = Carbon::createFromTimestamp(
                         rand($startDate->timestamp, $endDate->timestamp)
                     );
@@ -34,9 +34,9 @@ class ReservationsTableSeeder extends Seeder
                         'shop_id' => $shop,
                         'date' => $randomDate->toDateString(),
                         'time' => $randomTime->toTimeString(),
-                        'numberPeople' => rand(1, 10),
-                        'created_at' => now(),
-                        'updated_at' => now(),
+                        'number_people' => rand(1, 10),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
                     ]);
                 }
             }

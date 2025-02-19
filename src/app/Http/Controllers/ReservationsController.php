@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Area;
-use App\Models\Genre;
 use App\Models\Shop;
 use App\Models\User;
 use App\Models\Reservation;
@@ -20,7 +18,7 @@ class ReservationsController extends Controller
         $reservationData = $request->only([
             'date',
             'time',
-            'numberPeople',
+            'number_people',
         ]);
         $reservationData['user_id'] = $user_id;
         $reservationData['shop_id'] = $shop_id;

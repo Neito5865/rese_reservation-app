@@ -44,7 +44,7 @@
                                     <select name="area_id" id="area" class="shopManagerShop-create-form__select--area">
                                         <option value="">選択してください</option>
                                         @foreach($areas as $area)
-                                            <option value="{{ $area->id }}" {{ old('area_id', $shopManagerShop->area_id) == $area->id ? 'selected' : '' }}>{{ $area->area }}</option>
+                                            <option value="{{ $area->id }}" {{ old('area_id', $shopManagerShop->area_id) == $area->id ? 'selected' : '' }}>{{ $area->prefecture }}</option>
                                         @endforeach
                                     </select>
                                     <i class="fa-solid fa-sort-down custom-arrow-area"></i>
@@ -66,7 +66,7 @@
                                     <select name="genre_id" id="genre" class="shopManagerShop-create-form__select--genre">
                                         <option value="">選択してください</option>
                                         @foreach($genres as $genre)
-                                            <option value="{{ $genre->id }}" {{ old('genre_id', $shopManagerShop->genre_id) == $genre->id ? 'selected' : '' }}>{{ $genre->genre }}</option>
+                                            <option value="{{ $genre->id }}" {{ old('genre_id', $shopManagerShop->genre_id) == $genre->id ? 'selected' : '' }}>{{ $genre->content }}</option>
                                         @endforeach
                                     </select>
                                     <i class="fa-solid fa-sort-down custom-arrow-genre"></i>
@@ -149,7 +149,7 @@
                             <td class="reservationList-table__item">{{ $reservation->date }}</td>
                             <td class="reservationList-table__item">{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</td>
                             <td class="reservationList-table__item">{{ $reservation->user->name }}</td>
-                            <td class="reservationList-table__item">{{ $reservation->numberPeople }}</td>
+                            <td class="reservationList-table__item">{{ $reservation->number_people }}</td>
                             <td class="reservationList-table__item">
                                 <button class="reservationList-table__btn">
                                     <a class="reservationList-table__btn--detail" href="{{ route('shopManagerReservation.show', $reservation->id) }}"><i class="fa-solid fa-pen-to-square"></i> 編集</a>

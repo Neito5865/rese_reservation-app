@@ -19,7 +19,7 @@ class CreateReservationsTable extends Migration
             $table->foreignId('shop_id')->constrained();
             $table->date('date');
             $table->time('time');
-            $table->integer('numberPeople');
+            $table->integer('number_people');
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();
             $table->softDeletes();

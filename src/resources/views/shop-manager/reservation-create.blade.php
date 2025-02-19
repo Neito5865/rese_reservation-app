@@ -57,18 +57,18 @@
                 </div>
                 <div class="shopManagerReservation-create-form__group">
                     <div class="shopManagerReservation-create-form__inner">
-                        <label class="shopManagerReservation-create-form__label" for="numberPeople">予約人数</label>
+                        <label class="shopManagerReservation-create-form__label" for="number_people">予約人数</label>
                         <div class="shopManagerReservation-create-form__select">
-                            <select class="shopManagerReservation-create-form__select--number" name="numberPeople" id="numberPeople">
+                            <select class="shopManagerReservation-create-form__select--number" name="number_people" id="number_people">
                                 @for ($i = 1; $i <= 100; $i++ )
-                                    <option value="{{ $i }}" {{ $i == old('numberPeople', '1') ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
+                                    <option value="{{ $i }}" {{ $i == old('number_people', '1') ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
                                 @endfor
                             </select>
                             <i class="fa-solid fa-sort-down custom-arrow"></i>
                         </div>
                     </div>
                     <div class="shopManagerReservation-create-form__error">
-                        @error('numberPeople')
+                        @error('number_people')
                         {{ $message }}
                         @enderror
                     </div>
