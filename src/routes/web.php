@@ -49,16 +49,19 @@ Route::get('/thanks', function(){
 Route::get('/', [ShopsController::class, 'index'])->name('shop.index');
 Route::get('/search', [ShopsController::class, 'search'])->name('shops.search');
 Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.detail');
-Route::get('/detail/reviews/{shop_id}', [ShopsController::class, 'showReviews'])->name('shop.reviews');
+Route::get('/detail/{shop_id}/reviews', [ShopsController::class, 'showReviews'])->name('shop.reviews');
 
 Route::get('/reservations/qr/{reservation}', [ReservationsController::class, 'qrConfirmed'])->name('reservation.qrConfirmed');
 
 Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function(){
-    Route::group(['prefix' => 'reservations'], function(){
+    // 一般ユーザー-予約
+    Route::group(['prefix' => 'reservation'], function(){
         Route::post('{shop_id}', [ReservationsController::class, 'store'])->name('reservation.store');
-        Route::get('{id}/edit', [ReservationsController::class, 'edit'])->name('reservation.edit');
-        Route::put('{id}/edit', [ReservationsController::class, 'update'])->name('reservation.update');
-        Route::delete('{id}/delete', [ReservationsController::class, 'destroy'])->name('reservation.destroy');
+        Route::group(['prefix' => '{reservation_id}'], function(){
+            Route::get('edit', [ReservationsController::class, 'edit'])->name('reservation.edit');
+            Route::put('edit', [ReservationsController::class, 'update'])->name('reservation.update');
+            Route::delete('delete', [ReservationsController::class, 'destroy'])->name('reservation.destroy');
+        });
     });
 
     Route::get('/mypage', [UsersController::class, 'show'])->name('mypage.show');

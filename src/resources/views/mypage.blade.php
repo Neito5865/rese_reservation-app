@@ -6,6 +6,7 @@
 
 @section('content')
     <div class="mypage-container">
+        @include('session_message.session_message')
         <div class="mypage__user-name">
             <p>{{ Auth::user()->name }}さん</p>
         </div>
@@ -136,7 +137,7 @@
                 </div>
                 <div class="buttons">
                     <div class="modal-close__back">
-                        <a class="modal-close__back--link" href="/mypage">&lt; 戻る</a>
+                        <a class="modal-close__back--link" href="{{ route('mypage.show') }}">&lt; 戻る</a>
                     </div>
                     <form class="delete-form" action="" method="POST">
                         @method('DELETE')
@@ -165,7 +166,7 @@
                     document.getElementById('modal-id').value = this.getAttribute('data-id');
 
                     var reservationId = this.getAttribute('data-id');
-                    document.querySelector('.delete-form').setAttribute('action', `/reservations/${reservationId}/delete`);
+                    document.querySelector('.delete-form').setAttribute('action', `/reservation/${reservationId}/delete`);
 
                     modal.style.display = 'block';
                 });

@@ -22,6 +22,7 @@ class ReservationsController extends Controller
         ]);
         $reservationData['user_id'] = $user_id;
         $reservationData['shop_id'] = $shop_id;
+
         $reservation = Reservation::create($reservationData);
 
         Mail::to($reservation->user->email)->send(new ReservationConfirmed($reservation));
@@ -29,14 +30,30 @@ class ReservationsController extends Controller
         return view('reservation.done');
     }
 
-    public function edit($id){
-        $reservation = Reservation::findOrFail($id);
+    public function edit($reservation_id){
+        $user = Auth::user();
+        $reservation = Reservation::findOrFail($reservation_id);
+
+        if ($user->id !== $reservation->user_id) {
+            abort(403, 'Invalid reservation_id.');
+        }
+
         return view('reservation.reservation_edit', compact('reservation'));
     }
 
-    public function update(ReservationRequest $request, $id){
-        $reservation = Reservation::findOrFail($id);
-        $reservationData = $request->all();
+    public function update(ReservationRequest $request, $reservation_id){
+        $user = Auth::user();
+        $reservation = Reservation::findOrFail($reservation_id);
+
+        if ($user->id !== $reservation->user_id) {
+            abort(403, 'Invalid reservation_id.');
+        }
+
+        $reservationData = $request->only([
+            'date',
+            'time',
+            'number_people',
+        ]);
         $reservation->update($reservationData);
 
         Mail::to($reservation->user->email)->send(new ReservationConfirmed($reservation));
@@ -44,12 +61,17 @@ class ReservationsController extends Controller
         return view('reservation.edit_done');
     }
 
-    public function destroy($id){
-        $reservation = Reservation::findOrFail($id);
-        if(\Auth::id() === $reservation->user_id){
-            $reservation->delete();
+    public function destroy($reservation_id){
+        $user = Auth::user();
+        $reservation = Reservation::findOrFail($reservation_id);
+
+        if ($user->id !== $reservation->user_id) {
+            abort(403, 'Invalid reservation_id.');
         }
-        return redirect()->route('mypage.show');
+
+        $reservation->delete();
+
+        return redirect()->route('mypage.show')->with('success', '予約をキャンセルしました。');
     }
 
     public function qrConfirmed(Reservation $reservation){
