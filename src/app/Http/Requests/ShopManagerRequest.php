@@ -24,10 +24,12 @@ class ShopManagerRequest extends FormRequest
      */
     public function rules()
     {
+        $managerId = $this->route('manager_id');
+
         $rules = [
             'name' => 'required|string|max:191',
             'email' => [
-                'required','string','email','max:191',Rule::unique('users')->ignore($this->id),
+                'required','string','email','max:191',Rule::unique('users')->ignore($managerId),
             ],
         ];
 

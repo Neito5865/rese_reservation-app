@@ -27,18 +27,21 @@ class AdminShopManagersController extends Controller
         return view('admin.index', compact('shopManagers'));
     }
 
-    public function show($id){
-        $shopManager = User::find($id);
+    public function show($manager_id){
+        $shopManager = User::find($manager_id);
         if(!$shopManager){
-            return response()->view('errors.shopManager-detail', ['message' => '該当のユーザーが存在しません。'], 404);
+            return response()->view('errors.error-page', ['message' => '該当のユーザーが存在しません。'], 404);
         }
-        $shopManagerShops = Shop::where('user_id', $id)->paginate(5);
+        $shopManagerShops = Shop::where('user_id', $manager_id)->paginate(5);
         return view('admin.detail', compact('shopManager', 'shopManagerShops'));
     }
 
-    public function update(ShopManagerRequest $request, $id){
-        $shopManager = $request->all();
-        User::findOrFail($id)->update($shopManager);
+    public function update(ShopManagerRequest $request, $manager_id){
+        $shopManager = User::findOrFail($manager_id);
+
+        $shopManagerData = $request->only(['name','email']);
+        $shopManager->update($shopManagerData);
+
         return back()->with('success', '保存が成功しました。');
     }
 

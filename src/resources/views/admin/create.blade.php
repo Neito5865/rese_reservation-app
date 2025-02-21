@@ -6,11 +6,7 @@
 
 @section('content')
     <div class="shopManager-create__content">
-        @if(session('success'))
-            <div class="shopManager-create__alert--success">
-                {{ session('success') }}
-            </div>
-        @endif
+        @include('session_message.session_message')
         <div class="shopManager-create__heading">
             <h2>新規店舗代表者作成</h2>
         </div>

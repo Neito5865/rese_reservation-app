@@ -46,7 +46,7 @@
                             <td class="shopManagers-table__item">{{ $shopManager->email }}</td>
                             <td class="shopManagers-table__item">
                                 <button class="shopManagers-table__btn">
-                                    <a class="shopManagers-table__btn--detail" href="{{ route('admin.detail', $shopManager->id)}}"><i class="fa-solid fa-pen-to-square"></i> 編集</a>
+                                    <a class="shopManagers-table__btn--detail" href="{{ route('admin.show', $shopManager->id)}}"><i class="fa-solid fa-pen-to-square"></i> 詳細</a>
                                 </button>
                             </td>
                         </tr>

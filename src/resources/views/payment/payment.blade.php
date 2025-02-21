@@ -6,15 +6,10 @@
 
 @section('content')
     <div class="payment__content">
+        @include('session_message.session_message')
         <div class="payment__heading">
             <h2>オンライン決済</h2>
         </div>
-        @if (session('success'))
-            <div class="payment__alert--success">{{ session('success') }}</div>
-        @endif
-        @if (session('error'))
-            <div class="payment__alert--error">{{ session('error') }}</div>
-        @endif
         <div class="payment__form">
             <form id="payment-form" class="payment-form__content" action="{{ route('payment.process') }}" method="POST">
                 @csrf

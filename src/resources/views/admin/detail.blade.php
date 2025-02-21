@@ -12,11 +12,7 @@
         <div class="shopManager-detail__header">
             <h2>基本情報</h2>
         </div>
-        @if(session('success'))
-            <div class="shopManager-detail__alert--success">
-                {{ session('success') }}
-            </div>
-        @endif
+        @include('session_message.session_message')
         <div class="shopManager-detail__form">
             <form class="shopManager-edit-form" action="{{ route('admin.update', $shopManager->id) }}" method="POST">
                 @csrf
@@ -76,7 +72,7 @@
                         </tr>
                         @foreach($shopManagerShops as $shop)
                             <tr class="shopManagerShops-table__row">
-                                <td class="shopManagerShops-table__item"><img src="{{ asset('storage/' . $shop->shopI_img) }}" alt="{{ $shop->shop_name }}"></td>
+                                <td class="shopManagerShops-table__item"><img src="{{ asset('storage/' . $shop->shop_img) }}" alt="{{ $shop->shop_name }}"></td>
                                 <td class="shopManagerShops-table__item">{{ $shop->shop_name }}</td>
                                 @php
                                     $countFavoriteUsers = $shop->favoriteUsers()->count();
