@@ -7,14 +7,14 @@
 @section('content')
     <div class="shopManager-detail__container">
         <div class="shopManager-detail__btn">
-            <a class="shopManager-detail__btn--Link-back" href="{{ route('admin.index') }}">&lt; 一覧に戻る</a>
+            <a class="shopManager-detail__btn--Link-back" href="{{ route('admin.shop-managers.index') }}">&lt; 一覧に戻る</a>
         </div>
         <div class="shopManager-detail__header">
             <h2>基本情報</h2>
         </div>
         @include('session_message.session_message')
         <div class="shopManager-detail__form">
-            <form class="shopManager-edit-form" action="{{ route('admin.update', $shopManager->id) }}" method="POST">
+            <form class="shopManager-edit-form" action="{{ route('admin.shop-managers.update', $shopManager->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="shopManagers-edit-table__wrapper">

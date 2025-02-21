@@ -11,7 +11,7 @@
             <h2>新規店舗代表者作成</h2>
         </div>
         <div class="shopManager-create__form">
-            <form method="POST" action="{{ route('admin.store') }}" class="shopManager-create-form">
+            <form method="POST" action="{{ route('admin.shop-managers.store') }}" class="shopManager-create-form">
                 @csrf
                 <div class="shopManager-create-form__group">
                     <div class="shopManager-create-form__inner">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="shopManager-create-form__btn">
                     <div class="shopManager-create-form__btn-link">
-                        <a class="shopManager-create-form__btn-link--back" href="{{ route('admin.index') }}">&lt; 戻る</a>
+                        <a class="shopManager-create-form__btn-link--back" href="{{ route('admin.shop-managers.index') }}">&lt; 戻る</a>
                     </div>
                     <div class="shopManager-create-form__btn-submit">
                         <input class="shopManager-create-form__btn-submit--create" type="submit" value="登録する">

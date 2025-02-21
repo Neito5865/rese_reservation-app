@@ -95,12 +95,12 @@ Route::middleware(['auth', 'verified', 'can:admin-higher'])->group(function(){
     // 管理者-店舗責任者
     Route::group(['prefix' => 'admin'], function(){
         Route::group(['prefix' => 'shop-manager'], function(){
-            Route::get('', [AdminShopManagersController::class, 'index'])->name('admin.index');
-            Route::get('create', [AdminShopManagersController::class, 'create'])->name('admin.create');
-            Route::post('create', [AdminShopManagersController::class, 'store'])->name('admin.store');
+            Route::get('', [AdminShopManagersController::class, 'index'])->name('admin.shop-managers.index');
+            Route::get('create', [AdminShopManagersController::class, 'create'])->name('admin.shop-managers.create');
+            Route::post('create', [AdminShopManagersController::class, 'store'])->name('admin.shop-managers.store');
             Route::group(['prefix' => '{manager_id}'], function(){
-                Route::get('', [AdminShopManagersController::class, 'show'])->name('admin.show');
-                Route::put('', [AdminShopManagersController::class, 'update'])->name('admin.update');
+                Route::get('', [AdminShopManagersController::class, 'show'])->name('admin.shop-managers.show');
+                Route::put('', [AdminShopManagersController::class, 'update'])->name('admin.shop-managers.update');
             });
         });
     });
