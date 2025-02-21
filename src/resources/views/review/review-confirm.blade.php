@@ -10,7 +10,7 @@
             <h2>投稿内容の確認</h2>
         </div>
         <div class="review-confirm__table-form">
-            <form class="review-confirm-form" action="{{ route('reviews.confirm', $reservation->id) }}" method="POST">
+            <form class="review-confirm-form" action="{{ route('review.confirm', $reservation->id) }}" method="POST">
                 @csrf
                 <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
                 <input type="hidden" name="shop_id" value="{{ $reservation->shop->id }}">
@@ -23,7 +23,7 @@
                             @else
                                 {{ $user->name }}
                             @endif
-                            <input type="hidden" name="is_anonymous" value="{{ $review->is_anonymous }}">
+                            <input type="hidden" name="is_anonymous" value="{{ $review['is_anonymous'] }}">
                         </td>
                     </tr>
                     <tr class="review-confirm-table__row">
@@ -46,13 +46,13 @@
                                     @endif
                                 @endfor
                             </div>
-                            <input type="hidden" name="evaluation" value="{{ $review->evaluation }}">
+                            <input type="hidden" name="evaluation" value="{{ $review['evaluation'] }}">
                         </td>
                     </tr>
                     <tr class="review-confirm-table__row">
                         <th class="review-confirm-table__heading review-confirm-table__heading--last">感想・コメント</th>
                         <td class="review-confirm-table__item review-confirm-table__item--last">
-                            <textarea class="review-confirm-form__textarea" name="comment" id="comment" readonly>{{ $review->comment }}</textarea>
+                            <textarea class="review-confirm-form__textarea" name="comment" id="comment" readonly>{{ $review['comment'] }}</textarea>
                         </td>
                     </tr>
                 </table>

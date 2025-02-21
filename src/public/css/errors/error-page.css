@@ -1,0 +1,29 @@
+.error-page__content {
+    width: 95%;
+    max-width: 1280px;
+    padding: 0 20px;
+    margin: 80px auto;
+}
+
+.error__heading {
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.error-page__content p {
+    padding: 0;
+    margin: 0;
+}
+
+.back__btn {
+    border: none;
+    border-radius: 4px;
+    background-color: #e69335;
+    padding: 10px 16px;
+}
+
+.back__btn a {
+    text-decoration: none;
+    color: #fff;
+    border-radius: 4px;
+}

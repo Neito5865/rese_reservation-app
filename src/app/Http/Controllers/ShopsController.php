@@ -14,24 +14,27 @@ use Carbon\Carbon;
 
 class ShopsController extends Controller
 {
-    public function index(){
-        $shops = Shop::with('area', 'genre')->get();
+    public function index(Request $request)
+    {
+        $query = Shop::with('area', 'genre');
+
+        if ($request->hasAny(['area_id', 'genre_id', 'keyword'])) {
+            $query->AreaSearch($request->area_id)
+                ->GenreSearch($request->genre_id)
+                ->KeywordSearch($request->keyword);
+        }
+        $shops = $query->get();
         $areas = Area::all();
         $genres = Genre::all();
+
         return view('index', compact('shops', 'areas', 'genres'));
     }
 
-    public function search(Request $request){
-        $shops = Shop::with('area', 'genre')->AreaSearch($request->area_id)->GenreSearch($request->genre_id)->KeywordSearch($request->keyword)->get();
-        $areas = Area::all();
-        $genres = Genre::all();
-        return view('index', compact('shops', 'areas', 'genres'));
-    }
-
-    public function show($shop_id){
+    public function show($shop_id)
+    {
         $shop = Shop::find($shop_id);
         if(!$shop){
-            return response()->view('errors.shop-detail', ['message' => '該当の店舗が存在しません。'], 404);
+            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 404);
         }
 
         $reviews = Review::where('shop_id', $shop_id)->get();
@@ -51,10 +54,11 @@ class ShopsController extends Controller
         return view('detail', compact('shop', 'userReservations', 'averageRating', 'reviewCount'));
     }
 
-    public function showReviews($shop_id){
+    public function showReviews($shop_id)
+    {
         $shop = Shop::find($shop_id);
         if(!$shop){
-            return response()->view('errors.shop-review', ['message' => 'レビューが存在しません。'], 404);
+            return response()->view('errors.error-page', ['message' => 'ページが存在しません。'], 404);
         }
         $reviews = Review::where('shop_id', $shop_id)->orderBy('id','desc')->paginate(10);
 

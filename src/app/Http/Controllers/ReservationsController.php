@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Mail;
 
 class ReservationsController extends Controller
 {
-    public function store(ReservationRequest $request, $shop_id){
+    public function store(ReservationRequest $request, $shop_id)
+    {
         $user_id = Auth::id();
         $reservationData = $request->only([
             'date',
@@ -30,23 +31,31 @@ class ReservationsController extends Controller
         return view('reservation.done');
     }
 
-    public function edit($reservation_id){
+    public function edit($reservation_id)
+    {
         $user = Auth::user();
-        $reservation = Reservation::findOrFail($reservation_id);
+        $reservation = Reservation::find($reservation_id);
+        if(!$reservation){
+            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+        }
 
         if ($user->id !== $reservation->user_id) {
-            abort(403, 'Invalid reservation_id.');
+            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
         }
 
         return view('reservation.reservation_edit', compact('reservation'));
     }
 
-    public function update(ReservationRequest $request, $reservation_id){
+    public function update(ReservationRequest $request, $reservation_id)
+    {
         $user = Auth::user();
-        $reservation = Reservation::findOrFail($reservation_id);
+        $reservation = Reservation::find($reservation_id);
+        if(!$reservation){
+            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+        }
 
         if ($user->id !== $reservation->user_id) {
-            abort(403, 'Invalid reservation_id.');
+            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
         }
 
         $reservationData = $request->only([
@@ -61,12 +70,16 @@ class ReservationsController extends Controller
         return view('reservation.edit_done');
     }
 
-    public function destroy($reservation_id){
+    public function destroy($reservation_id)
+    {
         $user = Auth::user();
-        $reservation = Reservation::findOrFail($reservation_id);
+        $reservation = Reservation::find($reservation_id);
+        if(!$reservation){
+            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+        }
 
         if ($user->id !== $reservation->user_id) {
-            abort(403, 'Invalid reservation_id.');
+            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
         }
 
         $reservation->delete();
@@ -74,7 +87,8 @@ class ReservationsController extends Controller
         return redirect()->route('mypage.show')->with('success', '予約をキャンセルしました。');
     }
 
-    public function qrConfirmed(Reservation $reservation){
+    public function qrConfirmed(Reservation $reservation)
+    {
         return view('reservation.qr-result', compact('reservation'));
     }
 }

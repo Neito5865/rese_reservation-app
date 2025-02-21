@@ -16,22 +16,41 @@ class ReviewsController extends Controller
     public function index(){
         $user = Auth::user();
         $today = Carbon::now();
+
         $reservations = $user->reservations()
             ->with(['shop', 'review'])
             ->where(Reservation::raw("CONCAT(date, ' ', time)"), '<', $today)
             ->orderBy('date', 'desc')
             ->paginate(10);
+
         return view('review.review-index', compact('reservations'));
     }
 
-    public function create($id){
-        $reservation = Reservation::with('shop')->findOrFail($id);
+    public function create($reservation_id){
+        $user = Auth::user();
+        $reservation = Reservation::with('shop')->find($reservation_id);
+        if(!$reservation){
+            return response()->view('errors.error-page', ['message' => 'ページを表示できません。'], 404);
+        }
+
+        if ($user->id !== $reservation->user_id) {
+            return response()->view('errors.error-page', ['message' => 'ページを表示できません。'], 403);
+        }
+
         return view('review.review-create', compact('reservation'));
     }
 
-    public function confirm(ReviewRequest $request, $id){
+    public function confirm(ReviewRequest $request, $reservation_id){
         $user = Auth::user();
-        $reservation = Reservation::with('shop')->findOrFail($id);
+        $reservation = Reservation::with('shop')->findOrFail($reservation_id);
+        if(!$reservation){
+            return response()->view('errors.error-page', ['message' => 'ページを表示できません。'], 404);
+        }
+
+        if ($user->id !== $reservation->user_id) {
+            return response()->view('errors.error-page', ['message' => 'ページを表示できません。'], 403);
+        }
+
         $review = $request->only([
             'is_anonymous',
             'evaluation',
@@ -39,7 +58,7 @@ class ReviewsController extends Controller
         ]);
 
         if($request->input('action') === '＜ 修正する'){
-            return redirect()->route('reviews.create', ['id' => $id])->withInput();
+            return redirect()->route('review.create', ['id' => $id])->withInput();
         }
 
         if($request->input('action') === 'レビューを投稿する'){
@@ -51,17 +70,16 @@ class ReviewsController extends Controller
 
     public function store(Request $request){
         $user = Auth::user();
-        $review = $request->only([
+        $reviewData = $request->only([
             'is_anonymous',
             'evaluation',
             'comment',
             'reservation_id',
             'shop_id',
         ]);
+        $reviewData['user_id'] = $user->id;
 
-        $review['user_id'] = $user->id;
-
-        Review::create($review);
+        Review::create($reviewData);
 
         return view('review.review-done');
     }

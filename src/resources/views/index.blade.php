@@ -9,7 +9,7 @@
         <div class="search__header">
             <h2>マイベストなお店を探す</h2>
         </div>
-        <form method="GET" action="{{ route('shops.search') }}" class="search-form" id="search-form">
+        <form method="GET" action="{{ route('shop.index') }}" class="search-form" id="search-form">
             @csrf
             <div class="search-form__inner">
                 <div class="search-form__item-select">

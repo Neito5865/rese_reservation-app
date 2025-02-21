@@ -10,10 +10,10 @@
     </div>
     <div class="review__container">
         <div class="review__back">
-            <a class="review__back--link" href="{{ route('reviews.index') }}">&lt; 利用店舗一覧に戻る</a>
+            <a class="review__back--link" href="{{ route('review.index') }}">&lt; 利用店舗一覧に戻る</a>
         </div>
         <div class="review__table-form">
-            <form class="review-form" action="{{ route('reviews.confirm', $reservation->id) }}" method="POST">
+            <form class="review-form" action="{{ route('review.confirm', $reservation->id) }}" method="POST">
                 @csrf
                 <table class="review-table__inner">
                     <tr class="review-table__row">
