@@ -1,0 +1,130 @@
+.message__success {
+    background-color: #caf8e8;
+    font-size: 14px;
+    color: #2f5e4e;
+    margin: 20px auto 0 auto;
+    width: 100%;
+    margin: 20px auto 0 auto;
+    padding: 10px 0 10px 20px;
+    border-radius: 5px;
+}
+
+.message__error {
+    background-color: #f8d3ca;
+    font-size: 14px;
+    color: #951b12;
+    margin: 20px auto 0 auto;
+    width: 100%;
+    margin: 20px auto 0 auto;
+    padding: 10px 0 10px 20px;
+    border-radius: 5px;
+}
+
+.sendUserMail__content{
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.sendUserMail__btn{
+    margin-top: 10px;
+}
+.sendUserMail__btn--link-back{
+    text-decoration: none;
+    color: #3560F6;
+}
+
+.sendUserMail__heading{
+    text-align: center;
+    margin-top: 40px;
+}
+.sendUserMail__heading h2{
+    margin: 0;
+    padding: 0;
+}
+
+.sendUserMail__form{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+}
+.sendUserMail-form__content{
+    width: 100%;
+}
+.sendUserMail-form__group{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+}
+.sendUserMail-form__label{
+    flex-basis: 25%;
+    text-align: right;
+    margin-right: 50px;
+    margin-top: 20px;
+}
+.sendUserMail-form__input{
+    width: 100%;
+    margin-top: 20px;
+}
+.sendUserMail-form__input-email, .sendUserMail-form__input-subject{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.sendUserMail-form__textarea{
+    margin-top: 20px;
+    width: 100%;
+}
+.sendUserMail-form__textarea-message{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 1.4rem;
+    height: 400px;
+}
+
+.sendUserMail-form__label--heading{
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 20px;
+}
+.sendUserMail-form__label--required{
+    color: #fff;
+    background-color: #dc3444;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+.sendUserMail-form__button{
+    margin-top: 40px;
+    text-align: center;
+}
+.sendUserMail-form__button--submit{
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    background-color: #e69335;
+    padding: 10px 16px;
+    border-radius: 5px;
+}
+.sendUserMail-form__error{
+    font-size: 14px;
+    color: #dc3444;
+    margin-left: 25%;
+}
+
+@media screen and (max-width: 768px){
+    .sendUserMail-form__group {
+        flex-direction: column;
+    }
+}

@@ -166,7 +166,7 @@
                     document.getElementById('modal-id').value = this.getAttribute('data-id');
 
                     var reservationId = this.getAttribute('data-id');
-                    document.querySelector('.delete-form').setAttribute('action', `/reservation/${reservationId}/delete`);
+                    document.querySelector('.delete-form').setAttribute('action', `/reservation/${reservationId}`);
 
                     modal.style.display = 'block';
                 });

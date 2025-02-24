@@ -18,13 +18,13 @@ class ShopManagerShopsController extends Controller
         $shopManagerShops = $shopManager->shops()
             ->orderBy('id', 'asc')
             ->paginate(10);
-        return view('shop-manager.index', compact('shopManagerShops'));
+        return view('shop-manager.shop.index', compact('shopManagerShops'));
     }
 
     public function create(){
         $areas = Area::all();
         $genres = Genre::all();
-        return view('shop-manager.create', compact('areas', 'genres'));
+        return view('shop-manager.shop.create', compact('areas', 'genres'));
     }
 
     public function store(ShopRequest $request){
@@ -45,10 +45,16 @@ class ShopManagerShopsController extends Controller
         return back()->with('success', '店舗が作成されました。');
     }
 
-    public function show($id){
-        $shopManagerShop = Shop::find($id);
+    public function show($shop_id){
+        $shopManager = Auth::user();
+        $shopManagerShop = Shop::find($shop_id);
+
         if(!$shopManagerShop){
-            return response()->view('errors.shopManagerShop-detail', ['message' => '該当の店舗が存在しません。'], 404);
+            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 404);
+        }
+
+        if($shopManager->shops->id !== $shop_id) {
+            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 403);
         }
 
         $areas = Area::all();
@@ -58,8 +64,17 @@ class ShopManagerShopsController extends Controller
         return view('shop-manager.detail', compact('shopManagerShop', 'areas', 'genres', 'shopManagerReservations'));
     }
 
-    public function update(ShopRequest $request, $id){
-        $shopManagerShop = Shop::findOrFail($id);
+    public function update(ShopRequest $request, $shop_id){
+        $shopManager = Auth::user();
+        $shopManagerShop = Shop::findOrFail($shop_id);
+
+        if(!$shopManagerShop){
+            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 404);
+        }
+
+        if($shopManager->shops->id !== $shop_id) {
+            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 403);
+        }
 
         if($request->hasFile('shop_img')){
             if($shopManagerShop->shop_img && Storage::exists('public/' . $shopManagerShop->shop_img)){

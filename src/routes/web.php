@@ -63,8 +63,8 @@ Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function(){
         Route::post('{shop_id}', [ReservationsController::class, 'store'])->name('reservation.store');
         Route::group(['prefix' => '{reservation_id}'], function(){
             Route::get('edit', [ReservationsController::class, 'edit'])->name('reservation.edit');
-            Route::put('edit', [ReservationsController::class, 'update'])->name('reservation.update');
-            Route::delete('delete', [ReservationsController::class, 'destroy'])->name('reservation.destroy');
+            Route::put('', [ReservationsController::class, 'update'])->name('reservation.update');
+            Route::delete('', [ReservationsController::class, 'destroy'])->name('reservation.destroy');
         });
     });
 
@@ -82,7 +82,7 @@ Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function(){
         Route::get('', [ReviewsController::class, 'index'])->name('review.index');
         Route::get('create/{reservation_id}', [ReviewsController::class, 'create'])->name('review.create');
         Route::post('confirm/{reservation_id}', [ReviewsController::class, 'confirm'])->name('review.confirm');
-        Route::post('store', [ReviewsController::class, 'store'])->name('review.store');
+        Route::post('', [ReviewsController::class, 'store'])->name('review.store');
     });
 
     // 一般ユーザー-決済
@@ -95,12 +95,12 @@ Route::middleware(['auth', 'verified', 'can:admin-higher'])->group(function(){
     // 管理者-店舗責任者
     Route::group(['prefix' => 'admin'], function(){
         Route::group(['prefix' => 'shop-manager'], function(){
-            Route::get('', [AdminShopManagersController::class, 'index'])->name('admin.shop-managers.index');
-            Route::get('create', [AdminShopManagersController::class, 'create'])->name('admin.shop-managers.create');
-            Route::post('create', [AdminShopManagersController::class, 'store'])->name('admin.shop-managers.store');
+            Route::get('', [AdminShopManagersController::class, 'index'])->name('admin.shop-manager.index');
+            Route::get('create', [AdminShopManagersController::class, 'create'])->name('admin.shop-manager.create');
+            Route::post('', [AdminShopManagersController::class, 'store'])->name('admin.shop-manager.store');
             Route::group(['prefix' => '{manager_id}'], function(){
-                Route::get('', [AdminShopManagersController::class, 'show'])->name('admin.shop-managers.show');
-                Route::put('', [AdminShopManagersController::class, 'update'])->name('admin.shop-managers.update');
+                Route::get('', [AdminShopManagersController::class, 'show'])->name('admin.shop-manager.show');
+                Route::put('', [AdminShopManagersController::class, 'update'])->name('admin.shop-manager.update');
             });
         });
     });
@@ -109,24 +109,32 @@ Route::middleware(['auth', 'verified', 'can:admin-higher'])->group(function(){
 // 店舗責任者権限
 Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(function(){
     // 店舗責任者-店舗
-    Route::group(['prefix' => 'shop-manager'], function(){
-        Route::get('', [ShopManagerShopsController::class, 'index'])->name('shopManager.index');
-        Route::get('create', [ShopManagerShopsController::class, 'create'])->name('shopManager.create');
-        Route::post('create', [ShopManagerShopsController::class, 'store'])->name('shopManager.store');
-        Route::get('detail/{id}', [ShopManagerShopsController::class, 'show'])->name('shopManager.detail');
-        Route::put('{id}/edit', [shopManagerShopsController::class, 'update'])->name('shopManager.update');
+    Route::group(['prefix' => 'shop-manager'], function() {
+        Route::group(['prefix' => 'shop'], function() {
+            Route::get('', [ShopManagerShopsController::class, 'index'])->name('shop-manager.shop.index');
+            Route::get('create', [ShopManagerShopsController::class, 'create'])->name('shop-manager.shop.create');
+            Route::post('', [ShopManagerShopsController::class, 'store'])->name('shop-manager.shop.store');
+            Route::group(['prefix' => '{shop_id}'], function() {
+                Route::get('', [ShopManagerShopsController::class, 'show'])->name('shop-manager.shop.show');
+                Route::put('', [shopManagerShopsController::class, 'update'])->name('shop-manager.shop.update');
+            });
+        });
 
         // 店舗責任者-予約
-        Route::group(['prefix' => 'reservations'], function(){
-            Route::get('create/{id}', [ShopManagerReservationsController::class, 'create'])->name('shopManagerReservation.create');
-            Route::post('create/{id}', [ShopManagerReservationsController::class, 'store'])->name('shopManagerReservation.store');
-            Route::get('show/{id}', [ShopManagerReservationsController::class, 'show'])->name('shopManagerReservation.show');
-            Route::put('{id}/edit', [ShopManagerReservationsController::class, 'update'])->name('shopManagerReservation.update');
-            Route::delete('{id}/delete', [ShopManagerReservationsController::class, 'destroy'])->name('shopManagerReservation.destroy');
+        Route::group(['prefix' => 'reservation'], function() {
+            Route::group(['prefix' => '{shop_id}'], function() {
+                Route::get('create', [ShopManagerReservationsController::class, 'create'])->name('shop-manager.reservation.create');
+                Route::post('', [ShopManagerReservationsController::class, 'store'])->name('shop-manager.reservation.store');
+            });
+            Route::group(['prefix' => '{reservation_id}'], function() {
+                Route::get('show', [ShopManagerReservationsController::class, 'show'])->name('shop-manager.reservation.show');
+                Route::put('', [ShopManagerReservationsController::class, 'update'])->name('shop-manager.reservation.update');
+                Route::delete('', [ShopManagerReservationsController::class, 'destroy'])->name('shop-manager.reservation.destroy');
+            });
         });
 
         // 店舗責任者-メール送信
-        Route::get('email-form/{id}', [ShopManagerSendMailsController::class, 'mailForm'])->name('shopManagerSendMail.form');
-        Route::post('send-mail', [ShopManagerSendMailsController::class, 'sendMail'])->name('shopManagerSendMail.sendMail');
+        Route::get('email-form/{reservation_id}', [ShopManagerSendMailsController::class, 'mailForm'])->name('shop-manager.send-mail.form');
+        Route::post('send-mail', [ShopManagerSendMailsController::class, 'sendMail'])->name('shop-manager.send-mail.send');
     });
 });

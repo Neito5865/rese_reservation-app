@@ -1,0 +1,168 @@
+.message__success {
+    background-color: #caf8e8;
+    font-size: 14px;
+    color: #2f5e4e;
+    margin: 20px auto 0 auto;
+    width: 100%;
+    margin: 20px auto 0 auto;
+    padding: 10px 0 10px 20px;
+    border-radius: 5px;
+}
+
+.message__error {
+    background-color: #f8d3ca;
+    font-size: 14px;
+    color: #951b12;
+    margin: 20px auto 0 auto;
+    width: 100%;
+    margin: 20px auto 0 auto;
+    padding: 10px 0 10px 20px;
+    border-radius: 5px;
+}
+
+.shopManagerShop-create__content {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.shopManagerShop-create__heading {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.shopManagerShop-create__heading h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.shopManagerShop-create__form {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.shopManagerShop-create-form__group {
+    margin-bottom: 20px;
+}
+
+.shopManagerShop-create-form__inner {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.shopManagerShop-create-form__label {
+    display: block;
+    width: 20%;
+}
+
+.shopManagerShop-create-form__input {
+    width: 80%;
+    height: 40px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+.shopManagerShop-create-form__group:nth-of-type(5) .shopManagerShop-create-form__input{
+    border: none;
+    padding-top: 10px;
+}
+.shopImg-preview{
+    margin-top: 10px;
+    margin-left: 20%;
+}
+.shopManagerShop-create-form__select {
+    width: 60%;
+    position: relative;
+    box-sizing: border-box;
+}
+.shopManagerShop-create-form__select--area, .shopManagerShop-create-form__select--genre{
+    max-width: none;
+    width: 80%;
+    height: 40px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding-left: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.custom-arrow-area, .custom-arrow-genre {
+    position: absolute;
+    top: 0;
+    right: 25%;
+    pointer-events: none;
+    font-size: 30px;
+    color: #cdcdcd;
+}
+
+.shopManagerShop-create-form__textarea{
+    width: 80%;
+    height: 100px;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.shopManagerShop-create-form__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.shopManagerShop-create-form__btn-link--back {
+    text-decoration: none;
+    color: #000;
+}
+
+.shopManagerShop-create-form__btn-submit--create {
+    background-color: #e69335;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    padding: 6px 16px;
+    border-radius: 5px;
+}
+
+.shopManagerShop-create-form__error {
+    font-size: 14px;
+    color: #ff0000;
+    margin-left: 20%;
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .shopManagerShop-create-form__inner {
+        justify-content: flex-start;
+        flex-direction: column;
+        text-align: left;
+    }
+    .shopManagerShop-create-form__label {
+        display: block;
+        width: 90%;
+    }
+    .shopManagerShop-create-form__input {
+        width: 90%;
+    }
+    .shopManagerShop-create-form__textarea {
+        width: 90%;
+    }
+    .shopManagerShop-create-form__select {
+        width: 100%;
+        position: relative;
+        text-align: center;
+    }
+    .shopManagerShop-create-form__select--area,
+    .shopManagerShop-create-form__select--genre {
+        width: 90%;
+    }
+    .custom-arrow-area,
+    .custom-arrow-genre {
+        right: 10%;
+    }
+}

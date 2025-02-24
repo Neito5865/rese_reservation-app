@@ -13,14 +13,34 @@ use Illuminate\Support\Facades\Mail;
 
 class ShopManagerReservationsController extends Controller
 {
-    public function create($id){
-        $shop = Shop::findOrFail($id);
+    public function create($shop_id){
+        $shopManager = Auth::user();
+        $shop = Shop::find($shop_id);
         $users = User::where('role', 3)->get();
-        return view('shop-manager.reservation-create', compact('shop', 'users'));
+
+        if(!$shop){
+            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 404);
+        }
+
+        if($shopManager->shops->id !== $shop_id) {
+            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 403);
+        }
+
+        return view('shop_manager.reservation.create', compact('shop', 'users'));
     }
 
-    public function store(ShopManagerReservationRequest $request, $id){
-        $shop = Shop::findOrFail($id);
+    public function store(ShopManagerReservationRequest $request, $shop_id){
+        $shopManager = Auth::user();
+        $shop = Shop::find($shop_id);
+
+        if(!$shop){
+            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 404);
+        }
+
+        if($shopManager->shops->id !== $shop_id) {
+            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 403);
+        }
+
         $reservationData = $request->only([
             'date',
             'time',
@@ -35,28 +55,28 @@ class ShopManagerReservationsController extends Controller
         return back()->with('success', '新規予約を作成しました');
     }
 
-    public function show($id){
-        $shopManagerReservation = Reservation::find($id);
+    public function show($reservation_id){
+        $shopManagerReservation = Reservation::find($reservation_id);
         if(!$shopManagerReservation){
-            return response()->view('errors.shopManagerReservation-show', ['message' => '該当の予約が存在しません。'], 404);
+            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
         }
-        return view('shop-manager.reservation-show', compact('shopManagerReservation'));
+        return view('shop_manager.reservation.show', compact('shopManagerReservation'));
     }
 
-    public function update(ReservationRequest $request, $id){
+    public function update(ReservationRequest $request, $reservation_id){
         $reservationData = $request->all();
-        $reservation = Reservation::findOrFail($id)->update($reservationData);
+        $reservation = Reservation::findOrFail($reservation_id)->update($reservationData);
 
-        $updatedReservation = Reservation::findOrFail($id);
+        $updatedReservation = Reservation::findOrFail($reservation_id);
         Mail::to($updatedReservation->user->email)->send(new ReservationConfirmed($updatedReservation));
 
         return back()->with('success', '予約情報が変更されました');
     }
 
-    public function destroy($id){
-        $shopManagerReservation = Reservation::findOrFail($id);
+    public function destroy($reservation_id){
+        $shopManagerReservation = Reservation::findOrFail($reservation_id);
         $shopId = $shopManagerReservation->shop->id;
         $shopManagerReservation->delete();
-        return redirect()->route('shopManager.detail', ['id' => $shopId])->with('success', '予約を削除しました');
+        return redirect()->route('shop-manager.shop.show', ['id' => $shopId])->with('success', '予約を削除しました');
     }
 }
