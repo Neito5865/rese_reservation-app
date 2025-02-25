@@ -83,7 +83,7 @@
                 </div>
                 <div class="shopManagerReservation-create-form__btn">
                     <div class="shopManagerReservation-create-form__btn-link">
-                        <a class="shopManagerReservation-create-form__btn-link--back" href="{{ route('shopManager.detail', $shop->id) }}">&lt; 戻る</a>
+                        <a class="shopManagerReservation-create-form__btn-link--back" href="{{ route('shop-manager.shop.show', $shop->id) }}">&lt; 戻る</a>
                     </div>
                     <div class="shopManagerReservation-create-form__btn-submit">
                         <input class="shopManagerReservation-create-form__btn-submit--create" type="submit" value="予約する">

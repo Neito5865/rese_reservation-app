@@ -18,13 +18,13 @@ class ShopManagerShopsController extends Controller
         $shopManagerShops = $shopManager->shops()
             ->orderBy('id', 'asc')
             ->paginate(10);
-        return view('shop-manager.shop.index', compact('shopManagerShops'));
+        return view('shop_manager.shop.index', compact('shopManagerShops'));
     }
 
     public function create(){
         $areas = Area::all();
         $genres = Genre::all();
-        return view('shop-manager.shop.create', compact('areas', 'genres'));
+        return view('shop_manager.shop.create', compact('areas', 'genres'));
     }
 
     public function store(ShopRequest $request){
@@ -53,26 +53,27 @@ class ShopManagerShopsController extends Controller
             return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 404);
         }
 
-        if($shopManager->shops->id !== $shop_id) {
+        if($shopManagerShop->user_id !== $shopManager->id) {
             return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 403);
         }
 
         $areas = Area::all();
         $genres = Genre::all();
 
-        $shopManagerReservations = $shopManagerShop->reservations()->orderBy('date', 'asc')->orderBy('time', 'asc')->paginate(10);
-        return view('shop-manager.detail', compact('shopManagerShop', 'areas', 'genres', 'shopManagerReservations'));
+        $shopManagerReservations = $shopManagerShop->reservations()->orderBy('date', 'desc')->orderBy('time', 'desc')->paginate(10);
+
+        return view('shop_manager.shop.show', compact('shopManagerShop', 'areas', 'genres', 'shopManagerReservations'));
     }
 
     public function update(ShopRequest $request, $shop_id){
         $shopManager = Auth::user();
-        $shopManagerShop = Shop::findOrFail($shop_id);
+        $shopManagerShop = Shop::find($shop_id);
 
         if(!$shopManagerShop){
             return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 404);
         }
 
-        if($shopManager->shops->id !== $shop_id) {
+        if($shopManagerShop->user_id !== $shopManager->id) {
             return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 403);
         }
 
@@ -85,11 +86,13 @@ class ShopManagerShopsController extends Controller
             $shopManagerShop->shop_img = 'shops/' . basename($path);
         }
 
-        $shopManagerShop->shop_name = $request->input('shop_name');
-        $shopManagerShop->area_id = $request->input('area_id');
-        $shopManagerShop->genre_id = $request->input('genre_id');
-        $shopManagerShop->detail = $request->input('detail');
-        $shopManagerShop->save();
+        $shopManagerShopData = $request->only([
+            'shop_name',
+            'area_id',
+            'genre_id',
+            'detail',
+        ]);
+        $shopManagerShop->update($shopManagerShopData);
 
         return back()->with('success', '店舗情報が保存されました');
     }

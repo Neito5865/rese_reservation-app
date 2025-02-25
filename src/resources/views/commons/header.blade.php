@@ -11,7 +11,7 @@
                         @can('admin-higher')
                             <li class="header-nav__item"><a class="header-nav__link" href="{{ route('admin.shop-managers.index') }}">ダッシュボード</a></li>
                         @elsecan('shopManager-higher')
-                            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('shopManager.index') }}">ダッシュボード</a></li>
+                            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('shop-manager.shop.index') }}">ダッシュボード</a></li>
                         @elsecan('user-higher')
                             <li class="header-nav__item"><a class="header-nav__link" href="{{ route('mypage.show') }}">マイページ</a></li>
                             <li class="header-nav__item"><a class="header-nav__link" href="{{ route('payment.form') }}">決済</a></li>

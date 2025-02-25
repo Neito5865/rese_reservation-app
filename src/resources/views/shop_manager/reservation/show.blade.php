@@ -7,7 +7,7 @@
 @section('content')
     <div class="shopManagerReservation-show__container">
         <div class="shopManagerReservation-show__btn">
-            <a class="shopManagerReservation-show__btn--Link-back" href="{{ route('shop-manager.shop.show', ['id' => $shopManagerReservation->shop->id]) }}">&lt; 店舗詳細ページに戻る</a>
+            <a class="shopManagerReservation-show__btn--Link-back" href="{{ route('shop-manager.shop.show', $shopManagerReservation->shop_id) }}">&lt; 店舗詳細ページに戻る</a>
         </div>
         <div class="header-deleteBtn--flex">
             <div class="shopManagerReservation-show__header">
@@ -120,7 +120,7 @@
                 </tr>
             </table>
             <div class="mail-to-user__button">
-                <a class="mail-to-user__button--link" href="{{ route('shop-manager.send-mail.form', ['id' => $shopManagerReservation->id]) }}">メールを送る</a>
+                <a class="mail-to-user__button--link" href="{{ route('shop-manager.send-mail.form', $shopManagerReservation->id) }}">メールを送る</a>
             </div>
         </div>
     </div>

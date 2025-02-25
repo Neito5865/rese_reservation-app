@@ -11,10 +11,14 @@ use App\Http\Requests\SendUserMailRequest;
 
 class ShopManagerSendMailsController extends Controller
 {
-    public function mailForm($id){
-        $reservation = Reservation::findOrFail($id);
+    public function mailForm($reservation_id){
+        $reservation = Reservation::find($reservation_id);
+        if(!$reservation) {
+            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+        }
+
         $user = $reservation->user;
-        return view('shop-manager.sendUserMail', compact('user', 'reservation'));
+        return view('shop_manager.send_email.send_email', compact('user', 'reservation'));
     }
 
     public function sendMail(SendUserMailRequest $request){
