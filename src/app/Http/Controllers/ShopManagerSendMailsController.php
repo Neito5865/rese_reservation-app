@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Reservation;
 use App\Mail\SendUserMail;
@@ -12,9 +13,15 @@ use App\Http\Requests\SendUserMailRequest;
 class ShopManagerSendMailsController extends Controller
 {
     public function mailForm($reservation_id){
-        $reservation = Reservation::find($reservation_id);
+        $shopManager = Auth::user();
+
+        $reservation = Reservation::with('shop')->find($reservation_id);
         if(!$reservation) {
             return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+        }
+
+        if ($reservation->shop->user_id !== $shopManager->id) {
+            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
         }
 
         $user = $reservation->user;
