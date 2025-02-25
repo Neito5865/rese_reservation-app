@@ -101,14 +101,20 @@ class ShopManagerReservationsController extends Controller
 
     public function destroy($reservation_id)
     {
-        $reservation = Reservation::find($reservation_id);
+        $shopManager = Auth::user();
+
+        $reservation = Reservation::with('shop')->find($reservation_id);
         if(!$reservation) {
             return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
         }
 
-        $shop = Shop::findOrFail($reservation->shop->id);
+        if ($reservation->shop->user_id !== $shopManager->id) {
+            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
+        }
+
+        $shop_id = $reservation->shop->id;
         $reservation->delete();
 
-        return redirect()->route('shop-manager.shop.show', ['shop_id' => $shop->id])->with('success', '予約を削除しました');
+        return redirect()->route('shop-manager.shop.show', ['shop_id' => $shop_id])->with('success', '予約を削除しました');
     }
 }
