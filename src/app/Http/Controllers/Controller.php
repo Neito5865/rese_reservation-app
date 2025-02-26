@@ -11,7 +11,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function userCounts($user){
+    public function userCounts($user)
+    {
         $countFavorites = $user->favorites()->count();
         return ['countFavorites' => $countFavorites];
     }

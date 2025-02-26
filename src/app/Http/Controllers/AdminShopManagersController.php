@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Shop;
 use App\Http\Requests\ShopManagerRequest;
@@ -11,7 +10,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminShopManagersController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $query = User::where('role', 2);
 
         if($request->filled('keyword')){
@@ -27,7 +27,8 @@ class AdminShopManagersController extends Controller
         return view('admin.index', compact('shopManagers'));
     }
 
-    public function show($manager_id){
+    public function show($manager_id)
+    {
         $shopManager = User::find($manager_id);
         if(!$shopManager){
             return response()->view('errors.error-page', ['message' => '該当のユーザーが存在しません。'], 404);
@@ -36,7 +37,8 @@ class AdminShopManagersController extends Controller
         return view('admin.detail', compact('shopManager', 'shopManagerShops'));
     }
 
-    public function update(ShopManagerRequest $request, $manager_id){
+    public function update(ShopManagerRequest $request, $manager_id)
+    {
         $shopManager = User::findOrFail($manager_id);
 
         $shopManagerData = $request->only(['name','email']);
@@ -45,11 +47,13 @@ class AdminShopManagersController extends Controller
         return back()->with('success', '保存が成功しました。');
     }
 
-    public function create(){
+    public function create()
+    {
         return view('admin.create');
     }
 
-    public function store(ShopManagerRequest $request){
+    public function store(ShopManagerRequest $request)
+    {
         User::create([
             'role' => 2,
             'name' => $request->input('name'),
