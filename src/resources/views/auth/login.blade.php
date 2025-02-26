@@ -10,7 +10,7 @@
             <h2>ログイン</h2>
         </div>
         <div class="form">
-            <form method="POST" action="{{ route('login') }}" class="login-form">
+            <form method="POST" action="{{ route('login.store') }}" class="login-form">
                 @csrf
                     <div class="login-form__group">
                         <div class="login-form__item">

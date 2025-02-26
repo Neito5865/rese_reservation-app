@@ -19,28 +19,46 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:191'],
+        $rules = [
+            'name' => ['required', 'string', 'max:80'],
             'email' => [
                 'required',
                 'string',
                 'email',
-                'max:191',
+                'max:255',
                 Rule::unique(User::class),
             ],
             'password' => [
                 'required',
                 'string',
                 'min:8',
-                'max:191',
+                'max:255',
                 'regex:/^[a-zA-Z0-9]+$/',
             ],
-        ])->validate();
+        ];
+
+        $messages = [
+            'name.required' => '名前を入力してください',
+            'name.string' => '名前は文字列で入力してください',
+            'name.max' => '名前は80文字以下で入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'email.string' => 'メールアドレスは文字列で入力してください',
+            'email.email' => 'メール形式で入力してください',
+            'email.max' => 'メールアドレスは255文字以下で入力してください',
+            'email.unique' => 'こちらのメールアドレスはすでに登録されています',
+            'password.required' => 'パスワードを入力してください',
+            'password.string' => 'パスワードは文字列で入力してください',
+            'password.min' => 'パスワードは8文字以上で入力してください',
+            'max' => 'パスワードは255文字以下で入力してください',
+            'regex' => 'パスワードには半角英数字のみを使用してください',
+        ];
+
+        Validator::make($input, $rules, $messages)->validate();
 
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
-            'password' => bcrypt($input['password']),
+            'password' => Hash::make($input['password']),
         ]);
     }
 }

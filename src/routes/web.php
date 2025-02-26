@@ -8,12 +8,13 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\AdminShopManagersController;
 use App\Http\Controllers\ShopManagerShopsController;
 use App\Http\Controllers\ShopManagerReservationsController;
 use App\Http\Controllers\ShopManagerSendMailsController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RegisteredUserController;
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,35 +27,11 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-// メール認証
-Route::get('/email/verify', function(){
-    return view('auth.verify-email');
-})->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}', function(EmailVerificationRequest $request){
-    $request->fulfill();
-    return redirect()->route('thanks');
-})->middleware(['auth', 'signed'])->name('verification.verify');
-Route::post('/email/verification-notification', function(Request $request){
-    $request->user()->sendEmailVerificationNotification();
-    return back()->with('massage', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-// ユーザー新規登録
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-Route::post('/register', [RegisterController::class, 'create'])->name('create.register');
-Route::get('/thanks', function(){
-    return view('auth.thanks');
-})->name('thanks');
 
 // ログイン前閲覧可能
 Route::get('/', [ShopsController::class, 'index'])->name('shop.index');
 Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.detail');
 Route::get('/detail/{shop_id}/reviews', [ShopsController::class, 'showReviews'])->name('shop.reviews');
-
-// QRコード読み取り先
-Route::get('/reservations/qr/{reservation}', [ReservationsController::class, 'qrConfirmed'])->name('reservation.qrConfirmed');
 
 // 一般ユーザー権限
 Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function(){
@@ -138,3 +115,33 @@ Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(functio
         Route::post('send-mail', [ShopManagerSendMailsController::class, 'sendMail'])->name('shop-manager.send-mail.send');
     });
 });
+
+// ログイン処理
+Route::post('login', [AuthenticatedSessionController::class, 'store'])->middleware('email')->name('login.store');
+// 新規ユーザー登録処理
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
+
+// メール認証
+Route::get('/email/verify', function(){
+    return view('auth.verify-email');
+})->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function(EmailVerificationRequest $request){
+    $request->fulfill();
+    session()->forget('unauthenticated_user');
+    return redirect()->route('thanks');
+})->name('verification.verify');
+
+Route::post('/email/verification-notification', function(Request $request){
+    if (session()->has('unauthenticated_user')) {
+        session()->get('unauthenticated_user')->sendEmailVerificationNotification();
+        session()->put('resent', true);
+    }
+    return back()->with('massage', 'Verification link sent!');
+})->middleware('throttle:6,1')->name('verification.send');
+
+// QRコード読み取り先
+Route::get('/reservations/qr/{reservation}', [ReservationsController::class, 'qrConfirmed'])->name('reservation.qrConfirmed');

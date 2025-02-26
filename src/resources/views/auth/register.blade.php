@@ -10,7 +10,7 @@
             <h2>会員登録</h2>
         </div>
         <div class="form">
-            <form method="POST" action="{{ route('create.register') }}" class="register-form">
+            <form method="POST" action="{{ route('register.store') }}" class="register-form">
                 @csrf
                 <input type="hidden" name="role" value="3">
                 <div class="register-form__group">
