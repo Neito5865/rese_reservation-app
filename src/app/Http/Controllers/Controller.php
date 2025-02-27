@@ -16,4 +16,9 @@ class Controller extends BaseController
         $countFavorites = $user->favorites()->count();
         return ['countFavorites' => $countFavorites];
     }
+
+    protected function errorResponse($message, $statusCode)
+    {
+        return response()->view('errors.error-page', ['message' => $message], $statusCode);
+    }
 }

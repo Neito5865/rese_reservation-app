@@ -7,21 +7,21 @@
 @section('content')
     <div class="shopManagerReservation-show__container">
         <div class="shopManagerReservation-show__btn">
-            <a class="shopManagerReservation-show__btn--Link-back" href="{{ route('shop-manager.shop.show', $shopManagerReservation->shop_id) }}">&lt; 店舗詳細ページに戻る</a>
+            <a class="shopManagerReservation-show__btn--Link-back" href="{{ route('shop-manager.shop.show', $reservation->shop_id) }}">&lt; 店舗詳細ページに戻る</a>
         </div>
         <div class="header-deleteBtn--flex">
             <div class="shopManagerReservation-show__header">
                 <h2>予約情報</h2>
             </div>
             <div class="shopManagerReservation-show__btn--modal">
-                <a class="shopManagerReservation-show__link--delete modal-trigger" href="#modal" data-id="{{ $shopManagerReservation->id }}">
+                <a class="shopManagerReservation-show__link--delete modal-trigger" href="#modal" data-id="{{ $reservation->id }}" data-shop-id="{{ $shop->id }}">
                     <i class="fa-solid fa-trash-can"></i> 予約をキャンセル
                 </a>
             </div>
         </div>
         @include('session_message.session_message')
         <div class="shopManagerReservation-edit__form">
-            <form class="shopManagerReservation-edit-form" action="{{ route('shop-manager.reservation.update', $shopManagerReservation->id) }}" method="POST">
+            <form class="shopManagerReservation-edit-form" action="{{ route('shop-manager.reservation.update', ['shop_id' => $shop->id, 'reservation_id' => $reservation->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="shopManagerReservation-edit-table__wrapper">
@@ -29,13 +29,13 @@
                         <tr class="shopManagerReservation-edit-table__row">
                             <th class="shopManagerReservation-edit-table__heading">店名</th>
                             <td class="shopManagerReservation-edit-table__item">
-                                <input class="shopManagerReservation-edit-form__input" type="text" name="shop_name" value="{{ old('shop_name', $shopManagerReservation->shop->shop_name) }}" readonly>
+                                <input class="shopManagerReservation-edit-form__input" type="text" name="shop_name" value="{{ old('shop_name', $reservation->shop->shop_name) }}" readonly>
                             </td>
                         </tr>
                         <tr class="shopManagerReservation-edit-table__row">
                             <th class="shopManagerReservation-edit-table__heading">予約日</th>
                             <td class="shopManagerReservation-edit-table__item">
-                                <input class="shopManagerReservation-edit-form__input" type="date" name="date" value="{{ old('date', $shopManagerReservation->date) }}">
+                                <input class="shopManagerReservation-edit-form__input" type="date" name="date" value="{{ old('date', $reservation->date) }}">
                             </td>
                         </tr>
                         <tr class="shopManagerReservation-edit-table__row--error">
@@ -54,7 +54,7 @@
                                         @for ($i = 0; $i < 24 * 4; $i++ )
                                             @php
                                                 $time = sprintf('%02d:%02d', intdiv($i, 4), ($i % 4) * 15);
-                                                $reservationTime = \Carbon\Carbon::parse($shopManagerReservation->time)->format('H:i')
+                                                $reservationTime = \Carbon\Carbon::parse($reservation->time)->format('H:i')
                                             @endphp
                                             <option value="{{ $time }}" {{ $time == old('time', $reservationTime) ? 'selected' : '' }}>{{ $time }}</option>
                                         @endfor
@@ -77,7 +77,7 @@
                                 <div class="shopManagerReservation-edit-form__select">
                                     <select class="shopManagerReservation-edit-form__select--number" name="number_people">
                                         @for ($i = 1; $i <= 100; $i++ )
-                                            <option value="{{ $i }}" {{ old('number_people', $shopManagerReservation->number_people) == $i ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
+                                            <option value="{{ $i }}" {{ old('number_people', $reservation->number_people) == $i ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
                                         @endfor
                                     </select>
                                     <i class="fa-solid fa-sort-down custom-arrow-number"></i>
@@ -109,18 +109,18 @@
                 <tr class="user-detail-table__row">
                     <th class="user-detail-table__heading">ユーザー名</th>
                     <td class="user-detail-table__item">
-                        {{ $shopManagerReservation->user->name }}
+                        {{ $reservation->user->name }}
                     </td>
                 </tr>
                 <tr class="user-detail-table__row">
                     <th class="user-detail-table__heading">メールアドレス</th>
                     <td class="user-detail-table__item">
-                        {{ $shopManagerReservation->user->email }}
+                        {{ $reservation->user->email }}
                     </td>
                 </tr>
             </table>
             <div class="mail-to-user__button">
-                <a class="mail-to-user__button--link" href="{{ route('shop-manager.send-mail.form', $shopManagerReservation->id) }}">メールを送る</a>
+                <a class="mail-to-user__button--link" href="{{ route('shop-manager.send-mail.form', $reservation->id) }}">メールを送る</a>
             </div>
         </div>
     </div>
@@ -166,9 +166,10 @@
                 deleteLink.addEventListener('click', function(event){
                     event.preventDefault();
                     var reservationId = this.getAttribute('data-id');
+                    var shopId = this.getAttribute('data-shop-id');
 
                     // フォームのaction URLを更新
-                    modalForm.setAttribute('action', `/shop-manager/reservation/${reservationId}`);
+                    modalForm.setAttribute('action', `/shop-manager/shop/${shopId}/reservation/${reservationId}`);
 
                     // hidden inputに予約IDをセット
                     modalIdInput.value = reservationId;

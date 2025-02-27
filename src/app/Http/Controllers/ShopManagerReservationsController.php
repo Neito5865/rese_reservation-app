@@ -19,12 +19,12 @@ class ShopManagerReservationsController extends Controller
         $shop = Shop::find($shop_id);
         $users = User::where('role', 3)->get();
 
-        if(!$shop){
-            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 404);
+        if(!$shop) {
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
         }
 
         if($shop->user_id !== $shopManager->id) {
-            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 403);
+            return $this->errorResponse('該当の店舗が存在しません。', 403);
         }
 
         return view('shop_manager.reservation.create', compact('shop', 'users'));
@@ -36,11 +36,11 @@ class ShopManagerReservationsController extends Controller
         $shop = Shop::find($shop_id);
 
         if(!$shop){
-            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 404);
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
         }
 
         if($shop->user_id !== $shopManager->id) {
-            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 403);
+            return $this->errorResponse('該当の店舗が存在しません。', 403);
         }
 
         $reservationData = $request->only([
@@ -57,33 +57,51 @@ class ShopManagerReservationsController extends Controller
         return back()->with('success', '新規予約を作成しました');
     }
 
-    public function show($reservation_id)
+    public function show($shop_id, $reservation_id)
     {
         $shopManager = Auth::user();
+        $shop = Shop::find($shop_id);
+        $reservation = Reservation::find($reservation_id);
 
-        $shopManagerReservation = Reservation::with('shop')->find($reservation_id);
-        if(!$shopManagerReservation) {
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+        if(!$shop) {
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
         }
 
-        if ($shopManagerReservation->shop->user_id !== $shopManager->id) {
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
+        if(!$reservation) {
+            return $this->errorResponse('該当の予約が存在しません。', 404);
         }
 
-        return view('shop_manager.reservation.show', compact('shopManagerReservation'));
+        if($reservation->shop_id !== $shop->id) {
+            return $this->errorResponse('該当の予約が存在しません。', 403);
+        }
+
+        if ($shop->user_id !== $shopManager->id) {
+            return $this->errorResponse('該当の予約が存在しません。', 403);
+        }
+
+        return view('shop_manager.reservation.show', compact('shop', 'reservation'));
     }
 
-    public function update(ReservationRequest $request, $reservation_id)
+    public function update(ReservationRequest $request, $shop_id, $reservation_id)
     {
         $shopManager = Auth::user();
+        $shop = Shop::find($shop_id);
+        $reservation = Reservation::find($reservation_id);
 
-        $reservation = Reservation::with('shop')->find($reservation_id);
-        if(!$reservation) {
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+        if(!$shop) {
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
         }
 
-        if ($reservation->shop->user_id !== $shopManager->id) {
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
+        if(!$reservation) {
+            return $this->errorResponse('該当の予約が存在しません。', 404);
+        }
+
+        if ($reservation->shop_id !== $shop->id) {
+            return $this->errorResponse('該当の予約が存在しません。', 403);
+        }
+
+        if ($shop->user_id !== $shopManager->id) {
+            return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
         $reservationData = $request->only([
@@ -98,22 +116,30 @@ class ShopManagerReservationsController extends Controller
         return back()->with('success', '予約情報が変更されました');
     }
 
-    public function destroy($reservation_id)
+    public function destroy($shop_id, $reservation_id)
     {
         $shopManager = Auth::user();
+        $shop = Shop::find($shop_id);
+        $reservation = Reservation::find($reservation_id);
 
-        $reservation = Reservation::with('shop')->find($reservation_id);
+        if(!$shop) {
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
+        }
+
         if(!$reservation) {
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+            return $this->errorResponse('該当の予約が存在しません。', 404);
         }
 
-        if ($reservation->shop->user_id !== $shopManager->id) {
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
+        if ($reservation->shop_id !== $shop->id) {
+            return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
-        $shop_id = $reservation->shop->id;
+        if ($shop->user_id !== $shopManager->id) {
+            return $this->errorResponse('該当の予約が存在しません。', 403);
+        }
+
         $reservation->delete();
 
-        return redirect()->route('shop-manager.shop.show', ['shop_id' => $shop_id])->with('success', '予約を削除しました');
+        return redirect()->route('shop-manager.shop.show', ['shop_id' => $shop->id])->with('success', '予約を削除しました');
     }
 }

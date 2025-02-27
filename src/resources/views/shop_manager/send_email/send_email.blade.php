@@ -7,7 +7,7 @@
 @section('content')
     <div class="sendUserMail__content">
         <div class="sendUserMail__btn">
-            <a class="sendUserMail__btn--link-back" href="{{ route('shop-manager.reservation.show',  $reservation->id) }}">&lt; 予約情報に戻る</a>
+            <a class="sendUserMail__btn--link-back" href="{{ route('shop-manager.reservation.show', ['shop_id' => $reservation->shop_id, 'reservation_id' => $reservation->id]) }}">&lt; 予約情報に戻る</a>
         </div>
         @include('session_message.session_message')
         <div class="sendUserMail__heading">

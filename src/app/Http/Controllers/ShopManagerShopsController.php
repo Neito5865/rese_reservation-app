@@ -35,7 +35,7 @@ class ShopManagerShopsController extends Controller
         ]);
         if($request->hasFile('shop_img')){
             $path = $request->file('shop_img')->store('public/shops');
-            $shopManagerShop->shop_img  = 'shops/' . basename($path);
+            $shopManagerShop['shop_img']  = 'shops/' . basename($path);
         }
         $shopManagerShop['user_id'] = $user_id;
         Shop::create($shopManagerShop);
