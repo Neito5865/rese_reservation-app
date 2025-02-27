@@ -26,6 +26,7 @@
                                     <div class="status-card__btn--modal">
                                         <a class="status-card__link--delete modal-trigger" href="#modal"
                                             data-id="{{ $reservation->id }}"
+                                            data-shop-id="{{ $reservation->shop->id }}"
                                             data-shop="{{ $reservation->shop->shop_name }}"
                                             data-date="{{ $reservation->date }}"
                                             data-time="{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}"
@@ -53,7 +54,7 @@
                                     </tr>
                                 </table>
                                 <div class="status-card__edit-btn">
-                                    <a class="status-card__edit-btn--link" href="{{ route('reservation.edit', $reservation->id) }}">予約内容の変更</a>
+                                    <a class="status-card__edit-btn--link" href="{{ route('reservation.edit', ['shop_id' => $reservation->shop_id, 'reservation_id' => $reservation->id]) }}">予約内容の変更</a>
                                 </div>
                             </div>
                         @endforeach
@@ -81,7 +82,7 @@
                                 </div>
                                 <div class="favorite-card__content--flex">
                                     <div class="favorite-card__link">
-                                        <a href="{{ route('shop.detail', $shop->id) }}" class="favorite-card__link-detail">詳しくみる</a>
+                                        <a href="{{ route('shop.show', $shop->id) }}" class="favorite-card__link-detail">詳しくみる</a>
                                     </div>
                                     @if(Auth::check())
                                         @if(Auth::user()->isFavorite($shop->id))
@@ -166,7 +167,8 @@
                     document.getElementById('modal-id').value = this.getAttribute('data-id');
 
                     var reservationId = this.getAttribute('data-id');
-                    document.querySelector('.delete-form').setAttribute('action', `/reservation/${reservationId}`);
+                    var shopId = this.getAttribute('data-shop-id');
+                    document.querySelector('.delete-form').setAttribute('action', `/shop/${shopId}/reservation/${reservationId}`);
 
                     modal.style.display = 'block';
                 });

@@ -30,16 +30,23 @@ class AdminShopManagersController extends Controller
     public function show($manager_id)
     {
         $shopManager = User::find($manager_id);
+
         if(!$shopManager){
-            return response()->view('errors.error-page', ['message' => '該当のユーザーが存在しません。'], 404);
+            return $this->errorResponse('該当の店舗責任者が存在しません。', 404);
         }
+
         $shopManagerShops = Shop::where('user_id', $manager_id)->paginate(5);
+
         return view('admin.detail', compact('shopManager', 'shopManagerShops'));
     }
 
     public function update(ShopManagerRequest $request, $manager_id)
     {
-        $shopManager = User::findOrFail($manager_id);
+        $shopManager = User::find($manager_id);
+
+        if(!$shopManager){
+            return $this->errorResponse('該当の店舗責任者が存在しません。', 404);
+        }
 
         $shopManagerData = $request->only(['name','email']);
         $shopManager->update($shopManagerData);

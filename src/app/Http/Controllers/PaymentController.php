@@ -9,14 +9,19 @@ Use App\Http\Requests\PaymentRequest;
 
 class PaymentController extends Controller
 {
-    public function showPaymentForm(){
+    public function showPaymentForm()
+    {
         $shops = Shop::all();
         return view('payment.payment', compact('shops'));
     }
 
-    public function processPayment(PaymentRequest $request){
-
+    public function processPayment(PaymentRequest $request)
+    {
         $shop = Shop::findOrFail($request->input('shop_id'));
+
+        if(!$shop) {
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
+        }
 
         Stripe::setApikey(config('services.stripe.secret'));
 

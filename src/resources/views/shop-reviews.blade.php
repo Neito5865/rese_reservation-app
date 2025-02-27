@@ -10,7 +10,7 @@
     </div>
     <div class="shop-reviews__container">
         <div class="shop-reviews__back">
-            <a class="shop-reviews__back--link" href="{{ route('shop.detail', $shop->id) }}">&lt; 店舗詳細に戻る</a>
+            <a class="shop-reviews__back--link" href="{{ route('shop.show', $shop->id) }}">&lt; 店舗詳細に戻る</a>
         </div>
         @foreach($reviews as $review)
             <div class="shop-reviews-card">

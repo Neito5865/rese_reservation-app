@@ -55,7 +55,7 @@
                             </div>
                             <div class="shop-card__content--flex">
                                 <div class="shop-card__link">
-                                    <a href="{{ route('shop.detail', $shop->id) }}" class="shop-card__link-detail">詳しくみる</a>
+                                    <a href="{{ route('shop.show', $shop->id) }}" class="shop-card__link-detail">詳しくみる</a>
                                 </div>
                                 @can('user-higher')
                                     @if(Auth::check())

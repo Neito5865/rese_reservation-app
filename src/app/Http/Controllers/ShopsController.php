@@ -33,8 +33,9 @@ class ShopsController extends Controller
     public function show($shop_id)
     {
         $shop = Shop::find($shop_id);
+
         if(!$shop){
-            return response()->view('errors.error-page', ['message' => '該当の店舗が存在しません。'], 404);
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
         }
 
         $reviews = Review::where('shop_id', $shop_id)->get();
@@ -57,10 +58,15 @@ class ShopsController extends Controller
     public function showReviews($shop_id)
     {
         $shop = Shop::find($shop_id);
+
         if(!$shop){
-            return response()->view('errors.error-page', ['message' => 'ページが存在しません。'], 404);
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
         }
-        $reviews = Review::where('shop_id', $shop_id)->orderBy('id','desc')->paginate(10);
+
+        $reviews = Review::where('shop_id', $shop_id)
+            ->with('reservation')
+            ->orderBy('id','desc')
+            ->paginate(10);
 
         return view('shop-reviews', compact('shop', 'reviews'));
     }

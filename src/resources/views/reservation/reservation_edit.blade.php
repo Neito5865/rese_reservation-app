@@ -10,7 +10,7 @@
             <h2>予約内容の変更</h2>
         </div>
         <div class="form">
-            <form method="POST" action="{{ route('reservation.update', $reservation->id) }}" class="edit-form">
+            <form method="POST" action="{{ route('reservation.update', ['shop_id' => $reservation->shop_id, 'reservation_id' => $reservation->id]) }}" class="edit-form">
                 @csrf
                 @method('PUT')
                 <table class="edit-table">

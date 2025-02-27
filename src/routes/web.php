@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ShopsController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FavoriteController;
@@ -30,28 +30,28 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 
 // ログイン前閲覧可能
 Route::get('/', [ShopsController::class, 'index'])->name('shop.index');
-Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.detail');
-Route::get('/detail/{shop_id}/reviews', [ShopsController::class, 'showReviews'])->name('shop.reviews');
+Route::get('/shop/{shop_id}', [ShopsController::class, 'show'])->name('shop.show');
+Route::get('/shop/{shop_id}/reviews', [ShopsController::class, 'showReviews'])->name('shop.reviews');
 
 // 一般ユーザー権限
 Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function () {
-    // 一般ユーザー-予約
-    Route::prefix('reservation')->group(function () {
-        Route::post('{shop_id}', [ReservationsController::class, 'store'])->name('reservation.store');
-        Route::prefix('{reservation_id}')->group(function () {
-            Route::get('edit', [ReservationsController::class, 'edit'])->name('reservation.edit');
-            Route::put('', [ReservationsController::class, 'update'])->name('reservation.update');
-            Route::delete('', [ReservationsController::class, 'destroy'])->name('reservation.destroy');
-        });
-    });
-
     // 一般ユーザー-マイページ
-    Route::get('/mypage', [UsersController::class, 'show'])->name('mypage.show');
+    Route::get('mypage', [UsersController::class, 'show'])->name('mypage.show');
 
-    // 一般ユーザー-お気に入り
     Route::prefix('shops/{shop_id}')->group(function () {
+        // 一般ユーザー-お気に入り
         Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite');
         Route::delete('unfavorite', [FavoriteController::class, 'destroy'])->name('unfavorite');
+
+        // 一般ユーザー-予約
+        Route::prefix('reservation')->group(function () {
+            Route::post('', [ReservationsController::class, 'store'])->name('reservation.store');
+            Route::prefix('{reservation_id}')->group(function () {
+                Route::get('edit', [ReservationsController::class, 'edit'])->name('reservation.edit');
+                Route::put('', [ReservationsController::class, 'update'])->name('reservation.update');
+                Route::delete('', [ReservationsController::class, 'destroy'])->name('reservation.destroy');
+            });
+        });
     });
 
     // 一般ユーザー-レビュー

@@ -11,27 +11,31 @@ use App\Http\Requests\SendUserMailRequest;
 
 class ShopManagerSendMailsController extends Controller
 {
-    public function mailForm($reservation_id){
+    public function mailForm($reservation_id)
+    {
         $shopManager = Auth::user();
-
         $reservation = Reservation::with('shop')->find($reservation_id);
+
         if(!$reservation) {
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+            return $this->errorResponse('該当の予約が存在しません。', 404);
         }
 
         if ($reservation->shop->user_id !== $shopManager->id) {
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
+            return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
         $user = $reservation->user;
         return view('shop_manager.send_email.send_email', compact('user', 'reservation'));
     }
 
-    public function sendMail(SendUserMailRequest $request){
+    public function sendMail(SendUserMailRequest $request)
+    {
         $recipientName = User::where('email', $request->input('to'))->first();
+
         if(!$recipientName){
-            return redirect()->back()->with('error', '該当するユーザーが見つかりませんでした');
+            return $this->errorResponse('該当のユーザーが存在しません。', 404);
         }
+
         Mail::to($recipientName->email)->send(new SendUserMail($request->input('subject'), $request->input('message'), $recipientName->name));
 
         return redirect()->back()->with('success', 'メールが送信されました');

@@ -31,7 +31,7 @@
                     @endif
                 </div>
                 <div class="review-card__link">
-                    <a class="link__shop-detail" href="{{ route('shop.detail', $reservation->shop->id) }}">店舗詳細</a>
+                    <a class="link__shop-detail" href="{{ route('shop.show', $reservation->shop->id) }}">店舗詳細</a>
                     @if(!$reservation->review)
                         <a class="link__shop-review" href="{{ route('review.create', $reservation->id) }}">レビューを投稿する</a>
                     @else

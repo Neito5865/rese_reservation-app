@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Reservation;
+use App\Models\Shop;
 use App\Http\Requests\ReservationRequest;
 use App\Mail\ReservationConfirmed;
 use Illuminate\Support\Facades\Mail;
@@ -13,6 +14,12 @@ class ReservationsController extends Controller
     public function store(ReservationRequest $request, $shop_id)
     {
         $user_id = Auth::id();
+        $shop = Shop::find($shop_id);
+
+        if(!$shop) {
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
+        }
+
         $reservationData = $request->only([
             'date',
             'time',
@@ -28,31 +35,51 @@ class ReservationsController extends Controller
         return view('reservation.done');
     }
 
-    public function edit($reservation_id)
+    public function edit($shop_id, $reservation_id)
     {
         $user = Auth::user();
+        $shop = Shop::find($shop_id);
         $reservation = Reservation::find($reservation_id);
-        if(!$reservation){
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+
+        if(!$shop) {
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
+        }
+
+        if(!$reservation) {
+            return $this->errorResponse('該当の予約が存在しません。', 404);
+        }
+
+        if($reservation->shop_id !== $shop->id) {
+            return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
         if ($user->id !== $reservation->user_id) {
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
+            return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
         return view('reservation.reservation_edit', compact('reservation'));
     }
 
-    public function update(ReservationRequest $request, $reservation_id)
+    public function update(ReservationRequest $request, $shop_id, $reservation_id)
     {
         $user = Auth::user();
+        $shop = Shop::find($shop_id);
         $reservation = Reservation::find($reservation_id);
-        if(!$reservation){
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+
+        if(!$shop) {
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
+        }
+
+        if(!$reservation) {
+            return $this->errorResponse('該当の予約が存在しません。', 404);
+        }
+
+        if($reservation->shop_id !== $shop->id) {
+            return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
         if ($user->id !== $reservation->user_id) {
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
+            return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
         $reservationData = $request->only([
@@ -67,16 +94,26 @@ class ReservationsController extends Controller
         return view('reservation.edit_done');
     }
 
-    public function destroy($reservation_id)
+    public function destroy($shop_id, $reservation_id)
     {
         $user = Auth::user();
+        $shop = Shop::find($shop_id);
         $reservation = Reservation::find($reservation_id);
-        if(!$reservation){
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 404);
+
+        if(!$shop) {
+            return $this->errorResponse('該当の店舗が存在しません。', 404);
+        }
+
+        if(!$reservation) {
+            return $this->errorResponse('該当の予約が存在しません。', 404);
+        }
+
+        if($reservation->shop_id !== $shop->id) {
+            return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
         if ($user->id !== $reservation->user_id) {
-            return response()->view('errors.error-page', ['message' => '該当の予約が存在しません。'], 403);
+            return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
         $reservation->delete();

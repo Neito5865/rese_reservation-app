@@ -27,12 +27,13 @@ class ReviewsController extends Controller
     public function create($reservation_id){
         $user = Auth::user();
         $reservation = Reservation::with('shop')->find($reservation_id);
+
         if(!$reservation){
-            return response()->view('errors.error-page', ['message' => 'ページを表示できません。'], 404);
+            return $this->errorResponse('ページを表示できません。', 404);
         }
 
         if ($user->id !== $reservation->user_id) {
-            return response()->view('errors.error-page', ['message' => 'ページを表示できません。'], 403);
+            return $this->errorResponse('ページを表示できません。', 403);
         }
 
         return view('review.review-create', compact('reservation'));
@@ -40,13 +41,14 @@ class ReviewsController extends Controller
 
     public function confirm(ReviewRequest $request, $reservation_id){
         $user = Auth::user();
-        $reservation = Reservation::with('shop')->findOrFail($reservation_id);
+        $reservation = Reservation::with('shop')->find($reservation_id);
+
         if(!$reservation){
-            return response()->view('errors.error-page', ['message' => 'ページを表示できません。'], 404);
+            return $this->errorResponse('ページを表示できません。', 404);
         }
 
         if ($user->id !== $reservation->user_id) {
-            return response()->view('errors.error-page', ['message' => 'ページを表示できません。'], 403);
+            return $this->errorResponse('ページを表示できません。', 403);
         }
 
         $review = $request->only([
@@ -56,7 +58,7 @@ class ReviewsController extends Controller
         ]);
 
         if($request->input('action') === '＜ 修正する'){
-            return redirect()->route('review.create', ['id' => $id])->withInput();
+            return redirect()->route('review.create', ['reservation_id' => $reservation_id])->withInput();
         }
 
         if($request->input('action') === 'レビューを投稿する'){
