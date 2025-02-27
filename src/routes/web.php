@@ -34,11 +34,11 @@ Route::get('/detail/{shop_id}', [ShopsController::class, 'show'])->name('shop.de
 Route::get('/detail/{shop_id}/reviews', [ShopsController::class, 'showReviews'])->name('shop.reviews');
 
 // 一般ユーザー権限
-Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function(){
+Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function () {
     // 一般ユーザー-予約
-    Route::group(['prefix' => 'reservation'], function(){
+    Route::prefix('reservation')->group(function () {
         Route::post('{shop_id}', [ReservationsController::class, 'store'])->name('reservation.store');
-        Route::group(['prefix' => '{reservation_id}'], function(){
+        Route::prefix('{reservation_id}')->group(function () {
             Route::get('edit', [ReservationsController::class, 'edit'])->name('reservation.edit');
             Route::put('', [ReservationsController::class, 'update'])->name('reservation.update');
             Route::delete('', [ReservationsController::class, 'destroy'])->name('reservation.destroy');
@@ -49,13 +49,13 @@ Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function(){
     Route::get('/mypage', [UsersController::class, 'show'])->name('mypage.show');
 
     // 一般ユーザー-お気に入り
-    Route::group(['prefix' => 'shops/{shop_id}'], function(){
+    Route::prefix('shops/{shop_id}')->group(function () {
         Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite');
         Route::delete('unfavorite', [FavoriteController::class, 'destroy'])->name('unfavorite');
     });
 
     // 一般ユーザー-レビュー
-    Route::group(['prefix' => 'review'], function(){
+    Route::prefix('review')->group(function () {
         Route::get('', [ReviewsController::class, 'index'])->name('review.index');
         Route::get('create/{reservation_id}', [ReviewsController::class, 'create'])->name('review.create');
         Route::post('confirm/{reservation_id}', [ReviewsController::class, 'confirm'])->name('review.confirm');
@@ -68,14 +68,14 @@ Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function(){
 });
 
 // 管理者権限
-Route::middleware(['auth', 'verified', 'can:admin-higher'])->group(function(){
+Route::middleware(['auth', 'verified', 'can:admin-higher'])->group(function () {
     // 管理者-店舗責任者
-    Route::group(['prefix' => 'admin'], function(){
-        Route::group(['prefix' => 'shop-manager'], function(){
+    Route::prefix('admin')->group(function () {
+        Route::prefix('shop-manager')->group(function () {
             Route::get('', [AdminShopManagersController::class, 'index'])->name('admin.shop-manager.index');
             Route::get('create', [AdminShopManagersController::class, 'create'])->name('admin.shop-manager.create');
             Route::post('', [AdminShopManagersController::class, 'store'])->name('admin.shop-manager.store');
-            Route::group(['prefix' => '{manager_id}'], function(){
+            Route::prefix('{manager_id}')->group(function () {
                 Route::get('', [AdminShopManagersController::class, 'show'])->name('admin.shop-manager.show');
                 Route::put('', [AdminShopManagersController::class, 'update'])->name('admin.shop-manager.update');
             });
@@ -84,29 +84,27 @@ Route::middleware(['auth', 'verified', 'can:admin-higher'])->group(function(){
 });
 
 // 店舗責任者権限
-Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(function(){
-    // 店舗責任者-店舗
-    Route::group(['prefix' => 'shop-manager'], function() {
-        Route::group(['prefix' => 'shop'], function() {
+Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(function () {
+    Route::prefix('shop-manager')->group(function () {
+        // 店舗責任者-店舗
+        Route::prefix('shop')->group(function () {
             Route::get('', [ShopManagerShopsController::class, 'index'])->name('shop-manager.shop.index');
             Route::get('create', [ShopManagerShopsController::class, 'create'])->name('shop-manager.shop.create');
             Route::post('', [ShopManagerShopsController::class, 'store'])->name('shop-manager.shop.store');
-            Route::group(['prefix' => '{shop_id}'], function() {
+            Route::prefix('{shop_id}')->group(function () {
                 Route::get('', [ShopManagerShopsController::class, 'show'])->name('shop-manager.shop.show');
-                Route::put('', [shopManagerShopsController::class, 'update'])->name('shop-manager.shop.update');
-            });
-        });
+                Route::put('', [ShopManagerShopsController::class, 'update'])->name('shop-manager.shop.update');
 
-        // 店舗責任者-予約
-        Route::group(['prefix' => 'reservation'], function() {
-            Route::group(['prefix' => '{shop_id}'], function() {
-                Route::get('create', [ShopManagerReservationsController::class, 'create'])->name('shop-manager.reservation.create');
-                Route::post('', [ShopManagerReservationsController::class, 'store'])->name('shop-manager.reservation.store');
-            });
-            Route::group(['prefix' => '{reservation_id}'], function() {
-                Route::get('show', [ShopManagerReservationsController::class, 'show'])->name('shop-manager.reservation.show');
-                Route::put('', [ShopManagerReservationsController::class, 'update'])->name('shop-manager.reservation.update');
-                Route::delete('', [ShopManagerReservationsController::class, 'destroy'])->name('shop-manager.reservation.destroy');
+                // 店舗責任者-予約
+                Route::prefix('reservation')->group(function () {
+                    Route::get('create', [ShopManagerReservationsController::class, 'create'])->name('shop-manager.reservation.create');
+                    Route::post('', [ShopManagerReservationsController::class, 'store'])->name('shop-manager.reservation.store');
+                    Route::prefix('{reservation_id}')->group(function () {
+                        Route::get('', [ShopManagerReservationsController::class, 'show'])->name('shop-manager.reservation.show');
+                        Route::put('', [ShopManagerReservationsController::class, 'update'])->name('shop-manager.reservation.update');
+                        Route::delete('', [ShopManagerReservationsController::class, 'destroy'])->name('shop-manager.reservation.destroy');
+                    });
+                });
             });
         });
 
@@ -118,7 +116,7 @@ Route::middleware(['auth', 'verified', 'can:shopManager-higher'])->group(functio
 
 // ログイン処理
 Route::post('login', [AuthenticatedSessionController::class, 'store'])->middleware('email')->name('login.store');
-// 新規ユーザー登録処理
+// 新規ユーザー登録
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
