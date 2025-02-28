@@ -47,6 +47,13 @@
     border-radius: 5px;
 }
 
+.shopManagerReservation-show__link--delete-disabled {
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: 1px solid #bfbfbf;
+}
+
 .user-detail__header {
     margin-top: 40px;
 }
@@ -167,6 +174,12 @@
     padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.shopManagerReservation-edit-form__btn--disabled {
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: 1px solid #bfbfbf;
 }
 
 .user-detail__container{

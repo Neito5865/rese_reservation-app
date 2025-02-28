@@ -104,6 +104,10 @@ class ShopManagerReservationsController extends Controller
             return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
+        if ($reservation->reservation_date < now()) {
+            return redirect()->back()->with('error', '過去の予約は変更できません');
+        }
+
         $reservationData = $request->only([
             'date',
             'time',
@@ -136,6 +140,10 @@ class ShopManagerReservationsController extends Controller
 
         if ($shop->user_id !== $shopManager->id) {
             return $this->errorResponse('該当の予約が存在しません。', 403);
+        }
+
+        if ($reservation->reservation_date < now()) {
+            return redirect()->back()->with('error', '過去の予約はキャンセルできません');
         }
 
         $reservation->delete();

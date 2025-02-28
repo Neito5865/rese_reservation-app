@@ -4,6 +4,10 @@
     <link rel="stylesheet" href="{{ asset('css/shop_manager/reservation/show.css') }}">
 @endsection
 
+@php
+    $reservationDateTime = \Carbon\Carbon::parse($reservation->date . '' . $reservation->time);
+@endphp
+
 @section('content')
     <div class="shopManagerReservation-show__container">
         <div class="shopManagerReservation-show__btn">
@@ -14,9 +18,13 @@
                 <h2>予約情報</h2>
             </div>
             <div class="shopManagerReservation-show__btn--modal">
-                <a class="shopManagerReservation-show__link--delete modal-trigger" href="#modal" data-id="{{ $reservation->id }}" data-shop-id="{{ $shop->id }}">
-                    <i class="fa-solid fa-trash-can"></i> 予約をキャンセル
-                </a>
+                @if ($reservationDateTime >= now())
+                    <a class="shopManagerReservation-show__link--delete modal-trigger" href="#modal" data-id="{{ $reservation->id }}" data-shop-id="{{ $shop->id }}">
+                        <i class="fa-solid fa-trash-can"></i> 予約をキャンセル
+                    </a>
+                @else
+                    <button class="shopManagerReservation-show__link--delete-disabled" disabled>キャンセル不可</button>
+                @endif
             </div>
         </div>
         @include('session_message.session_message')
@@ -95,7 +103,11 @@
                     </table>
                 </div>
                 <div class="shopManagerReservation-edit-form__btn">
-                    <input type="submit" class="shopManagerReservation-edit-form__btn--submit" value="予約変更">
+                    @if ($reservationDateTime >= now())
+                        <button class="shopManagerReservation-edit-form__btn--submit" type="submit">予約変更</button>
+                    @else
+                        <button class="shopManagerReservation-edit-form__btn--disabled" disabled>予約変更不可</button>
+                    @endif
                 </div>
             </form>
         </div>

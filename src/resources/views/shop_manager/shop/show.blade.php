@@ -148,7 +148,7 @@
                             <td class="reservationList-table__item">{{ $reservation->number_people }}</td>
                             <td class="reservationList-table__item">
                                 <button class="reservationList-table__btn">
-                                    <a class="reservationList-table__btn--detail" href="{{ route('shop-manager.reservation.show', ['shop_id' => $shopManagerShop->id, 'reservation_id' => $reservation->id]) }}"><i class="fa-solid fa-pen-to-square"></i> 編集</a>
+                                    <a class="reservationList-table__btn--detail" href="{{ route('shop-manager.reservation.show', ['shop_id' => $shopManagerShop->id, 'reservation_id' => $reservation->id]) }}"><i class="fa-solid fa-pen-to-square"></i> 詳細</a>
                                 </button>
                             </td>
                         </tr>

@@ -33,7 +33,7 @@
                             <td class="shopManagerShops-table__item"><i class="fa-solid fa-heart"></i> {{ $countFavoriteUsers }}</td>
                             <td class="shopManagerShops-table__item">
                                 <button class="shopManagerShops-table__btn">
-                                    <a class="shopManagerShops-table__btn--detail" href="{{ route('shop-manager.shop.show', $shop->id) }}"><i class="fa-solid fa-pen-to-square"></i> 編集</a>
+                                    <a class="shopManagerShops-table__btn--detail" href="{{ route('shop-manager.shop.show', $shop->id) }}"><i class="fa-solid fa-pen-to-square"></i> 詳細</a>
                                 </button>
                             </td>
                         </tr>
