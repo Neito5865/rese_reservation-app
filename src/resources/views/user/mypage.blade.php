@@ -26,7 +26,7 @@
                                     <div class="status-card__btn--modal">
                                         <a class="status-card__link--delete modal-trigger" href="#modal"
                                             data-id="{{ $reservation->id }}"
-                                            data-shop-id="{{ $reservation->shop->id }}"
+                                            data-shop-id="{{ $reservation->shop_id }}"
                                             data-shop="{{ $reservation->shop->shop_name }}"
                                             data-date="{{ $reservation->date }}"
                                             data-time="{{\Carbon\Carbon::parse($reservation->time)->format('H:i')}}"
@@ -156,6 +156,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             var modalTriggers = document.querySelectorAll('.modal-trigger');
             var modal = document.getElementById('modal');
+
             modalTriggers.forEach(function(trigger) {
                 trigger.addEventListener('click', function(event) {
                     event.preventDefault();
@@ -168,7 +169,10 @@
 
                     var reservationId = this.getAttribute('data-id');
                     var shopId = this.getAttribute('data-shop-id');
-                    document.querySelector('.delete-form').setAttribute('action', `/shop/${shopId}/reservation/${reservationId}`);
+                    var form = document.querySelector('.delete-form');
+
+                    var actionUrl = `/shop/${shopId}/reservation/${reservationId}`;
+                    form.setAttribute('action', actionUrl);
 
                     modal.style.display = 'block';
                 });

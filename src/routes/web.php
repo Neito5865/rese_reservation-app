@@ -38,7 +38,7 @@ Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function () {
     // 一般ユーザー-マイページ
     Route::get('mypage', [UsersController::class, 'show'])->name('mypage.show');
 
-    Route::prefix('shops/{shop_id}')->group(function () {
+    Route::prefix('shop/{shop_id}')->group(function () {
         // 一般ユーザー-お気に入り
         Route::post('favorite', [FavoriteController::class, 'store'])->name('favorite');
         Route::delete('unfavorite', [FavoriteController::class, 'destroy'])->name('unfavorite');

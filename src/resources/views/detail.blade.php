@@ -122,11 +122,15 @@
                             @endif
                         </div>
                         <div class="reservation-form__button">
-                            @can('admin-higher')
-                            @elsecan('shopManager-higher')
-                            @elsecan('user-higher')
-                                <input class="reservation-form__button--submit" type="submit" value="予約する">
-                            @endcan
+                            @if(Auth::check())
+                                @can('admin-higher')
+                                @elsecan('shopManager-higher')
+                                @elsecan('user-higher')
+                                    <button class="reservation-form__button--submit" type="submit">予約する</button>
+                                @endcan
+                            @else
+                                <button class="reservation-form__button--submit" type="submit">予約する</button>
+                            @endif
                         </div>
                     </form>
                 </div>

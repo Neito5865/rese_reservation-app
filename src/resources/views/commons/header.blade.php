@@ -9,7 +9,7 @@
                     @if(Auth::check())
                         <li class="header-nav__item"><a class="header-nav__link" href="{{ route('shop.index') }}">ホーム</a></li>
                         @can('admin-higher')
-                            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('admin.shop-managers.index') }}">ダッシュボード</a></li>
+                            <li class="header-nav__item"><a class="header-nav__link" href="{{ route('admin.shop-manager.index') }}">ダッシュボード</a></li>
                         @elsecan('shopManager-higher')
                             <li class="header-nav__item"><a class="header-nav__link" href="{{ route('shop-manager.shop.index') }}">ダッシュボード</a></li>
                         @elsecan('user-higher')

@@ -1,3 +1,9 @@
+.reservation-edit__content {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 .reservation-edit__heading {
     text-align: center;
     margin-top: 40px;
@@ -5,7 +11,7 @@
 }
 
 .form {
-    width: 500px;
+    width: 100%;
     height: auto;
     margin: 40px auto;
     padding: 35px;
@@ -31,9 +37,9 @@
     width: 70%;
     height: 50px;
 }
-.edit-form__input--shopName{
+.edit-form__input--shop_name{
     border: none;
-    font-size: 18px;
+    font-size: 16px;
 }
 .edit-form__input--date{
     width: 50%;
