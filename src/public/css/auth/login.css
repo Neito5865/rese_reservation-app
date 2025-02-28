@@ -6,6 +6,30 @@
     box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
 }
 
+.message__success {
+    width: 95%;
+    max-width: 1280px;
+    background-color: #caf8e8;
+    font-size: 14px;
+    color: #2f5e4e;
+    width: 100%;
+    margin: 20px auto 0 auto;
+    padding: 10px 0 10px 20px;
+    border-radius: 5px;
+}
+
+.message__error {
+    width: 95%;
+    max-width: 1280px;
+    background-color: #f8d3ca;
+    font-size: 14px;
+    color: #951b12;
+    width: 100%;
+    margin: 20px auto 0 auto;
+    padding: 10px 0 10px 20px;
+    border-radius: 5px;
+}
+
 .login__heading{
     color: #fff;
     background-color: #e69335;

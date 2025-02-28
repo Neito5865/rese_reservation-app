@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    @include('session_message.session_message')
     <div class="login__inner">
         <div class="login__heading">
             <h2>ログイン</h2>

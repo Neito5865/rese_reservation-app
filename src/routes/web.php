@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use App\Http\Controllers\ShopsController;
 use App\Http\Controllers\ReviewsController;
 use App\Http\Controllers\ReservationsController;
@@ -32,6 +34,9 @@ use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 Route::get('/', [ShopsController::class, 'index'])->name('shop.index');
 Route::get('/shop/{shop_id}', [ShopsController::class, 'show'])->name('shop.show');
 Route::get('/shop/{shop_id}/reviews', [ShopsController::class, 'showReviews'])->name('shop.reviews');
+Route::get('/thanks', function () {
+    return view('auth.thanks');
+})->name('thanks');
 
 // 一般ユーザー権限
 Route::middleware(['auth', 'verified', 'can:user-higher'])->group(function () {
@@ -127,10 +132,22 @@ Route::get('/email/verify', function(){
     return view('auth.verify-email');
 })->name('verification.notice');
 
-Route::get('/email/verify/{id}/{hash}', function(EmailVerificationRequest $request){
-    $request->fulfill();
+Route::get('/email/verify/{id}/{hash}', function($id, $hash){
+    $user = User::find($id);
+
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'ユーザーが見つかりませんでした。');
+    }
+    if (!hash_equals($hash, sha1($user->getEmailForVerification()))) {
+        return redirect()->route('login')->with('error', '無効な認証リンクです。');
+    }
+    if ($user->hasVerifiedEmail()) {
+        return redirect()->route('thanks')->with('message', 'すでに認証済みです。');
+    }
+
+    $user->markEmailAsVerified();
     session()->forget('unauthenticated_user');
-    return redirect()->route('thanks');
+    return redirect()->route('thanks')->with('message', 'メール認証が完了しました。');
 })->name('verification.verify');
 
 Route::post('/email/verification-notification', function(Request $request){

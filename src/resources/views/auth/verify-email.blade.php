@@ -7,12 +7,12 @@
 @section('content')
     <div class="verify__content">
         <div class="verify__heading">
-            <h2>認証メールを送信しました</h2>
+            <h2>メールでの認証が必要です。</h2>
         </div>
         <div class="verify__text">
             @if (session('resent'))
                 <div class="alert alert-success" role="alert">
-                    {{ __('A fresh verification link has been sent to your email address.') }}
+                    {{ __('新しい認証メールが送信されました。') }}
                 </div>
             @endif
 
