@@ -16,9 +16,11 @@ class ReviewsTableSeeder extends Seeder
      */
     public function run()
     {
-        $reservations = Reservation::all();
+        $pastReservations = Reservation::where('date', '<', now()->toDateString())->get();
 
-        foreach ($reservations as $reservation) {
+        $selectedReservations = $pastReservations->random($pastReservations->count() > 1 ? ceil($pastReservations->count() * 0.5) : 1);
+
+        foreach ($selectedReservations as $reservation) {
             Review::insert([
                 'user_id' => $reservation->user_id,
                 'shop_id' => $reservation->shop_id,
