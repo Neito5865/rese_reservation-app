@@ -94,14 +94,11 @@
                         <tr class="shopManagerShop-edit-table__row">
                             <th class="shopManagerShop-edit-table__heading">店舗写真</th>
                             <td class="shopManagerShop-edit-table__item">
-                                @if($shopManagerShop->shop_img)
-                                    <div id="current-image-wrapper">
-                                        <img id="current-image" src="{{ asset('storage/' . $shopManagerShop->shop_img) }}" alt="店舗写真" style="max-width: 200px; max-height: 150px;">
-                                        <button type="button" id="delete-image-btn"><i class="fa-solid fa-trash-can"></i></button>
-                                    </div>
-                                @endif
-                                <input class="shopManagerShop-edit-form__input" id="shop_img" type="file" name="shop_img" value="">
-                                <img id="uploaded-image-preview" style="display: none; max-width: 200px; max-height: 150px;">
+                                <div class="shop-image__wrapper">
+                                    <div class="shop-image-preview" id="shopImagePreview" style="background-image: url('{{ $shopManagerShop->shop_img ? asset('storage/' . $shopManagerShop->shop_img) : "" }}');"></div>
+                                    <label class="shopManagerShop-edit-form__label--image" for="shop_img">画像を変更</label>
+                                    <input class="shopManagerShop-edit-form__input" id="shop_img" type="file" name="shop_img" accept="image/*">
+                                </div>
                             </td>
                         </tr>
                         <tr class="shopManagerShop-edit-table__row--error">
@@ -165,38 +162,19 @@
 
 @section('script')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const deleteImageBtn = document.getElementById('delete-image-btn');
-            const currentImageWrapper = document.getElementById('current-image-wrapper');
-            const shopImgInput = document.getElementById('shop_img');
-            const uploadedImagePreview = document.getElementById('uploaded-image-preview');
+        document.getElementById('shop_img').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('shopImagePreview');
 
-            if (deleteImageBtn) {
-                deleteImageBtn.addEventListener('click', function () {
-                    currentImageWrapper.style.display = 'none';
-                    shopImgInput.value = '';
-                    uploadedImagePreview.style.display = 'none';
-                });
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.style.backgroundImage = `url('${e.target.result}')`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.backgroundImage = '';
             }
-
-            shopImgInput.addEventListener('change', function (event) {
-                const file = event.target.files[0];
-
-                if (file) {
-                    if (currentImageWrapper){
-                        currentImageWrapper.style.display = 'none';
-                    }
-
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        uploadedImagePreview.src = e.target.result;
-                        uploadedImagePreview.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    uploadedImagePreview.style.display = 'none';
-                }
-            });
         });
     </script>
 @endsection
