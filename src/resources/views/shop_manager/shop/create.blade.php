@@ -75,11 +75,12 @@
                 </div>
                 <div class="shopManagerShop-create-form__group">
                     <div class="shopManagerShop-create-form__inner">
-                        <label class="shopManagerShop-create-form__label" for="shop_img">店舗写真</label>
-                        <input class="shopManagerShop-create-form__input" id="shop_img" type="file" name="shop_img">
-                    </div>
-                    <div class="shop_img-preview">
-                        <img id="uploaded-image-preview" style="display: none; max-width: 200px; max-height: 150px;">
+                        <label class="shopManagerShop-create-form__label">店舗写真</label>
+                        <div class="shop-image__wrapper">
+                            <div class="shop-image-preview" id="shopImagePreview"></div>
+                            <label class="shopManagerShop-create-form__span--image" for="shop_img">画像を選択</label>
+                            <input class="shopManagerShop-create-form__input" id="shop_img" type="file" name="shop_img" accept="image/*">
+                        </div>
                     </div>
                     <div class="shopManagerShop-create-form__error">
                         @error('shop_img')
@@ -102,24 +103,19 @@
 
 @section('script')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const shopImgInput = document.getElementById('shop_img');
-            const uploadedImagePreview = document.getElementById('uploaded-image-preview');
+        document.getElementById('shop_img').addEventListener('change', function(event){
+            const file = event.target.files[0];
+            const preview = document.getElementById('shopImagePreview');
 
-            shopImgInput.addEventListener('change', function (event) {
-                const file = event.target.files[0];
-
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        uploadedImagePreview.src = e.target.result;
-                        uploadedImagePreview.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    uploadedImagePreview.style.display = 'none';
-                }
-            });
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.style.backgroundImage = `url('${e.target.result}')`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.backgroundImage = '';
+            }
         });
     </script>
 @endsection
