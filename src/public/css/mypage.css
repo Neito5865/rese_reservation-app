@@ -1,6 +1,6 @@
 .mypage-container {
+    width: 95%;
     max-width: 1280px;
-    padding: 0 20px;
     margin: 0 auto;
 }
 
@@ -145,13 +145,15 @@
 }
 .favorite-card__flex{
     margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(4px + 2vw);
+    row-gap: calc(12px + 1vh);
+    justify-content: center;
 }
+
 .favorite-card{
-    width: 300px;
-    height: 280px;
+    width: 100%;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 4px 4px 4px rgb(0, 0, 0, 0.3);
@@ -159,11 +161,11 @@
 }
 .favorite-card__img{
     width: 100%;
-    height: 150px;
+    aspect-ratio: 3 / 2;
 }
 .favorite-card__img img {
     width: 100%;
-    height: 150px;
+    height: 100%;
     object-fit: cover;
     border-radius: 5px 5px 0 0;
 }
@@ -287,7 +289,22 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 768px){
+@media(max-width: 959px) {
+    .favorite-card__img {
+        aspect-ratio: 4 / 3;
+    }
+
+    .favorite-card__btn--favorite i {
+        font-size: 28px;
+    }
+
+    .favorite-card__link-detail {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 768px){
     .mypage__flex {
         flex-direction: column;
     }
@@ -306,7 +323,17 @@
         width: 100%;
         padding: 0 15px;
     }
-    .favorite-card__flex {
-        flex-direction: column;
+
+    .favorite-card__shop-name {
+        font-size: 16px;
+    }
+
+    .favorite-card__tag {
+        font-size: 10px;
+    }
+
+    .favorite-card__link-detail {
+        font-size: 11px;
+        padding: 6px 10px;
     }
 }

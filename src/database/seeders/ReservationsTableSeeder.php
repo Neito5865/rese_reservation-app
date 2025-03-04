@@ -19,7 +19,7 @@ class ReservationsTableSeeder extends Seeder
         $shops = range(1, 20);
         $startDate = Carbon::now()->subMonths(6);
         $endDate = Carbon::now()->addMonths(6);
-        $minPastReservations = 50;
+        $minPastReservations = 60;
 
         $reservations = [];
 

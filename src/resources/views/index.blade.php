@@ -37,7 +37,7 @@
             </div>
         </form>
     </div>
-    <div class="shopAll__content" id="shop-list">
+    <div class="shop-list__content" id="shop-list">
         <div class="shop-card__flex">
             @if($shops->isEmpty())
                 <p>該当する店舗が見つかりませんでした。</p>
