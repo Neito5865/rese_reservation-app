@@ -30,7 +30,7 @@ class PaymentController extends Controller
                 'amount' => $request->input('amount'),
                 'currency' => 'jpy',
                 'source' => $request->input('stripeToken'),
-                'description' => '店舗名: ' . $shop->shopName . ' - 飲食店のお会計',
+                'description' => '店舗名: ' . $shop->shop_name . ' - 飲食店のお会計',
             ]);
 
             return redirect()->back()->with('success', '支払いが完了しました');
