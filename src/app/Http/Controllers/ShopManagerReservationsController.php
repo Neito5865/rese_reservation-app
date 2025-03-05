@@ -10,6 +10,7 @@ use App\Http\Requests\ReservationRequest;
 use App\Http\Requests\ShopManagerReservationRequest;
 use App\Mail\ReservationConfirmed;
 use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 class ShopManagerReservationsController extends Controller
 {
@@ -62,6 +63,7 @@ class ShopManagerReservationsController extends Controller
         $shopManager = Auth::user();
         $shop = Shop::find($shop_id);
         $reservation = Reservation::find($reservation_id);
+        $reservationDateTime = $reservation->reservationDateTime;
 
         if(!$shop) {
             return $this->errorResponse('該当の店舗が存在しません。', 404);
@@ -79,7 +81,7 @@ class ShopManagerReservationsController extends Controller
             return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
-        return view('shop_manager.reservation.show', compact('shop', 'reservation'));
+        return view('shop_manager.reservation.show', compact('shop', 'reservation', 'reservationDateTime'));
     }
 
     public function update(ReservationRequest $request, $shop_id, $reservation_id)
@@ -104,7 +106,7 @@ class ShopManagerReservationsController extends Controller
             return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
-        if ($reservation->reservation_date < now()) {
+        if ($reservation->reservationDateTime < now()) {
             return redirect()->back()->with('error', '過去の予約は変更できません');
         }
 
@@ -142,7 +144,7 @@ class ShopManagerReservationsController extends Controller
             return $this->errorResponse('該当の予約が存在しません。', 403);
         }
 
-        if ($reservation->reservation_date < now()) {
+        if ($reservation->reservationDateTime < now()) {
             return redirect()->back()->with('error', '過去の予約はキャンセルできません');
         }
 

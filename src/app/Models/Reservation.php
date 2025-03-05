@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class Reservation extends Model
 {
@@ -29,5 +30,10 @@ class Reservation extends Model
 
     public function review(){
         return $this->hasOne(Review::class);
+    }
+
+    public function getReservationDateTimeAttribute()
+    {
+        return Carbon::parse("{$this->date} {$this->time}");
     }
 }

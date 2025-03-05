@@ -4,10 +4,6 @@
     <link rel="stylesheet" href="{{ asset('css/shop_manager/reservation/show.css') }}">
 @endsection
 
-@php
-    $reservationDateTime = \Carbon\Carbon::parse($reservation->date . '' . $reservation->time);
-@endphp
-
 @section('content')
     <div class="shopManagerReservation-show__container">
         <div class="shopManagerReservation-show__btn">
