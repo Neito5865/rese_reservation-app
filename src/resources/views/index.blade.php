@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<div class="index__content">
     <div class="search">
         <div class="search__header">
             <h2>マイベストなお店を探す</h2>
@@ -80,6 +81,7 @@
             @endif
         </div>
     </div>
+</div>
 @endsection
 
 @section('script')

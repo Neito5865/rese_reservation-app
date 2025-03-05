@@ -1,5 +1,6 @@
 .thanks__inner {
-    width: 400px;
+    width: 90%;
+    max-width: 400px;
     background-color: #fff;
     border-radius: 4px;
     margin: 40px auto;
@@ -26,10 +27,4 @@
     padding: 8px 17px;
     border-radius: 4px;
     cursor: pointer;
-}
-
-@media screen and (max-width: 768px) {
-    .thanks__inner {
-        width: 100%;
-    }
 }

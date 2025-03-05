@@ -20,5 +20,23 @@
     @include('commons.footer')
     @yield('script')
     <script src="https://kit.fontawesome.com/bbc02bbca9.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const hamburger = document.querySelector(".hamburger");
+            const nav = document.querySelector(".header-nav__items");
+
+            hamburger.addEventListener("click", function() {
+                nav.classList.toggle("active");
+                hamburger.classList.toggle("active");
+            });
+
+            document.addEventListener("click", function(event) {
+                if (!nav.contains(event.target) && !hamburger.contains(event.target)) {
+                    nav.classList.remove("active");
+                    hamburger.classList.remove("active");
+                }
+            });
+        });
+    </script>
 </body>
 </html>
