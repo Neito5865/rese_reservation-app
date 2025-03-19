@@ -5,108 +5,107 @@
 @endsection
 
 @section('content')
-    <div class="shopManagerReservation-show__container">
-        <div class="shopManagerReservation-show__btn">
-            <a class="shopManagerReservation-show__btn--Link-back" href="{{ route('shop-manager.shop.show', $reservation->shop_id) }}">&lt; 店舗詳細ページに戻る</a>
+<div class="shopManagerReservation-show__container">
+    <div class="shopManagerReservation-show__btn">
+        <a class="shopManagerReservation-show__btn--Link-back" href="{{ route('shop-manager.shop.show', $reservation->shop_id) }}">&lt; 店舗詳細ページに戻る</a>
+    </div>
+    <div class="header-deleteBtn--flex">
+        <div class="shopManagerReservation-show__header">
+            <h2>予約情報</h2>
         </div>
-        <div class="header-deleteBtn--flex">
-            <div class="shopManagerReservation-show__header">
-                <h2>予約情報</h2>
+        <div class="shopManagerReservation-show__btn--modal">
+            @if ($reservationDateTime >= now())
+                <a class="shopManagerReservation-show__link--delete modal-trigger" href="#modal" data-id="{{ $reservation->id }}" data-shop-id="{{ $shop->id }}">
+                    <i class="fa-solid fa-trash-can"></i> 予約をキャンセル
+                </a>
+            @else
+                <button class="shopManagerReservation-show__link--delete-disabled" disabled>キャンセル不可</button>
+            @endif
+        </div>
+    </div>
+    @include('session_message.session_message')
+    <div class="shopManagerReservation-edit__form">
+        <form class="shopManagerReservation-edit-form" action="{{ route('shop-manager.reservation.update', ['shop_id' => $shop->id, 'reservation_id' => $reservation->id]) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="shopManagerReservation-edit-table__wrapper">
+                <table class="shopManagerReservation-edit-table__content">
+                    <tr class="shopManagerReservation-edit-table__row">
+                        <th class="shopManagerReservation-edit-table__heading">店名</th>
+                        <td class="shopManagerReservation-edit-table__item">
+                            <input class="shopManagerReservation-edit-form__input" type="text" name="shop_name" value="{{ old('shop_name', $reservation->shop->shop_name) }}" readonly>
+                        </td>
+                    </tr>
+                    <tr class="shopManagerReservation-edit-table__row">
+                        <th class="shopManagerReservation-edit-table__heading">予約日</th>
+                        <td class="shopManagerReservation-edit-table__item">
+                            <input class="shopManagerReservation-edit-form__input" type="date" name="date" value="{{ old('date', $reservation->date) }}">
+                        </td>
+                    </tr>
+                    <tr class="shopManagerReservation-edit-table__row--error">
+                        <th></th>
+                        <td class="shopManagerReservation-edit-table__item--error">
+                            @error('date')
+                            {{ $message }}
+                            @enderror
+                        </td>
+                    </tr>
+                    <tr class="shopManagerReservation-edit-table__row">
+                        <th class="shopManagerReservation-edit-table__heading">予約時間</th>
+                        <td class="shopManagerReservation-edit-table__item">
+                            <div class="shopManagerReservation-edit-form__select">
+                                <select class="shopManagerReservation-edit-form__select--time" name="time">
+                                    @for ($i = 0; $i < 24 * 4; $i++ )
+                                        @php
+                                            $time = sprintf('%02d:%02d', intdiv($i, 4), ($i % 4) * 15);
+                                            $reservationTime = \Carbon\Carbon::parse($reservation->time)->format('H:i')
+                                        @endphp
+                                        <option value="{{ $time }}" {{ $time == old('time', $reservationTime) ? 'selected' : '' }}>{{ $time }}</option>
+                                    @endfor
+                                </select>
+                                <i class="fa-solid fa-sort-down custom-arrow-time"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="shopManagerReservation-edit-table__row--error">
+                        <th></th>
+                        <td class="shopManagerReservation-edit-table__item--error">
+                            @error('time')
+                            {{ $message }}
+                            @enderror
+                        </td>
+                    </tr>
+                    <tr class="shopManagerReservation-edit-table__row">
+                        <th class="shopManagerReservation-edit-table__heading">予約人数</th>
+                        <td class="shopManagerReservation-edit-table__item">
+                            <div class="shopManagerReservation-edit-form__select">
+                                <select class="shopManagerReservation-edit-form__select--number" name="number_people">
+                                    @for ($i = 1; $i <= 100; $i++ )
+                                        <option value="{{ $i }}" {{ old('number_people', $reservation->number_people) == $i ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
+                                    @endfor
+                                </select>
+                                <i class="fa-solid fa-sort-down custom-arrow-number"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="shopManagerReservation-edit-table__row--error">
+                        <th></th>
+                        <td class="shopManagerReservation-edit-table__item--error">
+                            @error('number_people')
+                            {{ $message }}
+                            @enderror
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <div class="shopManagerReservation-show__btn--modal">
+            <div class="shopManagerReservation-edit-form__btn">
                 @if ($reservationDateTime >= now())
-                    <a class="shopManagerReservation-show__link--delete modal-trigger" href="#modal" data-id="{{ $reservation->id }}" data-shop-id="{{ $shop->id }}">
-                        <i class="fa-solid fa-trash-can"></i> 予約をキャンセル
-                    </a>
+                    <button class="shopManagerReservation-edit-form__btn--submit" type="submit">予約変更</button>
                 @else
-                    <button class="shopManagerReservation-show__link--delete-disabled" disabled>キャンセル不可</button>
+                    <button class="shopManagerReservation-edit-form__btn--disabled" disabled>予約変更不可</button>
                 @endif
             </div>
-        </div>
-        @include('session_message.session_message')
-        <div class="shopManagerReservation-edit__form">
-            <form class="shopManagerReservation-edit-form" action="{{ route('shop-manager.reservation.update', ['shop_id' => $shop->id, 'reservation_id' => $reservation->id]) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="shopManagerReservation-edit-table__wrapper">
-                    <table class="shopManagerReservation-edit-table__content">
-                        <tr class="shopManagerReservation-edit-table__row">
-                            <th class="shopManagerReservation-edit-table__heading">店名</th>
-                            <td class="shopManagerReservation-edit-table__item">
-                                <input class="shopManagerReservation-edit-form__input" type="text" name="shop_name" value="{{ old('shop_name', $reservation->shop->shop_name) }}" readonly>
-                            </td>
-                        </tr>
-                        <tr class="shopManagerReservation-edit-table__row">
-                            <th class="shopManagerReservation-edit-table__heading">予約日</th>
-                            <td class="shopManagerReservation-edit-table__item">
-                                <input class="shopManagerReservation-edit-form__input" type="date" name="date" value="{{ old('date', $reservation->date) }}">
-                            </td>
-                        </tr>
-                        <tr class="shopManagerReservation-edit-table__row--error">
-                            <th></th>
-                            <td class="shopManagerReservation-edit-table__item--error">
-                                @error('date')
-                                {{ $message }}
-                                @enderror
-                            </td>
-                        </tr>
-                        <tr class="shopManagerReservation-edit-table__row">
-                            <th class="shopManagerReservation-edit-table__heading">予約時間</th>
-                            <td class="shopManagerReservation-edit-table__item">
-                                <div class="shopManagerReservation-edit-form__select">
-                                    <select class="shopManagerReservation-edit-form__select--time" name="time">
-                                        @for ($i = 0; $i < 24 * 4; $i++ )
-                                            @php
-                                                $time = sprintf('%02d:%02d', intdiv($i, 4), ($i % 4) * 15);
-                                                $reservationTime = \Carbon\Carbon::parse($reservation->time)->format('H:i')
-                                            @endphp
-                                            <option value="{{ $time }}" {{ $time == old('time', $reservationTime) ? 'selected' : '' }}>{{ $time }}</option>
-                                        @endfor
-                                    </select>
-                                    <i class="fa-solid fa-sort-down custom-arrow-time"></i>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="shopManagerReservation-edit-table__row--error">
-                            <th></th>
-                            <td class="shopManagerReservation-edit-table__item--error">
-                                @error('time')
-                                {{ $message }}
-                                @enderror
-                            </td>
-                        </tr>
-                        <tr class="shopManagerReservation-edit-table__row">
-                            <th class="shopManagerReservation-edit-table__heading">予約人数</th>
-                            <td class="shopManagerReservation-edit-table__item">
-                                <div class="shopManagerReservation-edit-form__select">
-                                    <select class="shopManagerReservation-edit-form__select--number" name="number_people">
-                                        @for ($i = 1; $i <= 100; $i++ )
-                                            <option value="{{ $i }}" {{ old('number_people', $reservation->number_people) == $i ? 'selected' : '' }}>{{ $i == 100 ? '100人〜' :$i . '人' }}</option>
-                                        @endfor
-                                    </select>
-                                    <i class="fa-solid fa-sort-down custom-arrow-number"></i>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="shopManagerReservation-edit-table__row--error">
-                            <th></th>
-                            <td class="shopManagerReservation-edit-table__item--error">
-                                @error('number_people')
-                                {{ $message }}
-                                @enderror
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="shopManagerReservation-edit-form__btn">
-                    @if ($reservationDateTime >= now())
-                        <button class="shopManagerReservation-edit-form__btn--submit" type="submit">予約変更</button>
-                    @else
-                        <button class="shopManagerReservation-edit-form__btn--disabled" disabled>予約変更不可</button>
-                    @endif
-                </div>
-            </form>
-        </div>
+        </form>
     </div>
     <div class="user-detail__container">
         <div class="user-detail__header">
@@ -132,6 +131,7 @@
             </div>
         </div>
     </div>
+</div>
 
     <div id="modal" class="modal">
         <div class="modal__contents">

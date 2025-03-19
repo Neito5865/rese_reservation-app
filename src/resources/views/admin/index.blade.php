@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<div class="admin-index__content">
     <div class="admin-index__heading">
         <h2>店舗代表者一覧</h2>
     </div>
@@ -58,4 +59,5 @@
     <div class="shopManagers__paginate">
         {{ $shopManagers->links() }}
     </div>
+</div>
 @endsection

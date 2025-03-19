@@ -20,11 +20,10 @@
     border-radius: 5px;
 }
 
-.shopManagerReservation-show__container,
-.user-detail__container {
+.shopManagerReservation-show__container {
     width: 90%;
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 120px auto 80px auto;
 }
 
 .shopManagerReservation-show__btn {
@@ -183,6 +182,7 @@
 }
 
 .user-detail__container{
+    width: 100%;
     margin-bottom: 40px;
 }
 .user-detail-table{

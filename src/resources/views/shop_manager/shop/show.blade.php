@@ -5,118 +5,118 @@
 @endsection
 
 @section('content')
-    <div class="shopManagerShop-detail__container">
-        <div class="shopManagerShop-detail__btn">
-            <a class="shopManagerShop-detail__btn--Link-back" href="{{ route('shop-manager.shop.index') }}">&lt; 一覧に戻る</a>
-        </div>
-        <div class="shopManagerShop-detail__header">
-            <h2>店舗情報</h2>
-        </div>
-        @include('session_message.session_message')
-        <div class="shopManagerShop-detail__form">
-            <form class="shopManagerShop-edit-form" action="{{ route('shop-manager.shop.update', $shopManagerShop->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="shopManagersShop-edit-table__wrapper">
-                    <table class="shopManagerShop-edit-table__content">
-                        <tr class="shopManagerShop-edit-table__row">
-                            <th class="shopManagerShop-edit-table__heading">店名</th>
-                            <td class="shopManagerShop-edit-table__item">
-                                <input class="shopManagerShop-edit__input" type="text" name="shop_name" value="{{ old('shop_name', $shopManagerShop->shop_name) }}">
-                            </td>
-                        </tr>
-                        <tr class="shopManagerShop-edit-table__row--error">
-                            <th></th>
-                            <td class="shopManagerShop-edit-table__item--error">
-                                @error('shop_name')
-                                {{ $message }}
-                                @enderror
-                            </td>
-                        </tr>
-                        <tr class="shopManagerShop-edit-table__row">
-                            <th class="shopManagerShop-edit-table__heading">エリア</th>
-                            <td class="shopManagerShop-edit-table__item">
-                                <div class="shopManagerShop-create-form__select">
-                                    <select name="area_id" id="area" class="shopManagerShop-create-form__select--area">
-                                        <option value="">選択してください</option>
-                                        @foreach($areas as $area)
-                                            <option value="{{ $area->id }}" {{ old('area_id', $shopManagerShop->area_id) == $area->id ? 'selected' : '' }}>{{ $area->prefecture }}</option>
-                                        @endforeach
-                                    </select>
-                                    <i class="fa-solid fa-sort-down custom-arrow-area"></i>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="shopManagerShop-edit-table__row--error">
-                            <th></th>
-                            <td class="shopManagerShop-edit-table__item--error">
-                                @error('area_id')
-                                {{ $message }}
-                                @enderror
-                            </td>
-                        </tr>
-                        <tr class="shopManagerShop-edit-table__row">
-                            <th class="shopManagerShop-edit-table__heading">ジャンル</th>
-                            <td class="shopManagerShop-edit-table__item">
-                                <div class="shopManagerShop-create-form__select">
-                                    <select name="genre_id" id="genre" class="shopManagerShop-create-form__select--genre">
-                                        <option value="">選択してください</option>
-                                        @foreach($genres as $genre)
-                                            <option value="{{ $genre->id }}" {{ old('genre_id', $shopManagerShop->genre_id) == $genre->id ? 'selected' : '' }}>{{ $genre->content }}</option>
-                                        @endforeach
-                                    </select>
-                                    <i class="fa-solid fa-sort-down custom-arrow-genre"></i>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="shopManagerShop-edit-table__row--error">
-                            <th></th>
-                            <td class="shopManagerShop-edit-table__item--error">
-                                @error('genre_id')
-                                {{ $message }}
-                                @enderror
-                            </td>
-                        </tr>
-                        <tr class="shopManagerShop-edit-table__row">
-                            <th class="shopManagerShop-edit-table__heading">詳細文</th>
-                            <td class="shopManagerShop-edit-table__item">
-                                <textarea class="shopManagerShop-create-form__textarea" name="detail" id="detail">{{ old('detail', $shopManagerShop->detail) }}</textarea>
-                            </td>
-                        </tr>
-                        <tr class="shopManagerShop-edit-table__row--error">
-                            <th></th>
-                            <td class="shopManagerShop-edit-table__item--error">
-                                @error('detail')
-                                {{ $message }}
-                                @enderror
-                            </td>
-                        </tr>
-                        <tr class="shopManagerShop-edit-table__row">
-                            <th class="shopManagerShop-edit-table__heading">店舗写真</th>
-                            <td class="shopManagerShop-edit-table__item">
-                                <div class="shop-image__wrapper">
-                                    <div class="shop-image-preview" id="shopImagePreview" style="background-image: url('{{ $shopManagerShop->shop_img ? asset('storage/' . $shopManagerShop->shop_img) : "" }}');"></div>
-                                    <label class="shopManagerShop-edit-form__label--image" for="shop_img">画像を変更</label>
-                                    <input class="shopManagerShop-edit-form__input" id="shop_img" type="file" name="shop_img" accept="image/*">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="shopManagerShop-edit-table__row--error">
-                            <th></th>
-                            <td class="shopManagerShop-edit-table__item--error">
-                                @error('shop_img')
-                                {{ $message }}
-                                @enderror
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="shopManagerShop-edit-form__btn">
-                    <input type="submit" class="shopManagerShop-edit-form__btn--submit" value="保存">
-                </div>
-            </form>
-        </div>
+<div class="shopManagerShop-detail__container">
+    <div class="shopManagerShop-detail__btn">
+        <a class="shopManagerShop-detail__btn--Link-back" href="{{ route('shop-manager.shop.index') }}">&lt; 一覧に戻る</a>
     </div>
+    <div class="shopManagerShop-detail__header">
+        <h2>店舗情報</h2>
+    </div>
+    @include('session_message.session_message')
+    <div class="shopManagerShop-detail__form">
+        <form class="shopManagerShop-edit-form" action="{{ route('shop-manager.shop.update', $shopManagerShop->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="shopManagersShop-edit-table__wrapper">
+                <table class="shopManagerShop-edit-table__content">
+                    <tr class="shopManagerShop-edit-table__row">
+                        <th class="shopManagerShop-edit-table__heading">店名</th>
+                        <td class="shopManagerShop-edit-table__item">
+                            <input class="shopManagerShop-edit__input" type="text" name="shop_name" value="{{ old('shop_name', $shopManagerShop->shop_name) }}">
+                        </td>
+                    </tr>
+                    <tr class="shopManagerShop-edit-table__row--error">
+                        <th></th>
+                        <td class="shopManagerShop-edit-table__item--error">
+                            @error('shop_name')
+                            {{ $message }}
+                            @enderror
+                        </td>
+                    </tr>
+                    <tr class="shopManagerShop-edit-table__row">
+                        <th class="shopManagerShop-edit-table__heading">エリア</th>
+                        <td class="shopManagerShop-edit-table__item">
+                            <div class="shopManagerShop-create-form__select">
+                                <select name="area_id" id="area" class="shopManagerShop-create-form__select--area">
+                                    <option value="">選択してください</option>
+                                    @foreach($areas as $area)
+                                        <option value="{{ $area->id }}" {{ old('area_id', $shopManagerShop->area_id) == $area->id ? 'selected' : '' }}>{{ $area->prefecture }}</option>
+                                    @endforeach
+                                </select>
+                                <i class="fa-solid fa-sort-down custom-arrow-area"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="shopManagerShop-edit-table__row--error">
+                        <th></th>
+                        <td class="shopManagerShop-edit-table__item--error">
+                            @error('area_id')
+                            {{ $message }}
+                            @enderror
+                        </td>
+                    </tr>
+                    <tr class="shopManagerShop-edit-table__row">
+                        <th class="shopManagerShop-edit-table__heading">ジャンル</th>
+                        <td class="shopManagerShop-edit-table__item">
+                            <div class="shopManagerShop-create-form__select">
+                                <select name="genre_id" id="genre" class="shopManagerShop-create-form__select--genre">
+                                    <option value="">選択してください</option>
+                                    @foreach($genres as $genre)
+                                        <option value="{{ $genre->id }}" {{ old('genre_id', $shopManagerShop->genre_id) == $genre->id ? 'selected' : '' }}>{{ $genre->content }}</option>
+                                    @endforeach
+                                </select>
+                                <i class="fa-solid fa-sort-down custom-arrow-genre"></i>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="shopManagerShop-edit-table__row--error">
+                        <th></th>
+                        <td class="shopManagerShop-edit-table__item--error">
+                            @error('genre_id')
+                            {{ $message }}
+                            @enderror
+                        </td>
+                    </tr>
+                    <tr class="shopManagerShop-edit-table__row">
+                        <th class="shopManagerShop-edit-table__heading">詳細文</th>
+                        <td class="shopManagerShop-edit-table__item">
+                            <textarea class="shopManagerShop-create-form__textarea" name="detail" id="detail">{{ old('detail', $shopManagerShop->detail) }}</textarea>
+                        </td>
+                    </tr>
+                    <tr class="shopManagerShop-edit-table__row--error">
+                        <th></th>
+                        <td class="shopManagerShop-edit-table__item--error">
+                            @error('detail')
+                            {{ $message }}
+                            @enderror
+                        </td>
+                    </tr>
+                    <tr class="shopManagerShop-edit-table__row">
+                        <th class="shopManagerShop-edit-table__heading">店舗写真</th>
+                        <td class="shopManagerShop-edit-table__item">
+                            <div class="shop-image__wrapper">
+                                <div class="shop-image-preview" id="shopImagePreview" style="background-image: url('{{ $shopManagerShop->shop_img ? asset('storage/' . $shopManagerShop->shop_img) : "" }}');"></div>
+                                <label class="shopManagerShop-edit-form__label--image" for="shop_img">画像を変更</label>
+                                <input class="shopManagerShop-edit-form__input" id="shop_img" type="file" name="shop_img" accept="image/*">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="shopManagerShop-edit-table__row--error">
+                        <th></th>
+                        <td class="shopManagerShop-edit-table__item--error">
+                            @error('shop_img')
+                            {{ $message }}
+                            @enderror
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="shopManagerShop-edit-form__btn">
+                <input type="submit" class="shopManagerShop-edit-form__btn--submit" value="保存">
+            </div>
+        </form>
+    </div>
+
     <div class="reservationList__container">
         <div class="reservationList__header">
             <h2>予約一覧</h2>
@@ -125,39 +125,40 @@
             <a class="shopManagerReservation-create-btn__link" href="{{ route('shop-manager.reservation.create', $shopManagerShop->id) }}"><i class="fa-solid fa-plus"></i> 新規作成</a>
         </div>
         <div class="reservationList__inner">
-        @if($shopManagerReservations->isEmpty())
-            <p>予約がありません。</p>
-        @else
-            <div class="reservationList-table__wrapper">
-                <table class="reservationList-table">
-                    <tr class="reservationList-table__row">
-                        <th class="reservationList-table__heading">予約日</th>
-                        <th class="reservationList-table__heading">時間</th>
-                        <th class="reservationList-table__heading">予約者名</th>
-                        <th class="reservationList-table__heading">人数</th>
-                        <th class="reservationList-table__heading"></th>
-                    </tr>
-                    @foreach($shopManagerReservations as $reservation)
+            @if($shopManagerReservations->isEmpty())
+                <p>予約がありません。</p>
+            @else
+                <div class="reservationList-table__wrapper">
+                    <table class="reservationList-table">
                         <tr class="reservationList-table__row">
-                            <td class="reservationList-table__item">{{ $reservation->date }}</td>
-                            <td class="reservationList-table__item">{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</td>
-                            <td class="reservationList-table__item">{{ $reservation->user->name }}</td>
-                            <td class="reservationList-table__item">{{ $reservation->number_people }}</td>
-                            <td class="reservationList-table__item">
-                                <button class="reservationList-table__btn">
-                                    <a class="reservationList-table__btn--detail" href="{{ route('shop-manager.reservation.show', ['shop_id' => $shopManagerShop->id, 'reservation_id' => $reservation->id]) }}"><i class="fa-solid fa-pen-to-square"></i> 詳細</a>
-                                </button>
-                            </td>
+                            <th class="reservationList-table__heading">予約日</th>
+                            <th class="reservationList-table__heading">時間</th>
+                            <th class="reservationList-table__heading">予約者名</th>
+                            <th class="reservationList-table__heading">人数</th>
+                            <th class="reservationList-table__heading"></th>
                         </tr>
-                    @endforeach
-                </table>
-            </div>
-        @endif
+                        @foreach($shopManagerReservations as $reservation)
+                            <tr class="reservationList-table__row">
+                                <td class="reservationList-table__item">{{ $reservation->date }}</td>
+                                <td class="reservationList-table__item">{{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}</td>
+                                <td class="reservationList-table__item">{{ $reservation->user->name }}</td>
+                                <td class="reservationList-table__item">{{ $reservation->number_people }}</td>
+                                <td class="reservationList-table__item">
+                                    <button class="reservationList-table__btn">
+                                        <a class="reservationList-table__btn--detail" href="{{ route('shop-manager.reservation.show', ['shop_id' => $shopManagerShop->id, 'reservation_id' => $reservation->id]) }}"><i class="fa-solid fa-pen-to-square"></i> 詳細</a>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            @endif
+        </div>
+        <div class="reservationList__paginate">
+            {{ $shopManagerReservations->links() }}
+        </div>
     </div>
-    <div class="reservationList__paginate">
-        {{ $shopManagerReservations->links() }}
-    </div>
-    </div>
+</div>
 @endsection
 
 @section('script')

@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<div class="admin-detail__content">
     <div class="shopManager-detail__container">
         <div class="shopManager-detail__btn">
             <a class="shopManager-detail__btn--Link-back" href="{{ route('admin.shop-manager.index') }}">&lt; 一覧に戻る</a>
@@ -88,4 +89,5 @@
     <div class="shopManagerShop__paginate">
         {{ $shopManagerShops->links() }}
     </div>
+</div>
 @endsection

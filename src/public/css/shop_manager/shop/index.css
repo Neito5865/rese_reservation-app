@@ -1,3 +1,9 @@
+.shopManager-index__content {
+    width: 90%;
+    max-width: 1000px;
+    margin: 120px auto 80px auto;
+}
+
 .shopManager-index__heading {
     text-align: center;
     margin-top: 40px;
@@ -10,8 +16,6 @@
 
 
 .shopManager-index__shop-create-btn {
-    width: 90%;
-    max-width: 1000px;
     margin: 20px auto;
 }
 
@@ -24,8 +28,7 @@
 }
 
 .shopManagerShops-list__content {
-    width: 90%;
-    max-width: 1000px;
+    width: 100%;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;

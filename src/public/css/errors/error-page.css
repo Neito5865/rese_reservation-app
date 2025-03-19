@@ -2,12 +2,12 @@
     width: 95%;
     max-width: 1280px;
     padding: 0 20px;
-    margin: 80px auto;
+    margin: 160px auto 0 auto;
 }
 
 .error__heading {
     padding: 0;
-    margin: 0 0 20px 0;
+    margin-bottom: 20px;
 }
 
 .error-page__content p {

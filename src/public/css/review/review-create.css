@@ -1,3 +1,9 @@
+.review__content {
+    width: 90%;
+    max-width: 800px;
+    margin: 120px auto 80px auto;
+}
+
 .review__heading {
     margin-top: 40px;
     text-align: center;
@@ -7,11 +13,7 @@
     padding: 0;
     margin: 0;
 }
-.review__container{
-    width: 90%;
-    max-width: 800px;
-    margin: 40px auto 0 auto;
-}
+
 .review__back {
     text-align: right;
 }
