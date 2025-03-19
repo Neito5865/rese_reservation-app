@@ -64,7 +64,7 @@
  - nginx 1.21.1
 
 ## ER図
-![er drawio](https://github.com/user-attachments/assets/5139c3b3-9ddb-44df-b494-6e80b991369a)
+![Image](https://github.com/user-attachments/assets/b7401ff3-c612-4b66-b55a-2d536aa62853)
 
 ## 環境構築
 ### Dockerビルド
