@@ -5,10 +5,10 @@
 @endsection
 
 @section('content')
-    <div class="shop-reviews__header">
-        <h2>{{ $shop->shop_name }} のレビュー</h2>
-    </div>
     <div class="shop-reviews__container">
+        <div class="shop-reviews__header">
+            <h2>{{ $shop->shop_name }} のレビュー</h2>
+        </div>
         <div class="shop-reviews__back">
             <a class="shop-reviews__back--link" href="{{ route('shop.show', $shop->id) }}">&lt; 店舗詳細に戻る</a>
         </div>

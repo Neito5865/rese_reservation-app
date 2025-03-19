@@ -1,7 +1,7 @@
 .mypage-container {
     width: 95%;
     max-width: 1280px;
-    margin: 0 auto;
+    margin: 80px auto 0 auto;
 }
 
 .message__success {
@@ -28,7 +28,7 @@
 
 .mypage__user-name{
     text-align: center;
-    margin-top: 40px;
+    padding-top: 40px;
 }
 .mypage__user-name p{
     margin: 0;
